@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %>
+        <title>Nuve - Detalle de Receta</title>
+
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+
+        <!-- product detail -->
+
+        <div class="container products-wrapper">
+            <div class="row">
+                <div class="col-12">
+
+                    <h2 class="products-title">Detalle de receta: </h2>
+                </div>
+            </div>
+            <div class="product-detail">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="product-detail-description">
+                            <%= recipeToShow[0].name %>
+                        </h4>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <article class="product-detail-info">
+                            <p class="product-detail-type">
+                                Tipo: <%= recipeToShow[0].type %>
+                            </p>
+                            <p class="product-detail-description">
+                                Descripcion: <%= recipeToShow[0].description %>
+                            </p>
+                            <p>Utiliza los siguientes Aromas: </p>
+                            <% for( let i=0; i < recipeToShow[0].flavors.length; i++ ) { %>
+                                <% if (recipeToShow[0].flavors[i].flavor !="" ) { %>
+                                    <li>
+                                        <%= recipeToShow[0].flavors[i].flavor %>
+                                            <%= recipeToShow[0].flavors[i].percent %> %
+                                                <% } %>
+                                    </li>
+                                    <% } %>
+                                        <div class="actions-list">
+                                            <br>
+                                                <p class="product-detail-price big">
+                                                    Ventas Ultimo Mes
+                                                </p>
+                                                   <p>Cantidades ML: </p> 
+                                                  <p>Cantidades $:</p>  
+
+                                                
+                                            
+                                           
+                                                <i class="fas fa-store"></i>
+                                                <p>Usuario que mas compra: </p>
+                                           
+                                        </div>
+                                        <hr>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /product detail -->
+
+        <!-- footer -->
+
+        <!-- /footer -->
+
+</body>
+
+</html>

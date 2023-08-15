@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %> 
+    <link rel='stylesheet' href='/stylesheets/recipes.css' />
+    
+    <title>Aromas</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %> 
+    
+   <!-- NAVBAR  -->
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <form action="/Flavors/search" method="get">
+                <input type="text" name="searchFlavor" placeholder="Buscar Aroma">
+                <input type="submit" value="Buscar">
+            </form>
+        </a>
+    </li>
+    <a class="nav-link nav-fill active btn-outline-warning ml-4" aria-current="page" href="Flavors/create">Crear Nuevo Aroma</a>
+
+       
+    
+
+</ul>
+  <!-- termina navbar -->
+
+ <h3>Aromas</h3> 
+    <ul>
+        <% for( let i = 0; i < flavors.length; i++ ) { %>
+        <li class="btn btn-outline-warning btn-sm">
+            <a href="/Flavors/detail/<%= flavors[i].idFlavors %>">
+            <%= flavors[i].name %>
+            </a> <br>
+            <%= flavors[i].brand %> 
+            <form method="POST" action="/Flavors/delete/<%= flavors[i].id %>?_method=DELETE">
+            <button type="submit" class="btn btn-outline-danger btn-sm">Borrar Aroma</button>
+            
+            </form>
+        </li>
+        <% } %>
+    </ul>
+   
+
+    <%- include('../partials/bootstrapScript.ejs')  %> 
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %>
+        <title>Nuve - Editar Receta</title>
+
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+        <h1>Editar Receta</h1>
+        <form method='POST' action="/recipes/edit/<%= recipeToEdit.idRecipe %>?_method=PUT">
+            <label for="">Nombre Receta</label>
+            <input type="text" name="name" value="<%= recipeToEdit.name %>">
+            <br>
+            <label for="">Tipo</label>
+            <input type="text" name="type" value="<%= recipeToEdit.type %>">
+            <br>
+            <label for="">Descripcion
+                
+            </label>
+            <input type="text" name="description" value="<%= recipeToEdit.description %>">
+            <br>
+            <% if (recipeToEdit.flavors) { %>
+                <% for( let i=0; i < recipeToEdit.flavors.length; i++ ) { %>
+                    <label for="">Aroma <%=[i+1] %> </label>
+                    
+                    <% if (recipeToEdit.flavors[i].flavor != "") { %>
+                        <input type="text" name=flavors <%=recipeToEdit.flavors[i]  %> "
+                        value="<%= recipeToEdit.flavors[i].flavor %>">
+                        <label for="">porcentaje</label>
+                        <input type="number" name="percent" value="<%= recipeToEdit.flavors[i].percent %>">
+                        <br>
+                         <% } else { %>
+
+                            <label for=""></label>
+                <select class="form-control-sm" id=`{flavor$[i]}` name="flavors">
+                                <% for( let i = 0; i < flavors.length; i++ ) { %>
+                                    <option value="<%= flavors[i].name %>"><%= flavors[i].name %></option>
+                                <% } %>
+                            </select>
+                            <label for="">porcentaje</label>
+                            <input type="number" name="percent">
+                            <br>
+
+                            <% } %>
+                            <% } %>
+                
+
+
+                        <% } %>
+
+
+                            <input type="submit" value="Change Recipe">
+                  
+        </form>
+
+
+        <%- include('../partials/bootstrapScript.ejs') %>
+</body>
+
+</html>

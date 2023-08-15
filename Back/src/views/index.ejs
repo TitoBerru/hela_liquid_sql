@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('partials/headBootStrap.ejs') %> 
+  <title>
+    NUVE - HOME
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <%- include('partials/header.ejs') %>
+  <main class="indexMain">
+   <div class="view1">
+    <%- include('partials/registrarVenta.ejs') %>
+   </div>
+   <div class="view2">
+    <%- include('partials/costoVenta.ejs') %>
+   </div>
+   <div class="view3">Cantidad de Stock Bajo
+    
+   </div>
+   <div class="view4">Ranking de ventas por Receta
+   </div>
+  </main>
+      <%- include('partials/bootstrapScript.ejs') %>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('partials/headBootStrap.ejs') %>
+        <title>Nuve -Costos</title>
+
+</head>
+
+<body>
+
+    <body>
+        <%- include('partials/header.ejs') %>
+            <main class="indexMain">
+                <section class="Envases view1 col-4">
+                    <h4>Envases</h4>
+                    <table class="table table-dark ">
+                        <thead>
+                            <tr class="table-primary flush">
+                                <th scope="col">#</th>
+                                <th scope="col">Concepto</th>
+                                <th scope="col">Unidad/Medida</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Actualizar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td> 10 ml</td>
+                                <td> $ por unidad</td>
+                                <td>30</td>
+                                <td>100u</td>
+                                <td>
+                                    <button type="button" class="btn btn-info">Actualizar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td> 30 ml</td>
+                                <td> $ por unidad</td>
+                                <td>50</td>
+                                <td>100u</td>
+                                <td>
+                                    <button type="button" class="btn btn-info">Actualizar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td> 60 ml</td>
+                                <td> $ por unidad</td>
+                                <td>60</td>
+                                <td>100u</td>
+                                <td>
+                                    <button type="button" class="btn btn-info">Actualizar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td> 100 ml</td>
+                                <td> $ por unidad</td>
+                                <td>80</td>
+                                <td>100u</td>
+                                <td>
+                                    <button type="button" class="btn btn-info">Actualizar</button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </section> 
+            
+                <section class="Bases view2 col-4">
+                    <h4>Bases</h4>
+                    <table class="table table-dark ">
+                        <thead>
+                            <tr class="table-primary flush">
+                                <th scope="col">#</th>
+                                <th scope="col">Concepto</th>
+                                <th scope="col">Unidad/Medida</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Actualizar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td> PG</td>
+                                <td> $ por ML</td>
+                                <td>30</td>
+                                <td>1000 ML</td>
+                                <td>
+                                    <button type="button" class="btn btn-info">Actualizar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td> VG</td>
+                                <td> $ por ML</td>
+                                <td>50</td>
+                                <td>1000ML</td>
+                                <td>
+                                    <button type="button" class="btn btn-info">Actualizar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td> Nico</td>
+                                <td> $ por ML</td>
+                                <td>60</td>
+                                <td>1000ML</td>
+                                <td>
+                                    <button type="button" class="btn btn-info">Actualizar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td> 
+                                    Etiqueta
+                                </td>
+                                <td> $ por Unidad</td>
+                                <td>10</td>
+                                <td>10 u</td>
+                                <td>
+                                    <button type="button" class="btn btn-info">Actualizar</button>
+                                </td>
+                            </tr>
+                            
+
+                        </tbody>
+                    </table>
+                </section>
+                <section class="view3 col4"><h3>Cotizaciones</h3>
+                    <h5>Dolar Of</h5>
+                    <h5>Dolar Blue</h5>
+                <section/>
+                <section class="view4 col4"><p>Actualizados a fecha:</p>
+                </section>
+            </main>
+            <%- include('partials/bootstrapScript.ejs') %>
+    </body>
+</body>
+
+</html>

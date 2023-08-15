@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %> 
+    <title>Nuve - Borrar Aroma</title>
+    
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %> 
+
+	<!-- product detail -->
+	
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				
+				<h3 class="products-title">Estas intentando borrar el siguiente Aroma: </h3>
+			</div>
+		</div>
+		<div class="product-detail">
+			<div class="row">
+				<div class="col-12">
+					<p class="product-detail-description">
+						<%= flavors[0].description %>
+					</p>
+				</div>
+				<div class="col-12 col-lg-4">
+					<article class="product-detail-info">
+						<h2 class="product-detail-title"><%= flavors[0].name %></h2>
+						
+							
+							<p class="product-detail-price">
+							
+							</p>
+						
+
+						<ul class="actions-list">
+							<li>
+								<i class="fas fa-credit-card"></i>
+								<p>Proveedor: <%= flavors[0].provider %> </p>
+							</li>
+							<li>
+								<p class="product-detail-price small">
+									<span>Precio por Mililitro$ <%= flavors[0].price %></span>
+								</p>
+							</li>
+							<li>
+								<i class="fas fa-store"></i>
+								<p>Pero el mismo es usado en las siguientes recetas:</p>
+								
+									<%= resultRecipesUsed %> 
+
+                                    <h4>Por favor asegurate de borrar antes la receta</h4>
+								
+							</li>
+							
+
+
+						</ul>
+
+						<hr>
+
+						<a href="/flavors/edit/<%= flavors[0].idFlavor %>" class="card-link">
+							<button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
+						</a>
+						<form method="POST"
+                                    action="/flavors/delete/<%= flavors[0].idFlavor %>?_method=DELETE">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        Eliminar
+                                    </button>
+                                </form>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /product detail -->
+
+	<!-- footer -->
+
+	<!-- /footer -->
+
+</body>	
+</html>

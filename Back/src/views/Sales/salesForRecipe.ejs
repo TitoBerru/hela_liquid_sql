@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('./../partials/headBootStrap.ejs') %>
+        <title>Nuve -Ventas</title>
+</head>
+
+<body>
+
+    <%- include('./../partials/header.ejs') %>
+        <%- include('./../partials/bootstrapScript.ejs') %>
+            <section class="mainSectionSales">
+
+                <div class="one">
+                    <ul class="nav flex-column">
+                        <!-- <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Active</a>
+            </li> -->
+                        <li class="nav-item">
+                            <h4>
+
+                                <a class="nav-link" href="/Sales/salesForCustomer">Cliente</a>
+                            </h4>
+                        </li>
+                        <li class="nav-item">
+                            <h4><a class="nav-link" href="/Sales/salesForMonth">Mes</a></h4>
+                        </li>
+                        <li class="nav-item">
+                            <h4><a class="nav-link" href="/Sales/salesForYear">Año</a></h4>
+                        </li>
+                        <li class="nav-item">
+                            <h4><a class="nav-link" href="/Sales/salesForRecipe">Receta</a></h4>
+                        </li>
+                        <li class="nav-item">
+                            <h4><a class="nav-link" href="/Sales/salesForFlavor">Aroma</a></h4>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="two">
+                    <ul>
+
+                        <% for( let i=0; i < totalByRecipes.length; i++ ) { %>
+                            <li class="btn btn-outline-warning btn-sm">
+                                <div class="card text-white bg-dark">
+                                    <div class="card-body recipes">
+                                        <h5 class="card-subtitle mb-2 text-muted">Receta:</h5>
+                                        <h4 class="card-title">
+
+                                            <%= totalByRecipes[i].recipe%>
+                                        </h4>
+                                        <h6 class="card-subtitle mb-2">
+                                            ML:
+                                            <%= totalByRecipes[i].total %>
+                                        </h6>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <% } %>
+                    </ul>
+
+                </div>
+
+            </section>
+
+</body>
+
+</html>

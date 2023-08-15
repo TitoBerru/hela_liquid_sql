@@ -1,0 +1,47 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+
+}
+body{
+    background-color:#212529; 
+    color: aliceblue;
+}
+a:link{
+    text-decoration: none;
+    color: aliceblue;
+  }
+  
+.nav{
+    justify-content: space-between;
+}
+.cardsRecipesContainer{
+    display: flex;
+}
+.flavors, .recipes{
+    /* display: grid;
+    width: 18vw;
+    height: 25vh; */
+    /* align-items: center; */
+}
+
+.cardsFlavorContainer{
+    display: flex;
+}
+h3{
+    text-align: center;
+}
+ul{
+   
+    margin: 0 2vh;
+    padding:0;
+    
+}
+@media (min-width: 1236px) {
+    .flavors, .recipes{
+        display: grid;
+        width: 18vw;
+        height: 30vh; 
+        align-items: center; 
+    }
+}

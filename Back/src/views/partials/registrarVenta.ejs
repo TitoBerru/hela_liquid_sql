@@ -1,0 +1,28 @@
+<h4>Registrar Venta</h4>
+
+<form method='POST' action="/costs/calculate">
+    <label for="Cliente"></label>
+    <input type="text" name="Cliente" placeholder="Cliente">
+    <br>
+    <select class="form-control-sm m-1" id="Receta" name="Receta">
+        <% for( let i=0; i < recipes.length; i++ ) { %>
+            <option value="<%=recipes[i].idRecipe%>" >
+                <%=recipes[i].name%>
+            </option>
+            <% } %>
+    </select>
+    <br>
+    <label for="ml"></label>
+    <input type="number" name="ml" placeholder="Mililitros">
+    <br>
+    <label for="nico"></label>
+    <input type="number" name="nico" placeholder="Nico">
+    <br>
+    <label for="quantity"></label>
+    <input type="number" name="quantity" placeholder="Unidades">
+    <br>
+    <label for="price"></label>
+    <input type="number" name="price" placeholder="Precio de Venta">
+    <br>
+    <button class="btn btn-primary btnSend">Registrar</button>
+</form>

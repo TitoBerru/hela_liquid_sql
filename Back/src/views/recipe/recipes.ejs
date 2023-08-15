@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %>
+        <link rel='stylesheet' href='/stylesheets/recipes.css' />
+        <title>Nuve - Recetas</title>
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+        <!-- NAVBAR  -->
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <form action="/recipes/search" method="get">
+                        <input type="text" name="searchRecipe" placeholder="Buscar Receta">
+                        <input type="submit" value="Buscar">
+                    </form>
+                </a>
+            </li>
+            <a class="nav-link nav-fill active btn-outline-warning w-10" aria-current="page" href="recipes/create">Crear
+                Nueva Receta</a>
+        </ul>
+        <!-- termina navbar -->
+        <h3>Recetas</h3>
+        <ul>
+            <% for( let i=0; i < recipes.length; i++ ) { %>
+                <li class="btn btn-outline-warning btn-sm">
+                    <div class="card text-white bg-dark" >
+                        <div class="card-body recipes">
+                            <h5 class="card-title">
+                                <%= recipes[i].name %>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <%= recipes[i].type %>
+                            </h6>
+                            <p class="card-text">
+                                <%= recipes[i].description %>
+                            </p>
+                            <div class="cardsRecipesContainer">
+                                <a href="/recipes/detail/<%= recipes[i].idRecipe %>" class="card-link">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Detalle
+
+                                    </button>
+
+                                </a>
+                                <a href="/recipes/delete/<%= recipes[i].idRecipe %>" class="card-link">
+                                    <form method="POST"
+                                        action="/recipes/delete/<%= recipes[i].idRecipe %>?_method=DELETE">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                            Borrar
+                                        </button>
+                                    </form>
+                                </a>
+                                <a href="/recipes/edit/<%= recipes[i].idRecipe %>" class="card-link">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <% } %>
+        </ul>
+        <%- include('../partials/bootstrapScript.ejs') %>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %> 
+    <title>Nuve - Agregar Aroma</title>
+    
+</head>
+<body>
+    <%- include('../partials/header.ejs') %> 
+    <h1>Agregar Nuevo Aroma</h1>
+    <form method = 'POST' action="/Flavors/create">
+        <label for="">Nombre Aroma</label>
+        <input type="text" name="name">
+        <br>
+        <label for="">Marca</label>
+        <input type="text" name="brand">
+        <br>
+        <label for="">Costo</label>
+        <input type="number" name="price">
+        <div class="form-group sm">
+            <label for="flavorCostType" >Tipo de Costo</label>
+            <select class="form-control-sm" id="flavorCostType1" name="costType">
+                <option value="$ Arg">$ARS</option>
+                <option value="U$S">U$S Oficial</option>
+                <option value="U$SB">U$S Blue</option>
+            </select>
+        </div>
+        <label for="">Cantidad</label>
+        <input type="number" name="stock">
+        <br>
+        <label for="">Proveedor</label>
+        <input type="text" name="provider">
+        <br>
+        
+           <input type="submit" value="Agregar Aroma">
+            
+       
+    </form>
+
+
+    <%- include('../partials/bootstrapScript.ejs')  %> 
+</body>
+</html>

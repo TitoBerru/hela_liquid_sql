@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/recipes.css' />
+    <%- include('../partials/headBootStrap.ejs') %>
+        <title>Nuve - Buscar Recetas</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+        <h1>Resultado de Busqueda en RECETAS</h1>
+ <!-- Traigo de recipes -->
+ <h3>Recetas</h3>
+ <ul>
+
+    <% if (recipeFound.length>=1) { %>
+
+     <% for( let i=0; i < recipeFound.length; i++ ) { %>
+         <li class="btn btn-outline-warning btn-sm">
+             <div class="card text-white bg-dark" style="width: 18rem;">
+                 <div class="card-body recipes">
+                     <h5 class="card-title">
+                         <%= recipeFound[i].name %>
+                     </h5>
+                     <h6 class="card-subtitle mb-2 text-muted">
+                         <%= recipeFound[i].type %>
+                     </h6>
+                     <p class="card-text">
+                         
+                         <%= recipeFound[i].description %>
+
+                     </p>
+                     <div class = "cardsRecipesContainer card-footer">
+                     <a href="/recipes/detail/<%= recipeFound[i].idRecipe %>" class="card-link">
+                         <!-- <form method="get" action="/recipes/edit/<%= recipeFound[i].idRecipe %>"> -->
+
+                             <button type="submit" class="btn btn-outline-danger btn-sm">Detalle</button>
+                         <!-- </form> -->
+                     </a>
+                     <a href="/recipes/delete/<%= recipeFound[i].idRecipe %>" class="card-link">
+                         <form method="POST" action="/recipes/delete/<%= recipeFound[i].idRecipe %>?_method=DELETE">
+                             <button type="submit" class="btn btn-outline-danger btn-sm">Borrar</button>
+                         </form>
+                     </a>
+                     <a href="/recipes/edit/<%= recipeFound[i].idRecipe %>" class="card-link">
+                         <!-- <form method="get" action="/recipes/edit/<%= recipeFound[i].idRecipe %>"> -->
+
+                             <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
+                         <!-- </form> -->
+                     </a>
+                 </div>
+                 </div>
+             </div>
+
+         </li>
+         <% } %>
+         <% } else { %>
+            <h3>No hay Receta que coincida con su busqueda</h3>
+            <% } %>
+ </ul>
+ <!-- Termina Recipes -->
+
+       
+        <%- include('../partials/bootstrapScript.ejs') %>
+</body>
+</html>

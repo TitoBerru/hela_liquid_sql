@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %> 
+    <link rel='stylesheet' href='/stylesheets/recipes.css' />
+    
+    <title>Nuve - Aromas</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %> 
+    
+   <!-- NAVBAR  -->
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <form action="/Flavors/search" method="get">
+                <input type="text" name="searchFlavor" placeholder="Buscar Aroma">
+                <input type="submit" value="Buscar">
+            </form>
+        </a>
+    </li>
+    <a class="nav-link nav-fill active btn-outline-warning ml-4" aria-current="page" href="Flavors/create">Crear Nuevo Aroma</a>
+
+       
+    
+
+</ul>
+  <!-- termina navbar -->
+
+ <h3>Aromas</h3> 
+    <ul>
+        <% for( let i = 1; i < flavors.length; i++ ) { %>   
+    
+            <li class="btn btn-outline-warning btn-sm">
+                <div class="card text-white bg-dark" style="width: 18rem;">
+                    <div class="card-body flavors">
+                        <h5 class="card-title m-15">
+                            <%= flavors[i].name %>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <%= flavors[i].brand %>
+                        </h6>
+                        <p class="card-text">
+                            Stock:
+                            <%= flavors[i].stock %> ML
+                        </p>
+                        <p class="card-text">
+                           Costo:
+                            <%= flavors[i].price %> <%= flavors[i].costType %> /ML
+                        </p>
+                        <div class="cardsFlavorContainer card-footer">
+                            <a href="/flavors/detail/<%= flavors[i].idFlavor %>" class="card-link">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Detalle
+                                </button>
+                            </a>
+                            <a href="/flavors/delete/<%= flavors[i].idFlavor %>" class="card-link">
+                                <form method="POST"
+                                    action="/flavors/delete/<%= flavors[i].idFlavor %>?_method=DELETE">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </a>
+                            <a href="/flavors/edit/<%= flavors[i].idFlavor %>" class="card-link">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            
+        </li>
+        <% } %>
+    </ul>
+   
+
+    <%- include('../partials/bootstrapScript.ejs')  %> 
+    <script src="sweetalert2.all.min.js"></script>
+
+</body>
+</html>

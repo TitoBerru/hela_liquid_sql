@@ -1,0 +1,107 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+body{
+  background-color:#282d31; 
+  color: aliceblue;
+}
+.emojis{
+  color: red;
+  font-size:x-large;
+}
+.login{
+  margin-left: auto;
+  font-weight:800;
+  /* padding: 10px; */
+}
+a:link{
+  text-decoration: none;
+  color: aliceblue;
+}
+.view1{
+background-color: rgb(39, 38, 38);
+
+}
+.view2{
+  background-color: rgb(39, 38, 38);
+
+  }
+.view3{
+    background-color: rgb(39, 38, 38);
+ 
+   
+    }
+.view4{
+      background-color: rgb(39, 38, 38);
+      
+    }
+.view1, .view2, .view3, .view4{
+  margin-top: 30px;
+  width: 50vw;
+  
+  display: flex;
+  /* text-align:left; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.indexMain{
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+}
+
+input{
+  margin-top: 1px;
+  margin-bottom: 5px;
+  margin-left:0;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  width: 30vh;
+}
+.form-control-sm{
+  min-height: calc(2em + (0.5rem + 2px));
+  border-radius: 5px;
+  width: 30vh;
+}
+.btnSend{
+  width: 31vh;
+  justify-self: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+/* Sales */
+.SalesNavBar{
+  width: 70vw;
+  margin-left: 50px;
+}
+
+.mainSectionSales{
+  display: flex;
+  flex-wrap: nowrap;
+}
+.one{
+  width: 15vw;
+  max-height: 87vh;
+  /* background-color: rgb(8, 8, 8); */
+  padding: 10px;
+  margin-top: 20vh;
+}
+.two{
+  width: 85vw;
+  height: 87vh;
+  background-color: rgb(8, 138, 251);
+}
+
+/* End Sales */
+@media (max-width: 992px){ 
+ 
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark {
+ 
+    display: flex;
+    flex-direction: column-reverse;
+    
+}
+}
