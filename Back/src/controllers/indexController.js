@@ -1,11 +1,22 @@
-const path = require("path");
+
+let db = require('../../database/models')
 
 const indexController = {
     
     
     'index' : function (req, res){
-        
-        res.send('llego por index')
+
+        db.Stock.findAll()
+    .then(function(aroma){
+      res.send(aroma);
+      // res.send(aroma)
+    }
+    )
+
+
+
+
+        // res.send('llego por index')
         
     }
 
