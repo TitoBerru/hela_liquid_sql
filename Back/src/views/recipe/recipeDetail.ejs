@@ -26,26 +26,22 @@
                 <div class="row">
                     <div class="col-12">
                         <h4 class="product-detail-description">
-                            <%= recipeToShow[0].name %>
+                            <%= receta.NombreReceta %>
                         </h4>
                     </div>
                     <div class="col-12 col-lg-4">
                         <article class="product-detail-info">
                             <p class="product-detail-type">
-                                Tipo: <%= recipeToShow[0].type %>
+                              Tipo Receta: 
+                                <%= receta.TipoReceta %>
                             </p>
                             <p class="product-detail-description">
-                                Descripcion: <%= recipeToShow[0].description %>
+                                Descripcion: <%= receta.Descripcion %>
                             </p>
                             <p>Utiliza los siguientes Aromas: </p>
-                            <% for( let i=0; i < recipeToShow[0].flavors.length; i++ ) { %>
-                                <% if (recipeToShow[0].flavors[i].flavor !="" ) { %>
-                                    <li>
-                                        <%= recipeToShow[0].flavors[i].flavor %>
-                                            <%= recipeToShow[0].flavors[i].percent %> %
-                                                <% } %>
-                                    </li>
-                                    <% } %>
+                            <% for( let i = 0; i < receta.aromas.length; i++ ) { %>
+                                <%= receta.aromas[i].NombreAroma %>
+                            <% } %>
                                         <div class="actions-list">
                                             <br>
                                                 <p class="product-detail-price big">

@@ -28,35 +28,35 @@
         <!-- termina navbar -->
         <h3>Recetas</h3>
         <ul>
-            <% for( let i=0; i < recipes.length; i++ ) { %>
+            <% for( let i=0; i < receta.length; i++ ) { %>
                 <li class="btn btn-outline-warning btn-sm">
                     <div class="card text-white bg-dark" >
                         <div class="card-body recipes">
                             <h5 class="card-title">
-                                <%= recipes[i].name %>
+                                <%= receta[i].NombreReceta %>
                             </h5>
                             <h6 class="card-subtitle mb-2 text-muted">
-                                <%= recipes[i].type %>
+                                <%= receta[i].TipoReceta %>
                             </h6>
                             <p class="card-text">
-                                <%= recipes[i].description %>
+                                <%= receta[i].Descripcion %>
                             </p>
                             <div class="cardsRecipesContainer">
-                                <a href="/recipes/detail/<%= recipes[i].idRecipe %>" class="card-link">
+                                <a href="/recipes/detail/<%= receta[i].id %>" class="card-link">
                                     <button type="submit" class="btn btn-outline-danger btn-sm">Detalle
 
                                     </button>
 
                                 </a>
-                                <a href="/recipes/delete/<%= recipes[i].idRecipe %>" class="card-link">
+                                <a href="/recipes/delete/<%= receta[i].id %>" class="card-link">
                                     <form method="POST"
-                                        action="/recipes/delete/<%= recipes[i].idRecipe %>?_method=DELETE">
+                                        action="/recipes/delete/<%= receta[i].id %>?_method=DELETE">
                                         <button type="submit" class="btn btn-outline-danger btn-sm">
                                             Borrar
                                         </button>
                                     </form>
                                 </a>
-                                <a href="/recipes/edit/<%= recipes[i].idRecipe %>" class="card-link">
+                                <a href="/recipes/edit/<%= receta.id %>" class="card-link">
                                     <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
                                 </a>
                             </div>

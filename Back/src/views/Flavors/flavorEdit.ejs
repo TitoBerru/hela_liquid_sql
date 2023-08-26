@@ -15,15 +15,15 @@
 
     <%- include('../partials/header.ejs') %>
         <h1>Editar Aroma</h1>
-        <form method='POST' action="/flavors/edit/<%= flavorToEdit.idFlavor %>?_method=PUT">
+        <form method='POST' action="/flavors/edit/<%= aroma.id %>?_method=PUT">
             <label for="">Nombre Aroma </label>
-            <input type="text" name="name" value="<%= flavorToEdit.name %>">
+            <input type="text" name="name" value="<%= aroma.NombreAroma %>">
             <br>
             <label for="">Marca </label>
-            <input type="text" name="brand" value="<%= flavorToEdit.brand %>">
+            <input type="text" name="brand" value="<%= aroma.Marca %>">
             <br>
             <label for="">Precio</label>
-            <input type="text" name="price" value="<%= flavorToEdit.price %>">
+            <input type="text" name="price" value="<%= aroma.CostoUnitario %>">
             <br>
 
 
@@ -37,10 +37,10 @@
 
             <br>
             <label for="">Stock</label>
-            <input type="text" name="stock" value="<%= flavorToEdit.stock %>">
+            <input type="text" name="stock" value="<%= aroma.CantidadDisponible %>">
             <br>
             <label for="">Proveedor</label>
-            <input type="text" name="provider" value="<%= flavorToEdit.provider %>">
+            <input type="text" name="provider" value="<%= aroma.Proveedor %>">
             <br>
             <input type="submit" value="ChangeFlavor">
                   

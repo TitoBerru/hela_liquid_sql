@@ -24,7 +24,14 @@ module.exports =(sequelize, DataTypes) => {
         tableName: "historialcambios",
         timestamps: false
     }
-    const Historialcambio = sequelize.define (alias, cols, config)
+    const Historialcambio = sequelize.define (alias, cols, config);
+
+    Historialcambio.associate = function(models){
+        Historialcambio.belongsTo(models.Usuarios, {
+            as: "usuarios",
+            foreignKey: 'IDUsuario'
+        })
+    }
 
     return Historialcambio;
 }

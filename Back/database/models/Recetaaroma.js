@@ -21,7 +21,22 @@ module.exports =(sequelize, DataTypes) => {
         tableName: "recetaaromas",
         timestamps: false
     }
-    const Recetaaroma = sequelize.define (alias, cols, config)
+    const Recetaaroma = sequelize.define (alias, cols, config);
+    Recetaaroma.associate = function(models){
+        Recetaaroma.belongsTo(models.Recetas,{
+            as:'recetas',
+            foreignKey: 'IDReceta',
+            otherKey: 'ID',
+            timestamps: false
+        })
+        Recetaaroma.belongsTo(models.Aromas,{
+            as:'aromas',
+            foreignKey: 'IDAroma',
+            otherKey: 'ID',
+            timestamps: false
+        })
+        
+    }
 
     return Recetaaroma;
 }

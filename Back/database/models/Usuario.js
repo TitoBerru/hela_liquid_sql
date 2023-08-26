@@ -23,9 +23,17 @@ module.exports =(sequelize, DataTypes) => {
     }
     let config = {
         tableName: "usuarios",
-        timestamps: false
+        timestamps: false,
+        
     }
     const Usuario = sequelize.define (alias, cols, config)
+    
+    Usuario.associate = function(models){
+        Usuario.hasMany(models.Historialcambios, {
+            as: "historialcambio",
+            foreignKey: 'IDUsuario'
+        })
+    }
 
     return Usuario;
 }

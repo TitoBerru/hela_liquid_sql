@@ -16,6 +16,9 @@ module.exports =(sequelize, DataTypes) => {
         FechaCreacion:{
             type: DataTypes.DATE
         } ,
+        TipoReceta: {
+            type: DataTypes.STRING(50)
+        },
        
         CantidadIngredientesRequerida:{
             type: DataTypes.DECIMAL(10,2)
@@ -26,7 +29,21 @@ module.exports =(sequelize, DataTypes) => {
         tableName: "recetas",
         timestamps: false
     }
-    const Receta = sequelize.define (alias, cols, config)
+    const Receta = sequelize.define (alias, cols, config);
+    Receta.associate = function(models){
+        Receta.belongsToMany(models.Aromas,{
+            as:'aromas',
+            through:'recetaaromas',
+            foreignKey: 'IDReceta',
+            otherKey: 'IDAroma',
+            timestamps: false
+        });
+        Receta.hasMany(models.Recetaaromas,{
+           
+            foreignKey:  'IDReceta'
+        })
+    
+    }
 
-    return Receta;
+     return Receta;
 }

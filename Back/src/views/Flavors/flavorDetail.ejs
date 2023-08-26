@@ -16,22 +16,19 @@
 	
 	<div class="container products-wrapper">
 		<div class="row">
-			<div class="col-12">
-				
-				<h2 class="products-title">Detalle del aroma: </h2>
-			</div>
+			
 		</div>
 		<div class="product-detail">
 			<div class="row">
-				<div class="col-12">
-					<p class="product-detail-description">
-						<%= flavors[0].description %>
-					</p>
-				</div>
+				
 				<div class="col-12 col-lg-4">
 					<article class="product-detail-info">
-						<h2 class="product-detail-title"><%= flavors[0].name %></h2>
-						
+						<h2 class="product-detail-title"><%= aroma.NombreAroma %></h2>
+						<div class="col-12">
+							<p class="product-detail-description">
+								<%= aroma.Descripcion %>
+							</p>
+						</div>
 							
 							<p class="product-detail-price">
 							
@@ -41,18 +38,18 @@
 						<ul class="actions-list">
 							<li>
 								<i class="fas fa-credit-card"></i>
-								<p>Proveedor: <%= flavors[0].provider %> </p>
+								<p>Proveedor: <%= aroma.Proveedor %> </p>
 							</li>
 							<li>
 								<p class="product-detail-price small">
-									<span>Precio por Mililitro$ <%= flavors[0].price %></span>
+									<span>Precio por Mililitro$ <%= aroma.CostoUnitario %></span>
 								</p>
 							</li>
 							<li>
 								<i class="fas fa-store"></i>
 								<p>Es usado en los siguientes recetas:</p>
 								
-									<%= resultRecipesUsed %> 
+									
 								
 							</li>
 							
@@ -62,11 +59,11 @@
 
 						<hr>
 
-						<a href="/flavors/edit/<%= flavors[0].idFlavor %>" class="card-link">
+						<a href="/flavors/edit/<%= aroma.id %>" class="card-link">
 							<button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
 						</a>
 						<form method="POST"
-                                    action="/flavors/delete/<%= flavors[0].idFlavor %>?_method=DELETE">
+                                    action="/flavors/delete/<%= aroma.id %>?_method=DELETE">
                                     <button type="submit" class="btn btn-outline-danger btn-sm">
                                         Eliminar
                                     </button>

@@ -5,9 +5,9 @@
     <input type="text" name="Cliente" placeholder="Cliente">
     <br>
     <select class="form-control-sm m-1" id="Receta" name="Receta">
-        <% for( let i=0; i < recipes.length; i++ ) { %>
-            <option value="<%=recipes[i].idRecipe%>" >
-                <%=recipes[i].name%>
+        <% for( let i=0; i < recetas.length; i++ ) { %>
+            <option value="<%=recetas[i].idRecipe%>" >
+                <%=recetas[i].NombreReceta%>
             </option>
             <% } %>
     </select>
