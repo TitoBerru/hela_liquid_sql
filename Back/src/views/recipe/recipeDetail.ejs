@@ -40,7 +40,7 @@
                             </p>
                             <p>Utiliza los siguientes Aromas: </p>
                             <% for( let i = 0; i < receta.aromas.length; i++ ) { %>
-                                <%= receta.aromas[i].NombreAroma %>
+                                <%= receta.aromas[i].NombreAroma %> -
                             <% } %>
                                         <div class="actions-list">
                                             <br>
@@ -59,6 +59,9 @@
                                         </div>
                                         <hr>
                         </article>
+                        <a href="/recipes" class="card-link">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Volver</button>
+                        </a>
                     </div>
                 </div>
             </div>

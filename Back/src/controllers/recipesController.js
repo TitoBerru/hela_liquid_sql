@@ -93,7 +93,7 @@ const recipesController = {
         // Asociar los sabores y porcentajes a la receta en la tabla pivote
         await Promise.all(saboresYPorcentajes.map(async (saborPorcentaje) => {
           // Aquí debes buscar el ID del aroma en función del nombre del aroma
-          console.log(saborPorcentaje)
+          console.log('sabor y porcentaje total?',saborPorcentaje)
           const aroma = await db.Aromas.findOne({ where: { ID: saborPorcentaje.IDAroma } });
           console.log('id de la receta creada',recetaCreada.id)
           console.log('id del aroma',aroma.id)
