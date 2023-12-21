@@ -19,6 +19,20 @@ const indexController = {
           },
         ],
       });
+
+      const options={
+        order:[["FechaVenta", "DESC"]],
+        limit: 1
+      };
+
+      const ultimaVenta = await db.Ventas.findAll(options);
+      
+      // const cmv = db.Ventas.findAll(options)
+      // .then(function(cmv){
+      //   console.log('console.log linea 29 index controller', cmv)
+      //   return cmv
+        
+      // })
       
       // if (receta[0].hasOwnProperty("id")) {
       //   console.log('el atributo ID esta presente en el objeto', receta[0].id);
@@ -27,13 +41,14 @@ const indexController = {
       // }
       // console.log(JSON.stringify(recetas, null, 2));
       // console.log(recetas[0].ID)
-      const cmv = await salesCostServiceSql.consulta("Pepe", 58, 60, 9, 1, 5000);
+      // const cmv = await salesCostServiceSql.consulta("Julio", 58, 60, 9, 1, 5000);
       // Enviar los resultados al cliente en formato JSON
       // res.json(recetas[0].aromas[0].aroma_cantidad.CantidadAroma);
       // res.send(cmv)
      
       // console.log('data del req.body ', (JSON.stringify(recetas[0].ID)));
-      res.render("index", { recetas, cmv });
+      // res.send(ultimaVenta)
+      res.render("index", { recetas:recetas, ultimaVenta:ultimaVenta});
 
       // res.send(recetas)
     } catch (error) {

@@ -1,3 +1,4 @@
+const { DATE } = require("sequelize");
 const db = require("../../database/models");
 
 const salesCostServiceSql = {
@@ -24,7 +25,7 @@ const salesCostServiceSql = {
           },
         ],
       });
-      console.log('consoloe.log linea 27 sales cost services ',idReceta)
+      // console.log('consoloe.log linea 27 sales cost services ',idReceta)
       const esenciasUtilizadas = consultoReceta.aromas.map((aroma) => ({
         nombre: aroma.NombreAroma,
         id: aroma.aroma_cantidad.IDAroma,
@@ -84,28 +85,44 @@ const salesCostServiceSql = {
       
       const valorTotalReceta = (costoTotalPg+costoTotalVg+Number(valorFrasco) + Number(valorTotalEsencias) + Number(valorEnRecetaNico) )*cant;
       
-      cmv = {
-        cliente :cliente,
-        precioVenta : pcioVenta,
-        idReceta : idReceta,
-        receta : consultoReceta.NombreReceta,
-        costoTotalPg : costoTotalPg,
-        costoTotalVg : costoTotalVg,
-        valorFrasco : Number(valorFrasco),
-        valorTotalEsencias: valorTotalEsencias,
-        valorEnRecetaNico : valorEnRecetaNico,
-        valorTotalReceta: valorTotalReceta
+      // cmv = {
+      //   cliente :cliente,
+      //   precioVenta : pcioVenta,
+      //   idReceta : idReceta,
+      //   receta : consultoReceta.NombreReceta,
+      //   costoTotalPg : costoTotalPg,
+      //   costoTotalVg : costoTotalVg,
+      //   valorFrasco : Number(valorFrasco),
+      //   valorTotalEsencias: valorTotalEsencias,
+      //   valorEnRecetaNico : valorEnRecetaNico,
+      //   valorTotalReceta: valorTotalReceta
 
-      }
+      // }
+     
+        await db.Ventas.create({
+          CantidadUnitaria: cant,
+          FechaVenta: new Date(),
+          IDReceta: idReceta,
+          NombreCliente: cliente,
+          NombreReceta: consultoReceta.NombreReceta,
+          CostoTotalEsencia: valorTotalEsencias,
+          CostoTotalBase : (costoTotalPg + costoTotalVg),
+          CostoTotalNico: valorEnRecetaNico, 
+          CostoFrasco : Number(valorFrasco),
+          CostoTotal : valorTotalReceta,
+          PrecioVenta: pcioVenta,
+          Ganancia : pcioVenta-valorTotalReceta
+        })
+    
       
-      console.log('id de la receta',idReceta)
-      console.log('PG', costoTotalPg)
-      console.log('PorcentajeTotalEsencias:  ' ,porcentajeTotalEsencias)
-      console.log("Valor del Frasco (valorFrasco): ", Number(valorFrasco));
-      console.log("valor total esencias(valorTotalEsencias): ", valorTotalEsencias);
-      console.log("valor de la nico (valorEnRecetaNico): ", valorEnRecetaNico);
-      console.log('valor total receta(valorTotalReceta)', valorTotalReceta)
-      return cmv;
+      // console.log('id de la receta',idReceta)
+      // console.log('PG', costoTotalPg)
+      // console.log('PorcentajeTotalEsencias:  ' ,porcentajeTotalEsencias)
+      // console.log("Valor del Frasco (valorFrasco): ", Number(valorFrasco));
+      // console.log("valor total esencias(valorTotalEsencias): ", valorTotalEsencias);
+      // console.log("valor de la nico (valorEnRecetaNico): ", valorEnRecetaNico);
+      // console.log('valor total receta(valorTotalReceta)', valorTotalReceta)
+      // return cmv;
       
     } catch (error) {
       console.error("Error en la consulta:", error);
@@ -113,6 +130,6 @@ const salesCostServiceSql = {
     
   },
 };
-
-// salesCostServiceSql.consulta("Pepe", 58, 60, 9,1,5000);
+// (cliente, idReceta, ml, nico, cant, pcioVenta)
+salesCostServiceSql.consulta("Tito", 56, 100, 9,2,5000);
 module.exports = salesCostServiceSql;

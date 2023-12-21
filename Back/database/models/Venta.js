@@ -22,7 +22,35 @@ module.exports =(sequelize, DataTypes) => {
         } ,
         IDReceta:{
             type: DataTypes.INTEGER(11).UNSIGNED
-        } 
+        },
+        NombreCliente:{
+            type: DataTypes.STRING(50)
+        },
+        NombreReceta:{
+            type: DataTypes.STRING(50)
+        },
+        CostoTotalEsencia:{
+            type: DataTypes.DECIMAL(20,2)
+        },
+        CostoTotalBase:{
+            type: DataTypes.DECIMAL(20,2)
+        },
+        CostoTotalNico:{
+            type: DataTypes.DECIMAL(20,2)
+        },
+        CostoFrasco:{
+            type: DataTypes.DECIMAL(20,2)
+        },
+        CostoTotal:{
+            type: DataTypes.DECIMAL(20,2)
+        },
+        PrecioVenta:{
+            type: DataTypes.DECIMAL(20,2)
+        },
+        Ganancia:{
+            type: DataTypes.DECIMAL(20,2)
+        }
+
     }
     let config = {
         tableName: "ventas",

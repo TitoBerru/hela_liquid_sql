@@ -10,4 +10,7 @@ router.get('/salesForYear', salesController.year);
 router.get('/salesForRecipe', salesController.recipe);
 router.get('/salesForFlavor', salesController.flavor);
 
+router.get('/create', salesController.createSale);
+router.post('/create', salesController.createSale);
+
 module.exports = router;

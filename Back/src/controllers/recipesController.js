@@ -108,9 +108,9 @@ const recipesController = {
       try {
         // Obtener los datos de la nueva receta desde la solicitud del cliente
         const nuevaReceta = {
-          NombreReceta: req.body.name,
-          TipoReceta: req.body.type,
-          Descripcion: req.body.description,
+          NombreReceta: req.body.name.toUpperCase(),
+          TipoReceta: req.body.type.toUpperCase(),
+          Descripcion: req.body.description.toUpperCase(),
           FechaCreacion: new Date()
         };
   
@@ -168,9 +168,9 @@ updateRecipe: async function (req, res) {
 
     // Obtener los datos actualizados de la receta desde la solicitud del cliente
     const datosActualizados = {
-      NombreReceta: req.body.name,
-      TipoReceta: req.body.type,
-      Descripcion: req.body.description,
+      NombreReceta: req.body.name.toUpperCase(),
+      TipoReceta: req.body.type.toUpperCase(),
+      Descripcion: req.body.description.toUpperCase(),
     };
 
     // Actualizar la receta en la base de datos

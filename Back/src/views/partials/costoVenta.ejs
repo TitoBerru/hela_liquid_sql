@@ -2,28 +2,28 @@
     <div>
         <h4>Costo de ultima venta</h4>
         <section>
-            <% if (cmv != "") { %>
+       
             <card>
-            <p>Cliente: <%= cmv.cliente %>  </p>
+            <p>Cliente: <%= ultimaVenta[0].NombreCliente %>  </p>
         </card>
-            <p>Receta: <%= cmv.receta %>  </p>
-            <p class="card-text">Esencia:  <%= cmv.valorTotalEsencias %>
+            <p>Receta: <%= ultimaVenta[0].NombreReceta %>  </p>
+            <p class="card-text">Esencia:  <%= ultimaVenta.CostoTotalEsencias %>
             </p>
-            <p>Base:  <%= (cmv.costoTotalPg + cmv.costoTotalVg) %>
+            <p>Base:  <%= ultimaVenta[0].CostoTotalBase %>
             </p>
-            <p>Nico:  <%= cmv.valorEnRecetaNico%>
+            <p>Nico:  <%= ultimaVenta[0].CostoTotalNico%>
             </p>
-            <p>Frasco:  <%= cmv.valorFrasco %>
+            <p>Frasco:  <%= ultimaVenta[0].CostoFrasco %>
             </p>
             
         
-        <p>Costo total : <%=cmv.valorTotalReceta%> </p>
+        <p>Costo total : <%=ultimaVenta[0].CostoTotal%> </p>
         
-        <p>Precio Venta: <%= cmv.precioVenta %></p>
+        <p>Precio Venta: <%= ultimaVenta[0].PrecioVenta %></p>
         
-        <p>Ganacia:  <%= cmv.precioVenta-cmv.valorTotalReceta %> </p>
+        <p>Ganacia:  <%= ultimaVenta[0].Ganancia %> </p>
      
-        <% } %>
+       
     </section>
     </div>
     <!-- copio  -->

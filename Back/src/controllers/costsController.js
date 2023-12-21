@@ -1,7 +1,7 @@
 let db = require("../../database/models");
 const salesCostService = require ("../services/salesCostServiceSql")
 const costController = {
-
+ // LLamda desde la pagina de costs
   index: function (req, res) {
   
     db.Ingredientes.findAll()
@@ -11,7 +11,7 @@ const costController = {
     })
   },
 
-   
+   // LLamda desde la pagina de costs
   edit: function(req, res){
     db.Ingredientes.findByPk(req.params.id)
     .then(function(ingrediente){
@@ -20,6 +20,7 @@ const costController = {
     })
   
   },
+  // LLamda desde la pagina de costs
   updateCosts: function(req, res){
     db.Ingredientes.update({
       CantidadDisponible: req.body.cantidad,
@@ -33,10 +34,11 @@ const costController = {
     res.redirect('/costs')
     // res.send(req.body)
   },
+
   allCosts: function(req, res){
     res.send('llego por AllCost')
   },
-    
+    // llamada desde index, partials/Registrar Venta cuando hace una compra el cliente.
   calculate: async function (req, res) {
     const recetas = 
     db.Recetas.findAll({
@@ -56,21 +58,22 @@ const costController = {
     });
     ;
 
+    let cliente = req.body.cliente.toUpperCase(); 
+    let idReceta=req.body.receta;
+    let ml=req.body.ml;
+    let nico=req.body.nico;
+    let cant=req.body.cant;
+    let pcioVenta=req.body.pcioVenta;
 
-
-    cliente = req.body.cliente;
-    idReceta=req.body.receta;
-    ml=req.body.ml;
-    nico=req.body.nico;
-    cant=req.body.cant;
-    pcioVenta=req.body.pcioVenta;
-
-    
-    const cmv = await salesCostService.consulta(cliente,idReceta,ml,nico, cant, pcioVenta);
-    console.log('linea 61 de cost controller',cmv)
    
-    // res.send(cmv)
-    res.render('index', {recetas:recetas, cmv:cmv});
+    await salesCostService.consulta(cliente,idReceta,ml,nico, cant, pcioVenta);
+    
+    // console.log('linea 61 de cost controller',cmv)
+   
+    // res.send(req.body)
+    // console.log('cnsole linea 73 de costController, con recetas: ',recetas)
+    res.redirect('../');
+    // res.redirect('../')
     // res.send(receta)
 
   },
