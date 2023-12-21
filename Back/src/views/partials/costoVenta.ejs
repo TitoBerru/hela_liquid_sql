@@ -1,78 +1,78 @@
 <!-- <div class="card card-title text-dark bg-primary mb-3"> -->
     <div>
-    <h4>Costo de ultima venta</h4>
-    <section>
-        <% if (cmv != "") { %>
-        <card>
-        <p>Cliente:  <%= cmv[0].customer %> </p>
-    </card>
-        <p>Receta:  <%= cmv[0].recipe %> </p>
-        <p class="card-text">Esencia:  <%= (cmv[0].totalEsencias).toFixed(0) %>
-        </p>
-        <p>Base:  <%= (cmv[0].Vg + cmv[0].Pg).toFixed(0) %>
-        </p>
-        <p>Nico:  <%= (cmv[0].nico).toFixed(0) %>
-        </p>
-        <p>Frasco:  <%= (cmv[0].frasco).toFixed(0) %>
-        </p>
+        <h4>Costo de ultima venta</h4>
+        <section>
+            <% if (cmv != "") { %>
+            <card>
+            <p>Cliente: <%= cmv.cliente %>  </p>
+        </card>
+            <p>Receta: <%= cmv.receta %>  </p>
+            <p class="card-text">Esencia:  <%= cmv.valorTotalEsencias %>
+            </p>
+            <p>Base:  <%= (cmv.costoTotalPg + cmv.costoTotalVg) %>
+            </p>
+            <p>Nico:  <%= cmv.valorEnRecetaNico%>
+            </p>
+            <p>Frasco:  <%= cmv.valorFrasco %>
+            </p>
+            
         
-    
-    <p>Costo total : <%=((cmv[0].totalEsencias+cmv[0].Vg + cmv[0].Pg+cmv[0].nico+cmv[0].frasco) *cmv[0].quantity).toFixed(0)%> </p>
-    
-    <p>Precio Venta: <%= cmv[0].precioVenta %></p>
-    
-    <p>Ganacia:  <%=(cmv[0].precioVenta - ((cmv[0].totalEsencias+cmv[0].Vg + cmv[0].Pg+cmv[0].nico+cmv[0].frasco)*cmv[0].quantity)).toFixed() %> </p>
- 
-    <% } %>
-</section>
-</div>
-<!-- copio  -->
-
-<!-- <div>
-    <div
-        class="andes-card andes-card--flat andes-card--default summary-card mp-balance-card andes-card--secondary-light andes-card--padding-24">
-        <div class="andes-card__header andes-card__header--border">
-            <h4 class="andes-card__title">Tu dinero</h4>
-        </div>
-        <div class="andes-card__content">
-            <section class="mp-balance-amount">
-                <h4 class="mp-balance-amount__label">Dinero disponible</h4>
-                <div class="mp-balance-amount__container-amount mp-balance-amount__links">
-                    <div class="mp-balance-amount__amounts">
-                        <p>$ 4.972</p>
-                        <p class="mp-balance-amount__cents">28</p>
-                    </div>
-                    <a class="mp-balance-card__link" href="https://www.mercadopago.com.ar/withdraw" target="_blank"
-                        rel="noopener noreferrer">Transferir dinero</a>
-                </div>
-            </section>
-            <section class="mp-balance-amount">
-                <h4 class="mp-balance-amount__label">No invertido</h4>
-                <div class="mp-balance-amount__container-amount mp-balance-amount__links">
-                    <div class="mp-balance-amount__amounts">
-                        <p>$ 0</p>
-                    </div>
-                </div>
-            </section>
-            <section class="mp-balance-amount">
-                <h4 class="mp-balance-amount__label">Invertido</h4>
-                <div class="mp-balance-amount__container-amount mp-balance-amount__links">
-                    <div class="mp-balance-amount__amounts">
-                        <p>$ 4.972</p>
-                        <p class="mp-balance-amount__cents">28</p>
-                    </div>
-                </div>
-            </section>
-            <section class="mp-balance-amount">
-                <h4 class="mp-balance-amount__label">Dinero a liquidar</h4>
-                <div class="mp-balance-amount__container-amount mp-balance-amount__links">
-                    <div class="mp-balance-amount__amounts">
-                        <p>$ 0</p>
-                    </div>
-                </div>
-            </section>
-        </div><a href="https://www.mercadopago.com.ar/banking/balance#from-section=summary"
-            class="andes-card__footer andes-card__footer--link andes-card__footer--border">Ver en Mercado Pago<!-- -->
-            <!-- <span class="andes-card__arrow"></span></a>
+        <p>Costo total : <%=cmv.valorTotalReceta%> </p>
+        
+        <p>Precio Venta: <%= cmv.precioVenta %></p>
+        
+        <p>Ganacia:  <%= cmv.precioVenta-cmv.valorTotalReceta %> </p>
+     
+        <% } %>
+    </section>
     </div>
-</div> --> 
+    <!-- copio  -->
+    
+    <!-- <div>
+        <div
+            class="andes-card andes-card--flat andes-card--default summary-card mp-balance-card andes-card--secondary-light andes-card--padding-24">
+            <div class="andes-card__header andes-card__header--border">
+                <h4 class="andes-card__title">Tu dinero</h4>
+            </div>
+            <div class="andes-card__content">
+                <section class="mp-balance-amount">
+                    <h4 class="mp-balance-amount__label">Dinero disponible</h4>
+                    <div class="mp-balance-amount__container-amount mp-balance-amount__links">
+                        <div class="mp-balance-amount__amounts">
+                            <p>$ 4.972</p>
+                            <p class="mp-balance-amount__cents">28</p>
+                        </div>
+                        <a class="mp-balance-card__link" href="https://www.mercadopago.com.ar/withdraw" target="_blank"
+                            rel="noopener noreferrer">Transferir dinero</a>
+                    </div>
+                </section>
+                <section class="mp-balance-amount">
+                    <h4 class="mp-balance-amount__label">No invertido</h4>
+                    <div class="mp-balance-amount__container-amount mp-balance-amount__links">
+                        <div class="mp-balance-amount__amounts">
+                            <p>$ 0</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="mp-balance-amount">
+                    <h4 class="mp-balance-amount__label">Invertido</h4>
+                    <div class="mp-balance-amount__container-amount mp-balance-amount__links">
+                        <div class="mp-balance-amount__amounts">
+                            <p>$ 4.972</p>
+                            <p class="mp-balance-amount__cents">28</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="mp-balance-amount">
+                    <h4 class="mp-balance-amount__label">Dinero a liquidar</h4>
+                    <div class="mp-balance-amount__container-amount mp-balance-amount__links">
+                        <div class="mp-balance-amount__amounts">
+                            <p>$ 0</p>
+                        </div>
+                    </div>
+                </section>
+            </div><a href="https://www.mercadopago.com.ar/banking/balance#from-section=summary"
+                class="andes-card__footer andes-card__footer--link andes-card__footer--border">Ver en Mercado Pago<!-- -->
+                <!-- <span class="andes-card__arrow"></span></a>
+        </div>
+    </div> --> 

@@ -41,23 +41,26 @@
                                 <%= receta[i].Descripcion %>
                             </p>
                             <div class="cardsRecipesContainer">
-                                <a href="/recipes/detail/<%= receta[i].id %>" class="card-link">
+                                <a href="/recipes/detail/<%= receta[i].ID %>" class="card-link">
                                     <button type="submit" class="btn btn-outline-danger btn-sm">Detalle
 
                                     </button>
 
                                 </a>
-                                <a href="/recipes/delete/<%= receta[i].id %>" class="card-link">
+                                <a href="/recipes/delete/<%= receta[i].ID %>" class="card-link">
                                     <form method="POST"
-                                        action="/recipes/delete/<%= receta[i].id %>?_method=DELETE">
+                                        action="/recipes/delete/<%= receta[i].ID %>?_method=DELETE">
                                         <button type="submit" class="btn btn-outline-danger btn-sm">
                                             Borrar
                                         </button>
                                     </form>
                                 </a>
-                                <a href="/recipes/edit/<%= receta.id %>" class="card-link">
+                                <a href="/recipes" class="card-link">
                                     <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
                                 </a>
+                                <!-- <a href="/recipes/edit/<%= receta[i].id %>" class="card-link">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
+                                </a> -->
                             </div>
                         </div>
                     </div>

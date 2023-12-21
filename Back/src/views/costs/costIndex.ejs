@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%- include('partials/headBootStrap.ejs') %>
+    <%- include('../partials/headBootStrap.ejs') %>
         <title>Nuve -Costos</title>
 
 </head>
@@ -13,7 +13,7 @@
 <body>
 
     <body>
-        <%- include('partials/header.ejs') %>
+        <%- include('../partials/header.ejs') %>
             <main class="indexMain">
                 <section class="Envases view1 col-4">
                     <h4>Envases</h4>
@@ -31,7 +31,7 @@
                         <tbody>
                             <% for( let i=0; i < ingredientes.length; i++ ) { %>
                             <tr>
-                                <% if (ingredientes[i].TipoIngrediente == "Envases") { %>
+                                <% if (ingredientes[i].TipoIngrediente == "Envase") { %>
                                 <th scope="row"><%= ingredientes[i].id %></th>
                                 <td> <%= ingredientes[i].TipoIngrediente %></td>
                                 <td><%= ingredientes[i].NombreIngrediente %></td>
@@ -68,7 +68,7 @@
                         <tbody>
                             <% for( let i=0; i < ingredientes.length; i++ ) { %>
                                 <tr>
-                                    <% if (ingredientes[i].TipoIngrediente != "Envases") { %>
+                                    <% if (ingredientes[i].TipoIngrediente != "Envase") { %>
                                     <th scope="row"><%= ingredientes[i].id %></th>
                                     <td> <%= ingredientes[i].TipoIngrediente %></td>
                                     <td><%= ingredientes[i].NombreIngrediente %></td>
@@ -95,7 +95,7 @@
                 <section class="view4 col4"><p>Actualizados a fecha:</p>
                 </section>
             </main>
-            <%- include('partials/bootstrapScript.ejs') %>
+            <%- include('../partials/bootstrapScript.ejs') %>
     </body>
 </body>
 

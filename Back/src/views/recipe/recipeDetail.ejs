@@ -26,38 +26,45 @@
                 <div class="row">
                     <div class="col-12">
                         <h4 class="product-detail-description">
-                            <%= receta.NombreReceta %>
+                            <%= receta[0].NombreReceta %>
                         </h4>
                     </div>
                     <div class="col-12 col-lg-4">
                         <article class="product-detail-info">
                             <p class="product-detail-type">
-                              Tipo Receta: 
-                                <%= receta.TipoReceta %>
+                                Tipo Receta: <b>
+                                    <%= receta[0].TipoReceta %>
+                                </b>
+
                             </p>
                             <p class="product-detail-description">
-                                Descripcion: <%= receta.Descripcion %>
+                                Descripcion: <b><%= receta[0].Descripcion %></b> 
                             </p>
                             <p>Utiliza los siguientes Aromas: </p>
-                            <% for( let i = 0; i < receta.aromas.length; i++ ) { %>
-                                <%= receta.aromas[i].NombreAroma %> -
-                            <% } %>
-                                        <div class="actions-list">
-                                            <br>
-                                                <p class="product-detail-price big">
-                                                    Ventas Ultimo Mes
-                                                </p>
-                                                   <p>Cantidades ML: </p> 
-                                                  <p>Cantidades $:</p>  
+                            <% for( let i=0; i < receta.length; i++ ) { %>
 
-                                                
-                                            
-                                           
-                                                <i class="fas fa-store"></i>
-                                                <p>Usuario que mas compra: </p>
-                                           
-                                        </div>
-                                        <hr>
+                                <p>
+                                    <%= receta[i].aromas.NombreAroma %> :
+                                        <%= receta[i].aromas.aroma_cantidad.CantidadAroma %> %
+                                </p>
+                                <% } %>
+
+                                    <div class="actions-list">
+                                        <br>
+                                        <p class="product-detail-price big">
+                                            Ventas Ultimo Mes
+                                        </p>
+                                        <p>Cantidades ML: </p>
+                                        <p>Cantidades $:</p>
+
+
+
+
+                                        <i class="fas fa-store"></i>
+                                        <p>Usuario que mas compra: </p>
+
+                                    </div>
+                                    <hr>
                         </article>
                         <a href="/recipes" class="card-link">
                             <button type="submit" class="btn btn-outline-danger btn-sm">Volver</button>

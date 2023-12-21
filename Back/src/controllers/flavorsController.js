@@ -1,9 +1,10 @@
 
-let db = require('../../database/models')
-
+const db = require('../../database/models')
+let optionsOrder = {order: [['NombreAroma','ASC']]}
 const flavorsController = {
+
   allFlavors: function (req, res) {
-    db.Aromas.findAll()
+    db.Aromas.findAll(optionsOrder)
     .then(function(aroma){
       res.render("Flavors/flavors", {aroma});
     })

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %>
+   
+        <title>Nuve - Editar Costos</title>
+
+</head>
+
+<body>
+
+    <%- include('../partials/header.ejs') %>
+        <h1>Actualizar Costos</h1>
+        <form method='POST' action="/costs/edit/<%= ingrediente.id %>?_method=PUT">
+            
+            <h3>Vas a actualizar el sigueinte articulo</h3>
+
+            <% if (ingrediente.TipoIngrediente == 'Etiquetas') { %>
+                <h2><%= ingrediente.TipoIngrediente %></h2>                
+            
+                <% } else  { %>
+                    <h2> <%= ingrediente.TipoIngrediente %> de <%= ingrediente.NombreIngrediente %></h2>
+                    <% } %>
+            
+            <br>
+            <label for="">Cantidad Disponible</label>
+            <input type="text" name="cantidad" value="<%= ingrediente.CantidadDisponible %>">
+            <br>
+            <label for="">Costo</label>
+            <input type="text" name="costo" value="<%= ingrediente.Costo %>">
+            <br>
+            <input type="submit" value="ACTUALIZAR">
+            
+        </form>
+
+
+        <%- include('../partials/bootstrapScript.ejs') %>
+        <script src="sweetalert2.all.min.js"></script>
+</body>
+
+
+</html>

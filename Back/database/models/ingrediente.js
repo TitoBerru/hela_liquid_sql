@@ -6,12 +6,15 @@ module.exports =(sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
+        TipoIngrediente:{
+            type: DataTypes.STRING(100)
+        } ,
 
         NombreIngrediente:{
             type: DataTypes.STRING(100)
         } ,
         CantidadDisponible:{
-            type: DataTypes.DECIMAL(10)
+            type: DataTypes.DECIMAL(10,2)
         } ,
         UnidadMedida: {
             type: DataTypes.STRING(50)

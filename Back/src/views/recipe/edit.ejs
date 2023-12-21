@@ -12,39 +12,39 @@
 
 <body>
     <%- include('../partials/header.ejs') %>
-        <h1>Editar Receta</h1>
+        <h1>Editar Receta:</h1> <h2><%= recipeToEdit.NombreReceta  %></h2>
         <div>
             <h5 class="text-center">
                 Por favor no borrar Aromas, solo cambiar %
             </h5>
         </div>
-        <form method='POST' action="/recipes/edit/<%= recipeToEdit.idRecipe %>?_method=PUT">
+        <form method='POST' action="/recipes/edit/<%= recetaId %>?_method=PUT">
             <label for="">Nombre Receta</label>
             
-            <input type="text" name="name" value="<%= recipeToEdit.name %>">
+            <input type="text" name="name" value="<%= recipeToEdit.NombreReceta %>">
             <br>
             <label for="">Tipo</label>
-            <input type="text" name="type" value="<%= recipeToEdit.type %>">
+            <input type="text" name="type" value="<%= recipeToEdit.TipoReceta %>">
             <br>
             <label for="">Descripcion</label>
-            <input type="text" name="description" value="<%= recipeToEdit.description %>">
+            <input type="text" name="description" value="<%= recipeToEdit.Descripcion %>">
             <br>
-            <% if (recipeToEdit.flavors) { %>
-                <% for( let i=0; i < recipeToEdit.flavors.length; i++ ) { %>
+            <% if (recipeToEdit.aromas) { %>
+                <% for( let i=0; i < recipeToEdit.aromas.length; i++ ) { %>
                     <label for="">Aroma <%=[i+1] %> </label>
-                    <% if (recipeToEdit.flavors[i].flavor && recipeToEdit.flavors[i].flavor !== "") { %>
-                        <input type="text" name="flavors" value="<%= recipeToEdit.flavors[i].flavor %>">
+                    <% if (recipeToEdit.aromas[i].NombreAroma && recipeToEdit.aromas[i].NombreAroma !== "") { %>
+                        <input type="text" name="flavors" value="<%= recipeToEdit.aromas[i].NombreAroma %>">
                         <label for="">porcentaje</label>
-                        <input type="number" name="percent" value="<%= recipeToEdit.flavors[i].percent %>">
+                        <input type="number" name="percent" value="<%= recipeToEdit.aromas[i].aroma %>">
                         <br>
                     <% } else { %>
                         <label for=""></label>
                         <select class="form-control-sm" id="flavor<%= i+1 %>" name="flavors">
-                            <% for (let j = 0; j < flavors.length; j++) { %>
-                                <% if (flavors[j].name === recipeToEdit.flavors[i]) { %>
-                                    <option value="<%= flavors[j].name %>" selected><%= flavors[j].name %></option>
+                            <% for (let j = 0; j < recipeToEdit.aromas.length; j++) { %>
+                                <% if (recipeToEdit.aromas[j].name === recipeToEdit.aromas[i]) { %>
+                                    <option value="<%= recipeToEdit.aromas[j].name %>" selected><%= recipeToEdit.aromas[j].name %></option>
                                 <% } else { %>
-                                    <option value="<%= flavors[j].name %>"><%= flavors[j].name %></option>
+                                    <option value="<%= recipeToEdit.aromas[j].NombreAroma %>"><%= recipeToEdit.aromas[j].NombreAroma %></option>
                                 <% } %>
                             <% } %>
                         </select>
@@ -54,7 +54,7 @@
                     <% } %>
                 <% } %>
             <% } %>
-            <input type="submit" value="Change Recipe">
+            <input type="submit" value="Modificar Receta">
         </form>
         <%- include('../partials/bootstrapScript.ejs') %>
 </body>

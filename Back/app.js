@@ -18,7 +18,8 @@ const recipesRouter = require("./src/routes/recipesRoutes");
 const flavorsRouter = require("./src/routes/flavorsRoutes");
 const salesRouter = require("./src/routes/salesRoutes");
 const stockRouter = require("./src/routes/stockRoutes");
-const costsRouter = require("./src/routes/costsRoutes")
+const costsRouter = require("./src/routes/costsRoutes");
+const apisRouter = require("./src/routes/apisRoutes")
 
 
 // end of Consts
@@ -55,6 +56,7 @@ app.use("/flavors", flavorsRouter);
 app.use("/sales", salesRouter);
 app.use("/stock", stockRouter);
 app.use("/costs", costsRouter);
+app.use("/api", apisRouter);
 
 //Not found
 app.use((req, res, next) =>{
