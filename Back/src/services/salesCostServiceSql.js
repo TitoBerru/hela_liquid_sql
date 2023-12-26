@@ -6,7 +6,7 @@ const salesCostServiceSql = {
     // Implementar la lógica base aquí...
   },
 
-  consulta: async (cliente, idReceta, ml, nico, cant, pcioVenta) => {
+  consulta: async (cliente, idReceta, ml, nico, cant, pcioVenta, ventaEfectiva) => {
     let cmv = {}
     try {
       const consultoReceta = await db.Recetas.findOne({
@@ -98,7 +98,7 @@ const salesCostServiceSql = {
       //   valorTotalReceta: valorTotalReceta
 
       // }
-     
+          console.log('linea 101 de salesCostServicdes', ventaEfectiva)
         await db.Ventas.create({
           CantidadUnitaria: cant,
           FechaVenta: new Date(),
@@ -111,7 +111,8 @@ const salesCostServiceSql = {
           CostoFrasco : Number(valorFrasco),
           CostoTotal : valorTotalReceta,
           PrecioVenta: pcioVenta,
-          Ganancia : pcioVenta-valorTotalReceta
+          Ganancia : pcioVenta-valorTotalReceta,
+          VentaEfectiva: ventaEfectiva
         })
     
       
@@ -131,5 +132,5 @@ const salesCostServiceSql = {
   },
 };
 // (cliente, idReceta, ml, nico, cant, pcioVenta)
-salesCostServiceSql.consulta("Tito", 56, 100, 9,2,5000);
+// salesCostServiceSql.consulta("Tito", 56, 100, 9,2,5000);
 module.exports = salesCostServiceSql;

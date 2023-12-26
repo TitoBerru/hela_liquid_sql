@@ -1,5 +1,6 @@
 
 const db = require('../../database/models')
+const { Op } = require("sequelize");
 let optionsOrder = {order: [['NombreAroma','ASC']]}
 const flavorsController = {
 
@@ -29,14 +30,17 @@ const flavorsController = {
     res.redirect("/flavors");
   },
 
-  search: function (req, res) {
-    // db.Aromas.findAll({
-    //   include: [
-    //     { association: 'recetas', through: 'recetaaromas' }, // Cambio aquí
-    //   ],
-    // }).then(function (aromas) {
-    //     res.render("flavors/flavorResults");
-    // });
+  search: async function (req, res) {
+    const flavorFound = await db.Aromas.findAll({
+      where:{
+
+        NombreAroma:{
+          [Op.like]: `%${req.query.searchFlavor}%`,
+        }
+
+      }
+    })
+    res.render("flavors/flavorResults", {flavorFound : flavorFound });
 },
 
   edit: function (req, res) {

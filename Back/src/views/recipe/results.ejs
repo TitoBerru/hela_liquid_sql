@@ -23,30 +23,30 @@
              <div class="card text-white bg-dark" style="width: 18rem;">
                  <div class="card-body recipes">
                      <h5 class="card-title">
-                         <%= recipeFound[i].name %>
+                         <%= recipeFound[i].NombreReceta %>
                      </h5>
                      <h6 class="card-subtitle mb-2 text-muted">
-                         <%= recipeFound[i].type %>
+                         <%= recipeFound[i].TipoReceta %>
                      </h6>
                      <p class="card-text">
                          
-                         <%= recipeFound[i].description %>
+                         <%= recipeFound[i].Descripcion %>
 
                      </p>
                      <div class = "cardsRecipesContainer card-footer">
-                     <a href="/recipes/detail/<%= recipeFound[i].idRecipe %>" class="card-link">
-                         <!-- <form method="get" action="/recipes/edit/<%= recipeFound[i].idRecipe %>"> -->
+                     <a href="/recipes/detail/<%= recipeFound[i].ID %>" class="card-link">
+                         <!-- <form method="get" action="/recipes/edit/<%= recipeFound[i].ID %>"> -->
 
                              <button type="submit" class="btn btn-outline-danger btn-sm">Detalle</button>
                          <!-- </form> -->
                      </a>
-                     <a href="/recipes/delete/<%= recipeFound[i].idRecipe %>" class="card-link">
-                         <form method="POST" action="/recipes/delete/<%= recipeFound[i].idRecipe %>?_method=DELETE">
+                     <a href="/recipes/delete/<%= recipeFound[i].ID %>" class="card-link">
+                         <form method="POST" action="/recipes/delete/<%= recipeFound[i].ID %>?_method=DELETE">
                              <button type="submit" class="btn btn-outline-danger btn-sm">Borrar</button>
                          </form>
                      </a>
-                     <a href="/recipes/edit/<%= recipeFound[i].idRecipe %>" class="card-link">
-                         <!-- <form method="get" action="/recipes/edit/<%= recipeFound[i].idRecipe %>"> -->
+                     <a href="/recipes/edit/<%= recipeFound[i].ID %>" class="card-link">
+                         <!-- <form method="get" action="/recipes/edit/<%= recipeFound[i].ID %>"> -->
 
                              <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
                          <!-- </form> -->

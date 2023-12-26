@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/recipes.css' />
+    <%- include('../partials/headBootStrap.ejs') %>
+        <title>Nuve - Ventas por Cliente</title>
+        
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <form action="/Sales/search" method="get">
+                    <input type="text" name="searchCustomer" placeholder="Buscar Cliente">
+                    <input type="submit" value="Buscar">
+                </form>
+            </a>
+        </li>   
+        <p> <a class="nav-link nav-fill active btn-outline-warning w-10" aria-current="page" href="./salesForCustomer">Volver</a></p>  
+    </ul>
+   
+        <h1>Clientes Encontrados</h1>
+        
+ <ul>
+    
+    <% if (customersFound.length>=1) { %>
+        
+     <% for( let i=0; i < customersFound.length; i++ ) { %>
+         <li class="btn btn-outline-warning btn-sm">
+             <div class="card text-white bg-dark" style="width: 18rem;">
+                 <div class="card-body sales">
+                     <h5 class="card-title">
+                         <%= customersFound[i].NombreCliente %>
+                     </h5>
+                    <br>
+                     
+                   
+                    <div class="cardsFlavorContainer-center">
+                     <a href="./salesForCustomerDetail/<%= customersFound[i].NombreCliente%>" class="card-link">
+                      
+                             <button type="submit" class="btn btn-outline-danger btn-sm">Mas informacion</button>
+                   
+                     </a>
+                    
+                 </div>
+                 </div>
+             </div>
+
+         </li>
+         <% } %>
+         <% } else { %>
+            <h3>No hay cliente que coincida con su busqueda</h3>
+            <% } %>
+ </ul>
+ <!-- Termina Recipes -->
+
+       
+        <%- include('../partials/bootstrapScript.ejs') %>
+</body>
+</html>

@@ -49,6 +49,9 @@ module.exports =(sequelize, DataTypes) => {
         },
         Ganancia:{
             type: DataTypes.DECIMAL(20,2)
+        },
+        VentaEfectiva:{
+            type: DataTypes.BOOLEAN
         }
 
     }

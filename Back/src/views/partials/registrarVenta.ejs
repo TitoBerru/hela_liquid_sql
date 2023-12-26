@@ -1,29 +1,53 @@
 <h4>Registrar Venta</h4>
 
 <form method='POST' action="/costs/calculate">
+  
     <label for="cliente"></label>
     <input type="text" name="cliente" placeholder="Cliente">
     <br>
     <select class="form-control-sm m-1" id="receta" name="receta">
         <% for( let i=0; i < recetas.length; i++ ) { %>
-            <option value="<%=recetas[i].ID%>" >
-               
+            <option value="<%=recetas[i].ID%>">
+
                 <%=recetas[i].NombreReceta%>
             </option>
             <% } %>
     </select>
     <br>
     <label for="ml"></label>
-    <input type="number" name="ml" placeholder="Mililitros">
+    <input type="number" name="ml" placeholder="Mililitros" min="1" inputmode="numeric"pattern="^[0-9]+">
     <br>
     <label for="nico"></label>
-    <input type="number" name="nico" placeholder="Nico">
+    <input type="number" name="nico" placeholder="Nico" min="0" pattern="^[0-9]+" >
     <br>
     <label for="quantity"></label>
-    <input type="number" name="cant" placeholder="Unidades">
+    <input type="number" name="cant" placeholder="Unidades" min="1" pattern="^[0-9]+">
     <br>
     <label for="price"></label>
-    <input type="number" name="pcioVenta" placeholder="Precio de Venta">
+    <input type="number" name="pcioVenta" placeholder="Precio de Venta" min="1" pattern="^[0-9]+">
     <br>
+    <!-- INGRESO NUEVO DATOS PARA VALIDAR SI ES VENTA O CONSULTA -->
+    <fieldset class="container overflow-hidden">
+        <legend class="">Seleccione si es Venta o Consulta:</legend>
+      
+        <div>
+          <input type="radio" id="venta" name="ventaEfectiva" value="1"  />
+          <label for="venta">Venta</label>
+        </div>
+      
+        <div>
+          <input type="radio" id="consulta" name="ventaEfectiva" value="0" checked/>
+          <label for="consulta">Consulta</label>
+        </div>
+      </fieldset>
+
+    <!-- <label
+  ><input type="checkbox" id="cbox1" value="first_checkbox" /> Este es mi primer
+  checkbox</label
+><br />
+
+<input type="checkbox" id="cbox2" value="second_checkbox" />
+<label for="cbox2">Este es mi segundo checkbox</label> -->
+    <!-- TERMINA LA VALIDACION SI ES VENTA O CONSULTA -->
     <button class="btn btn-primary btnSend">Registrar</button>
 </form>

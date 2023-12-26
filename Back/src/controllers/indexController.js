@@ -5,6 +5,7 @@ const indexController = {
   index: async function (req, res) {
     try {
       const recetas = await db.Recetas.findAll({
+        order:[["NombreReceta", "ASC"]],
         attributes: ["ID", "NombreReceta"],
         include: [
           {
@@ -17,9 +18,12 @@ const indexController = {
               attributes: ["IDAroma", "CantidadAroma"],
             },
           },
+          
         ],
       });
 
+
+      // Opciones para la query de Ultima Venta.
       const options={
         order:[["FechaVenta", "DESC"]],
         limit: 1

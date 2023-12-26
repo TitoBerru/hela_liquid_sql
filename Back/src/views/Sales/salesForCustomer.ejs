@@ -1,1 +1,69 @@
-<h2>hola desde sales For Customer</h2>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %>
+        <link rel='stylesheet' href='/stylesheets/recipes.css' />
+        <title>Nuve - Recetas</title>
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+        <!-- NAVBAR  -->
+        <!-- <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <form action="/recipes/search" method="get">
+                        <input type="text" name="searchRecipe" placeholder="Buscar Receta">
+                        <input type="submit" value="Buscar">
+                    </form>
+                </a>
+            </li>
+            <a class="nav-link nav-fill active btn-outline-warning w-10" aria-current="page" href="recipes/create">Crear Receta</a>
+        </ul> -->
+        <!-- termina navbar -->
+       
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <form action="/Sales/search" method="get">
+                        <input type="text" name="searchCustomer" placeholder="Buscar Cliente">
+                        <input type="submit" value="Buscar">
+                    </form>
+                </a>
+            </li>     
+        </ul>
+        <h3>Ventas por Cliente</h3>
+      
+        <ul>
+            <% for( let i=0; i < ventas.length; i++ ) { %>
+                <li class="btn btn-outline-warning btn-sm">
+                    <div class="card text-white bg-dark" >
+                        <div class="card-body recipes">
+                            <h5 class="card-title">
+                            
+                                <%= ventas[i].dataValues.cliente %>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                TOTAL FACTURADO: 
+                                <br>
+                                <%= ventas[i].dataValues.TotalFacturado %>
+                            </h6>
+                            <h6 class="card-subtitle">
+                                TOTAL GANANCIA
+                                <br>
+                                <%= ventas[i].dataValues.TotalGanancia %>
+                            <h6/>
+                            
+                        </div>
+                    </div>
+                </li>
+                <% } %>
+        </ul>
+        <%- include('../partials/bootstrapScript.ejs') %>
+</body>
+
+</html>
