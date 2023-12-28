@@ -9,12 +9,19 @@ const recipesController = {
     });
   },
   create: async function (req, res) {
-    db.Aromas.findAll().then(function (aroma) {
-      // res.send(aroma)
+    try {
+        const aromas = await db.Aromas.findAll({
+            order: [['NombreAroma', 'ASC']]
+        });
+        // res.send(aromas)
+        res.render("recipe/create", { aroma: aromas });
+    } catch (error) {
+        // Manejar errores aquí
+        console.error(error);
+        res.status(500).send('Error interno del servidor');
+    }
+},
 
-      res.render("recipe/create", { aroma });
-    });
-  },
   search: async function (req, res) {
     const recipeFound = await db.Recetas.findAll({
       where: {
@@ -138,7 +145,7 @@ const recipesController = {
           });
         }
       }
-      // console.log('console.log desde linea 134 de recipes controller;: ', recetaCreada.ID)
+      console.log('console.log desde linea 134 de recipes controller;: ', recetaCreada.ID)
       // Asociar los sabores y porcentajes a la receta en la tabla pivote
       await Promise.all(
         saboresYPorcentajes.map(async (saborPorcentaje) => {
@@ -147,11 +154,11 @@ const recipesController = {
           const aroma = await db.Aromas.findOne({
             where: { ID: saborPorcentaje.IDAroma },
           });
-          // console.log('id de la receta creada',recetaCreada.id)
-          // console.log('id del aroma',aroma.id)
+          console.log('id de la receta creada',recetaCreada.id)
+          console.log('id del aroma',aroma.id)
           if (aroma) {
             await db.Recetaaromas.create({
-              IDAroma: aroma.id,
+              IDAroma: aroma.ID,
               IDReceta: recetaCreada.ID,
               CantidadAroma: saborPorcentaje.CantidadAroma,
             });
@@ -160,10 +167,10 @@ const recipesController = {
       );
 
       // Enviar la receta creada como respuesta
-      // res.status(201).json(recetaCreada);
+      // res.status(201).json(req.body);
       res.redirect("/recipes");
     } catch (error) {
-      console.error("Error al crear la receta:", error);
+      console.error("Linea 173 - RecipesController - Error al crear la receta:", error);
       res.status(500).json({ error: "Ocurrió un error al crear la receta" });
     }
   },

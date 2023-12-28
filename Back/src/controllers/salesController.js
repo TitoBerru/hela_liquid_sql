@@ -56,20 +56,42 @@ salesForCustomerDetail: async function(req, res){
     where:{NombreCliente:req.params.id},
     order: [[Sequelize.literal('FechaVenta'), 'DESC']],  
   })
-  let cantidadFrascos = 0;
-  let recetasMasCompradas = [];
-  let totalEnPesosVendido = 0;
-  let totalGanancia = 0;
-  for (let i=0; i<customerFound.length; i++){
-    cantidadFrascos += customerFound[i].CantidadUnitaria;
-    recetasMasCompradas.push(customerFound[i].NombreReceta);
-    totalEnPesosVendido += Number(customerFound[i].PrecioVenta)
-    totalGanancia += Number(customerFound[i].Ganancia)
-  }
-  console.log(cantidadFrascos, recetasMasCompradas, totalEnPesosVendido, totalGanancia)
-  // console.log(customerFound[0].CantidadUnitaria)
-  res.send(customerFound[0])
-    // res.render('./Sales/salesForCustomerDetail', {customerFound, detail})
+  const datosCliente = {
+    nombreCliente : req.params.id, 
+    cantidadFrascos: 0,
+    recetasMasCompradas: {},
+    totalEnPesosVendido: 0,
+    totalGanancia: 0,
+    fechaUltimaVenta: "",
+  };
+  
+  customerFound.forEach(({ CantidadUnitaria, NombreReceta, PrecioVenta, Ganancia, FechaVenta }) => {
+    // Sumar la cantidad de frascos
+    datosCliente.cantidadFrascos += CantidadUnitaria;
+  
+    // Agregar o actualizar la cantidad de recetas compradas
+    if (datosCliente.recetasMasCompradas[NombreReceta]) {
+      datosCliente.recetasMasCompradas[NombreReceta] += CantidadUnitaria;
+    } else {
+      datosCliente.recetasMasCompradas[NombreReceta] = CantidadUnitaria;
+    }
+  
+    // Sumar el total en pesos vendido y la ganancia
+    datosCliente.totalEnPesosVendido += Number(PrecioVenta);
+    datosCliente.totalGanancia += Number(Ganancia);
+    datosCliente.fechaUltimaVenta = new Date( FechaVenta)
+  });
+
+  // console.log('console log 109 sales controller, datosCiente: ',datosCliente);
+  // console.log(datosCliente.recetasMasCompradas)
+  // console.log('linea 113 solo recetas: ', datosCliente.recetasMasCompradas.TRIBECA)
+  
+
+  // console.log(cantidadFrascos, recetasMasCompradas, totalEnPesosVendido, totalGanancia)
+  // res.send(customerFound[0])
+  // res.send(datosCliente)
+  // console.log(customerFound)
+    res.render('./Sales/salesForCustomerDetail', {datosCliente, customerFound})
 
   },
   month: function (req, res) {

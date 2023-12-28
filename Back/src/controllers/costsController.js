@@ -58,7 +58,7 @@ const costController = {
     });
     ;
     const obj = JSON.parse(JSON.stringify(req.body));
-    console.log('console log linea 61 costController', req.body);
+    // console.log('console log linea 61 costController', req.body);
 
     let cliente = req.body.cliente.toUpperCase(); 
     let idReceta=req.body.receta;

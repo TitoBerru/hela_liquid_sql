@@ -11,21 +11,7 @@
 </head>
 
 <body>
-    <%- include('../partials/header.ejs') %>
-        <!-- NAVBAR  -->
-        <!-- <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <form action="/recipes/search" method="get">
-                        <input type="text" name="searchRecipe" placeholder="Buscar Receta">
-                        <input type="submit" value="Buscar">
-                    </form>
-                </a>
-            </li>
-            <a class="nav-link nav-fill active btn-outline-warning w-10" aria-current="page" href="recipes/create">Crear Receta</a>
-        </ul> -->
-        <!-- termina navbar -->
-       
+    <%- include('../partials/header.ejs') %>    
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -38,31 +24,35 @@
         </ul>
         <h3>Ventas por Cliente</h3>
       
-        <ul>
-            <% for( let i=0; i < ventas.length; i++ ) { %>
-                <li class="btn btn-outline-warning btn-sm">
-                    <div class="card text-white bg-dark" >
-                        <div class="card-body recipes">
-                            <h5 class="card-title">
-                            
-                                <%= ventas[i].dataValues.cliente %>
-                            </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                TOTAL FACTURADO: 
-                                <br>
-                                <%= ventas[i].dataValues.TotalFacturado %>
-                            </h6>
-                            <h6 class="card-subtitle">
-                                TOTAL GANANCIA
-                                <br>
-                                <%= ventas[i].dataValues.TotalGanancia %>
-                            <h6/>
-                            
+        
+            <ul>
+                <% for( let i=0; i < ventas.length; i++ ) { %>
+                    <a href="./salesForCustomerDetail/<%= ventas[i].dataValues.cliente %>">
+                    <li class="btn btn-outline-warning btn-sm">
+                        <div class="card text-white bg-dark" >
+                            <div class="card-body recipes">
+                                <h5 class="card-title">
+                                
+                                    <%= ventas[i].dataValues.cliente %>
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    TOTAL FACTURADO: 
+                                    <br>
+                                    <%= ventas[i].dataValues.TotalFacturado %>
+                                </h6>
+                                <h6 class="card-subtitle">
+                                    TOTAL GANANCIA
+                                    <br>
+                                    <%= ventas[i].dataValues.TotalGanancia %>
+                                <h6/>
+                                
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <% } %>
-        </ul>
+                    </li>
+                </a>
+                    <% } %>
+            </ul>
+        
         <%- include('../partials/bootstrapScript.ejs') %>
 </body>
 

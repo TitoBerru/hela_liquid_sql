@@ -1,16 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%- include('../partials/headBootStrap.ejs') %>
+        <link rel='stylesheet' href='/stylesheets/recipes.css' />
+        <title>Nuve - Detalle de Ventas por cliente</title>
 </head>
 <body>
-    <h1>
-        llego por ventas por cliente en detalle
-    salesForCustomerDetail
-    </h1>
-    
-    <%= detail.cantidadFrascos %>
+    <%- include('../partials/header.ejs') %>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <form action="/Sales/search" method="get">
+                        <input type="text" name="searchCustomer" placeholder="Buscar Cliente">
+                        <input type="submit" value="Buscar">
+                    </form>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="btn btn-outline-warning btn-sm">
+                <div class="card text-white bg-dark">
+                    <div class="card-body salesCustomerDetail">
+                        <h5 class="card-title-center">
+                            Cliente: <%= datosCliente.nombreCliente %>
+                        </h5>
+                        <h6 class="card-subtitle">
+                            <ul class="list-group list-group-horizontal-active">
+                                <li class="list-group-item list-group-item-success"> Cantidad de Compras:
+                                    <%= datosCliente.cantidadFrascos %>
+                                </li>
+                            </ul>
+                        </h6>
+                        <br>
+                        <h6 class="card-subtitle">
+                            <ul class="list-group list-group-horizontal-active">
+                                <li class="list-group-item list-group-item-success"> Total en $ Vendidos:
+                                    <%= datosCliente.totalEnPesosVendido %>
+                                </li>
+                            </ul>
+                            <h5>Recetas mas compradas</h5>
+                            <% Object.entries(datosCliente.recetasMasCompradas).forEach(([receta, cantidad])=> { %>
+                                <ul class="list-group list-group-horizontal-active">
+                                    <li class="list-group-item list-group-item-success"> <b>
+                                            <%= receta %>
+                                        </b>, Cantidad: <b>
+                                            <%= cantidad %>
+                                        </b>
+                                    </li>
+                                    <br>
+                                </ul>
+
+                                <% }); %>
+                    </div>
+                </div>
+            </li>
+
+
+        </ul>
+
+        <%- include('../partials/bootstrapScript.ejs') %>
 </body>
+
 </html>

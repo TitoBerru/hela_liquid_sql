@@ -1,5 +1,6 @@
 const { DATE } = require("sequelize");
 const db = require("../../database/models");
+const { literal } = require('sequelize');
 
 const salesCostServiceSql = {
   base: (cliente, idReceta, ml, nico, cantidad) => {
@@ -32,6 +33,9 @@ const salesCostServiceSql = {
         cantidad: Number(aroma.aroma_cantidad.CantidadAroma),
         costoUnitario: aroma.CostoUnitario,
       }));
+      console.log('console.log linea 36 salesCostSeviceSQL con esenciasUtilizadas: ',esenciasUtilizadas)
+      // console.log('console.log linea 36 salesCostSeviceSQL con cantidad de esencia: ',esenciasUtilizadas[0].cantidad)
+      // esenciasUtilizadas[0].CantidadAroma
       const idEsenciasUtilizadas = consultoReceta.aromas.map(
         (aroma) => aroma.aroma_cantidad.IDAroma
       );
@@ -98,7 +102,7 @@ const salesCostServiceSql = {
       //   valorTotalReceta: valorTotalReceta
 
       // }
-          console.log('linea 101 de salesCostServicdes', ventaEfectiva)
+          // console.log('linea 101 de salesCostServicdes', ventaEfectiva)
         await db.Ventas.create({
           CantidadUnitaria: cant,
           FechaVenta: new Date(),
@@ -114,6 +118,36 @@ const salesCostServiceSql = {
           Ganancia : pcioVenta-valorTotalReceta,
           VentaEfectiva: ventaEfectiva
         })
+
+        //ESte metodo funciona ok para una receta monoaroma.
+        // await db.Aromas.update({'CantidadDisponible': literal('CantidadDisponible -'+ esenciasUtilizadas[0].cantidad)},{
+        //   where:{
+        //   ID : esenciasUtilizadas[0].id
+        //   }
+        // }
+        //   )
+        
+        // Intento metodo para bulk, con varios ids y porcentajes.
+        const updates = esenciasUtilizadas.map((element) => ({
+        
+          id: element.id,
+          CantidadDisponible: element.cantidad
+        }));
+        console.log('console.log linea 135 sales Cost Services ',updates[0].id)
+        
+        for(let i=0; i<updates.length; i++){
+          await db.Aromas.update({'CantidadDisponible': literal('CantidadDisponible -'+ updates[i].CantidadDisponible)},{
+            where:{
+                ID : updates[i].id
+                }
+          }
+
+          )
+        }
+        // await db.Aromas.bulkCreate(updates, {
+        //   updateOnDuplicate: ['CantidadDisponible'],
+        //   fields: ['CantidadDisponible']
+        // });
     
       
       // console.log('id de la receta',idReceta)
