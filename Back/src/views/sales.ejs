@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include('partials/headBootStrap.ejs') %> 
+    <link rel='stylesheet' href='/stylesheets/recipes.css' />
     <title>Nuve -Ventas</title>
     
 </head>
@@ -40,10 +41,43 @@
       </div>
       <div class="two">
        
-          
-        </div>
+        <section class="Envases view1 col-4">
+            <h4>Ultimas Ventas</h4>
+            <table class="table table-dark ">
+                <thead>
+                    <tr class="table-primary flush">
+                       
+                        <th scope="col" class="bg-primary">Nombre Cliente</th>
+                        <th scope="col"class="bg-primary">Fecha Venta</th>
+                        <th scope="col"class="bg-primary">Receta</th>
+                        <th scope="col"class="bg-primary">Total en $</th>
+                        <th scope="col"class="bg-primary">Ganancia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for( let i=0; i < ventas.length; i++ ) { %>
+                    <tr>
+                       
+                        <th scope="row"><%= ventas[i].NombreCliente %></th>
+                        <td > <%= ventas[i].FechaVenta %> HS</td>
+                        <td><%= ventas[i].NombreReceta %></td>
+                        <td><%= ventas[i].PrecioVenta %></td>
+                        <td><%= ventas[i].Ganancia %></td>
+                       
+                        
+                    </tr>
+                    <% } %>
+                    
 
+
+                </tbody>
+            </table>
+        </section> 
+    </div>
+    <%- include('./partials/bootstrapScript.ejs')  %> 
+    <script src="sweetalert2.all.min.js"></script>
     </section>
+    
       
 </body>
 </html>

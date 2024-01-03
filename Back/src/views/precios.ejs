@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('./partials/headBootStrap.ejs') %>
+        <link rel='stylesheet' href='/stylesheets/recipes.css' />
+
+        <title>Nuve - Precios</title>
+</head>
+
+<body>
+    <%- include('./partials/header.ejs') %>
+
+        <!-- NAVBAR  -->
+
+        <!-- termina navbar -->
+
+        <h3>Precios</h3>
+
+        <section class="Envases view1 col-4">
+            
+            <table class="table table-dark ">
+                <thead>
+                    <tr class="table-primary flush">
+                        <th scope="col" class="bg-primary">Tipo Receta</th>
+                        <th scope="col" class="bg-primary">Rango Nico</th>
+                        <th scope="col" class="bg-primary">ML</th>
+                        <th scope="col" class="bg-primary">Precio individual</th>
+                        <th scope="col" class="bg-primary">Precio Pack</th>
+                        <th scope="col" class="bg-primary">Precio Unitario en Pack</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <h4>Tradicionales y NUVE!</h4>
+                    <br>
+                    <% for( let i=0; i < precio.length; i++ ) { %>
+                        
+                       
+                            <tr>
+                                <th scope="row">
+                                    <%= precio[i].TipoReceta %>
+                                </th>
+                                <td>
+                                    <%= precio[i].RangoNico %>
+                                </td>
+                                <td>
+                                    <%= precio[i].ML %>
+                                </td>
+                                <td>
+                                    <%= precio[i].Precio %>
+                                </td>
+                                <td>
+                                    <%= precio[i].PrecioPack %>
+                                </td>
+                                <td>
+                                    <%= precio[i].PrecioUnitarioPack %>
+                                </td>
+                            </tr>
+                       
+                        
+                        <% } %>
+                       
+                </tbody>
+                
+            </table>
+         
+            
+                
+            </table>
+
+        </section>
+        <%- include('./partials/bootstrapScript.ejs') %>
+            <script src="sweetalert2.all.min.js"></script>
+
+</body>
+
+</html>

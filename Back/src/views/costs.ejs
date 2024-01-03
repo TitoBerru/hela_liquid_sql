@@ -25,6 +25,7 @@
                                 <th scope="col">Unidad/Medida</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Stock</th>
+                                <th scope="col">Actualizado a:</th>
                                 <th scope="col">Actualizar</th>
                             </tr>
                         </thead>
@@ -62,6 +63,7 @@
                                 <th scope="col">Unidad/Medida</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Stock</th>
+                                <th scope="col">Actualizado a:</th>
                                 <th scope="col">Actualizar</th>
                             </tr>
                         </thead>
@@ -74,6 +76,7 @@
                                     <td><%= ingredientes[i].NombreIngrediente %></td>
                                     <td><%= ingredientes[i].Costo %></td>
                                     <td><%= ingredientes[i].CantidadDisponible %></td>
+                                    <td><%= ingredientes[i].FechaRegistro %></td>
                                     <td>
                                         <a href="/costs/edit/<%= ingredientes[i].id %>" class="card-link">
                                             <button type="submit" class="btn btn-info">Actualizar</button>

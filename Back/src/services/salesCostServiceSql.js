@@ -33,13 +33,13 @@ const salesCostServiceSql = {
         cantidad: Number(aroma.aroma_cantidad.CantidadAroma),
         costoUnitario: aroma.CostoUnitario,
       }));
-      console.log('console.log linea 36 salesCostSeviceSQL con esenciasUtilizadas: ',esenciasUtilizadas)
+      // console.log('console.log linea 36 salesCostSeviceSQL con esenciasUtilizadas: ',esenciasUtilizadas)
       // console.log('console.log linea 36 salesCostSeviceSQL con cantidad de esencia: ',esenciasUtilizadas[0].cantidad)
       // esenciasUtilizadas[0].CantidadAroma
       const idEsenciasUtilizadas = consultoReceta.aromas.map(
         (aroma) => aroma.aroma_cantidad.IDAroma
       );
-
+        // Traigo los 
       const consultoBaseIngredientes = await db.Ingredientes.findAll({
         attributes: ["NombreIngrediente", "Costo"],
       });
@@ -75,12 +75,13 @@ const salesCostServiceSql = {
           )?.costo || 0)) /
           100) * ml;
 
-            
+            //Costo PG
       const costoTotalPg =  
         (valoresUnitariosIngredientes.find(
           (ingrediente) => ingrediente.nombreIngrediente === "PG"
         )?.costo * (20-porcentajeTotalEsencias)*ml/100|| 0 );
 
+        // Costo VG
         const costoTotalVg =  
         (valoresUnitariosIngredientes.find(
           (ingrediente) => ingrediente.nombreIngrediente === "VG"
@@ -88,21 +89,10 @@ const salesCostServiceSql = {
        
       
       const valorTotalReceta = (costoTotalPg+costoTotalVg+Number(valorFrasco) + Number(valorTotalEsencias) + Number(valorEnRecetaNico) )*cant;
-      
-      // cmv = {
-      //   cliente :cliente,
-      //   precioVenta : pcioVenta,
-      //   idReceta : idReceta,
-      //   receta : consultoReceta.NombreReceta,
-      //   costoTotalPg : costoTotalPg,
-      //   costoTotalVg : costoTotalVg,
-      //   valorFrasco : Number(valorFrasco),
-      //   valorTotalEsencias: valorTotalEsencias,
-      //   valorEnRecetaNico : valorEnRecetaNico,
-      //   valorTotalReceta: valorTotalReceta
 
-      // }
-          // console.log('linea 101 de salesCostServicdes', ventaEfectiva)
+
+         
+
         await db.Ventas.create({
           CantidadUnitaria: cant,
           FechaVenta: new Date(),
@@ -119,14 +109,6 @@ const salesCostServiceSql = {
           VentaEfectiva: ventaEfectiva
         })
 
-        //ESte metodo funciona ok para una receta monoaroma.
-        // await db.Aromas.update({'CantidadDisponible': literal('CantidadDisponible -'+ esenciasUtilizadas[0].cantidad)},{
-        //   where:{
-        //   ID : esenciasUtilizadas[0].id
-        //   }
-        // }
-        //   )
-        
         // Intento metodo para bulk, con varios ids y porcentajes.
         const updates = esenciasUtilizadas.map((element) => ({
         
@@ -144,12 +126,7 @@ const salesCostServiceSql = {
 
           )
         }
-        // await db.Aromas.bulkCreate(updates, {
-        //   updateOnDuplicate: ['CantidadDisponible'],
-        //   fields: ['CantidadDisponible']
-        // });
-    
-      
+
       // console.log('id de la receta',idReceta)
       // console.log('PG', costoTotalPg)
       // console.log('PorcentajeTotalEsencias:  ' ,porcentajeTotalEsencias)

@@ -15,7 +15,7 @@
 
     <%- include('../partials/header.ejs') %>
         <h1>Editar Aroma</h1>
-        <form method='POST' action="/flavors/edit/<%= aroma.id %>?_method=PUT">
+        <form method='POST' action="/flavors/edit/<%= aroma.ID %>?_method=PUT">
             <label for="">Nombre Aroma </label>
             <input type="text" name="name" value="<%= aroma.NombreAroma %>">
             <br>

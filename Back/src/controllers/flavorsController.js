@@ -1,11 +1,11 @@
 
 const db = require('../../database/models')
 const { Op } = require("sequelize");
-let optionsOrder = {order: [['NombreAroma','ASC']]}
+let optionsOrder = {where:{AromaActivo : 1},order: [['NombreAroma','ASC']]}
 const flavorsController = {
 
-  allFlavors: function (req, res) {
-    db.Aromas.findAll(optionsOrder)
+  allFlavors: async function (req, res) {
+   await db.Aromas.findAll(optionsOrder)
     .then(function(aroma){
       res.render("Flavors/flavors", {aroma});
     })
@@ -15,14 +15,15 @@ const flavorsController = {
     res.render("Flavors/flavorCreate");
   },
 
-  storeFlavors: function (req, res) {
-    db.Aromas.create({
+  storeFlavors: async function (req, res) {
+    await db.Aromas.create({
       NombreAroma: req.body.name,
       CantidadDisponible: req.body.stock,
       Proveedor:req.body.provider,
       CostoUnitario:req.body.price,
       Marca: req.body.brand,
-      FechaRegistro : new Date()
+      FechaRegistro : new Date(),
+      AromaActivo: 1
     })
 
 
@@ -36,29 +37,31 @@ const flavorsController = {
 
         NombreAroma:{
           [Op.like]: `%${req.query.searchFlavor}%`,
-        }
+        },
+        'AromaActivo': 1
 
       }
     })
     res.render("flavors/flavorResults", {flavorFound : flavorFound });
 },
 
-  edit: function (req, res) {
-    db.Aromas.findByPk(req.params.id)
+  edit: async function (req, res) {
+   await db.Aromas.findByPk(req.params.id)
     .then(function(aroma){
     // res.send(aroma)
       res.render("flavors/flavorEdit", { aroma });
     })
     
   },
-  updateFlavor: function (req, res) {
-    db.Aromas.update({
+  updateFlavor: async function (req, res) {
+   await db.Aromas.update({
       NombreAroma: req.body.name,
       CantidadDisponible: req.body.stock,
       Proveedor:req.body.provider,
       CostoUnitario:req.body.price,
       Marca: req.body.brand,
-      FechaRegistro: new Date()
+      FechaRegistro: new Date(),
+      AromaActivo: 1
     }, {
       where:{
         id: req.params.id
@@ -68,8 +71,9 @@ const flavorsController = {
     res.redirect("/flavors");
   },
 
-  deleteFlavor: function (req, res) {
-    db.Aromas.destroy({
+  deleteFlavor: async function (req, res) {
+   
+    await db.Aromas.update({'AromaActivo': 0},{
       where:{
         id:req.params.id
       }
@@ -77,9 +81,9 @@ const flavorsController = {
     res.redirect("/flavors");
     },
 
-  detail: function (req, res) {
+  detail: async function (req, res) {
 
-    db.Aromas.findByPk(req.params.id)
+    await db.Aromas.findByPk(req.params.id)
     .then(function(aroma){
       res.render("flavors/flavorDetail", {aroma});
       // res.send(aroma)

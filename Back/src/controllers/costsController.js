@@ -2,9 +2,9 @@ let db = require("../../database/models");
 const salesCostService = require ("../services/salesCostServiceSql")
 const costController = {
  // LLamda desde la pagina de costs
-  index: function (req, res) {
+  index: async function (req, res) {
   
-    db.Ingredientes.findAll()
+    await db.Ingredientes.findAll()
     .then(function(ingredientes){
       res.render('./costs/costIndex', { ingredientes } )
       // res.send(ingredientes);
@@ -12,8 +12,8 @@ const costController = {
   },
 
    // LLamda desde la pagina de costs
-  edit: function(req, res){
-    db.Ingredientes.findByPk(req.params.id)
+  edit: async function(req, res){
+    await db.Ingredientes.findByPk(req.params.id)
     .then(function(ingrediente){
       res.render('costs/costsEdit', { ingrediente })
       // res.send(ingrediente)
@@ -21,10 +21,11 @@ const costController = {
   
   },
   // LLamda desde la pagina de costs
-  updateCosts: function(req, res){
-    db.Ingredientes.update({
+  updateCosts: async function(req, res){
+    await db.Ingredientes.update({
       CantidadDisponible: req.body.cantidad,
-      Costo: req.body.costo
+      Costo: req.body.costo,
+      FechaRegistro: new Date()
 
     }, {
       where:{
@@ -41,7 +42,7 @@ const costController = {
     // llamada desde index, partials/Registrar Venta cuando hace una compra el cliente.
   calculate: async function (req, res) {
     const recetas = 
-    db.Recetas.findAll({
+    await db.Recetas.findAll({
       attributes: ["ID", "NombreReceta"],
       include: [
         {

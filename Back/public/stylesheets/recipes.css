@@ -18,11 +18,8 @@ a:link{
 .cardsRecipesContainer{
     display: flex;
 }
-.flavors, .recipes{
-    /* display: grid;
-    width: 18vw;
-    height: 25vh; */
-    /* align-items: center; */
+.Envases{
+  width: auto;
 }
 
 .cardsFlavorContainer{
@@ -37,10 +34,17 @@ ul{
     padding:0;
     
 }
+.sectionMainFlavor{
+   /* border: 5px solid red; */
+   margin: 10px;
+   display: flex;
+   flex-wrap: wrap;
+}
 @media (min-width: 1236px) {
     .flavors, .recipes{
         display: grid;
-        width: 18vw;
+        padding: 10px;
+        width: 100%;
         height: 30vh; 
         align-items: center; 
     }

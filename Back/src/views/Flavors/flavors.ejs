@@ -22,8 +22,11 @@
             </form>
         </a>
     </li>
-    <a class="nav-link nav-fill active btn-outline-warning ml-4" aria-current="page" href="Flavors/create">Crear Nuevo Aroma</a>
+    <li>
+        <a class="nav-link nav-fill active btn-outline-warning ml-4" aria-current="page" href="Flavors/create">Crear Nuevo Aroma</a>
 
+    </li>
+   
        
     
 
@@ -31,7 +34,7 @@
   <!-- termina navbar -->
 
  <h3>Aromas</h3> 
-    <ul>
+    <section class="sectionMainFlavor">
         <% for( let i = 1; i < aroma.length; i++ ) { %>   
     
             <li class="btn btn-outline-warning btn-sm">
@@ -57,19 +60,19 @@
                          </p>
 
                         <div class="cardsFlavorContainer card-footer">
-                            <a href="/flavors/detail/<%= aroma[i].id %>" class="card-link">
+                            <a href="/flavors/detail/<%= aroma[i].ID %>" class="card-link">
                                 <button type="submit" class="btn btn-outline-danger btn-sm">Detalle
                                 </button>
                             </a>
-                            <a href="/flavors/delete/<%= aroma[i].id %>" class="card-link">
+                            <a href="/flavors/delete/<%= aroma[i].ID %>" class="card-link">
                                 <form method="POST"
-                                    action="/flavors/delete/<%= aroma[i].id %>?_method=DELETE">
+                                    action="/flavors/delete/<%= aroma[i].ID %>?_method=DELETE">
                                     <button type="submit" class="btn btn-outline-danger btn-sm">
                                         Eliminar
                                     </button>
                                 </form>
                             </a>
-                            <a href="/flavors/edit/<%= aroma[i].id %>" class="card-link">
+                            <a href="/flavors/edit/<%= aroma[i].ID %>" class="card-link">
                                 <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
                             </a>
                         </div>
@@ -78,7 +81,7 @@
             
         </li>
         <% } %>
-    </ul>
+    </section>
    
 
     <%- include('../partials/bootstrapScript.ejs')  %> 

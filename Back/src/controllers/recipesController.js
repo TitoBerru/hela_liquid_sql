@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 let db = require("../../database/models");
 const recipesController = {
   list: async function (req, res) {
-    db.Recetas.findAll().then(function (receta) {
+    await db.Recetas.findAll({where:{RecetaActiva : 1}}).then(function (receta) {
       // res.send(receta)
       res.render("recipe/recipes", { receta });
     });
@@ -11,6 +11,7 @@ const recipesController = {
   create: async function (req, res) {
     try {
         const aromas = await db.Aromas.findAll({
+          where:{'AromaActivo': 1},
             order: [['NombreAroma', 'ASC']]
         });
         // res.send(aromas)
@@ -109,15 +110,6 @@ const recipesController = {
       res.status(500).json({ error: "Ocurrió un error al obtener la receta" });
     }
   },
-
-  storeRecipe2: function (req, res) {
-    const nuevaReceta = req.body;
-    // const modificada = nuevaReceta.map(function(ele){
-    // ele + "hola"
-    // })
-    res.send("llego por put");
-    // res.redirect("/recipes");
-  },
   storeRecipe: async function (req, res) {
     try {
       // Obtener los datos de la nueva receta desde la solicitud del cliente
@@ -126,6 +118,7 @@ const recipesController = {
         TipoReceta: req.body.type.toUpperCase(),
         Descripcion: req.body.description.toUpperCase(),
         FechaCreacion: new Date(),
+        RecetaActiva:1
       };
 
       // Crear la nueva receta en la base de datos
@@ -145,7 +138,7 @@ const recipesController = {
           });
         }
       }
-      console.log('console.log desde linea 134 de recipes controller;: ', recetaCreada.ID)
+      // console.log('🛑🛑console.log desde linea 134 de recipes controller;: ', recetaCreada.ID)
       // Asociar los sabores y porcentajes a la receta en la tabla pivote
       await Promise.all(
         saboresYPorcentajes.map(async (saborPorcentaje) => {
@@ -244,11 +237,22 @@ const recipesController = {
   deleteRecipe: async function (req, res) {
     // res.send(req.params.id)
     let recetaABorrar = req.params.id;
-    await db.Recetaaromas.destroy({ where: { IDReceta: recetaABorrar } });
-    await db.Recetas.destroy({ where: { ID: recetaABorrar } });
 
+    // Funciona para destroy. Implemento softDelete
+    // await db.Ventas.destroy({where:{IDReceta: recetaABorrar}})
+    // await db.Recetaaromas.destroy({ where: { IDReceta: recetaABorrar } });
+    // await db.Recetas.destroy({ where: { ID: recetaABorrar } });
+
+    
+    // Soft Delete
+
+    await db.Recetas.update({ 'RecetaActiva': 0  }, {
+      where: {
+        'ID': recetaABorrar
+        
+      }
+    });
     res.redirect("/recipes");
-
     // res.redirect("/recipes" );
   },
 };

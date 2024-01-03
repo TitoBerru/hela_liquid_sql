@@ -22,7 +22,10 @@ module.exports =(sequelize, DataTypes) => {
        
         CantidadIngredientesRequerida:{
             type: DataTypes.DECIMAL(10,2)
-        } 
+        },
+        RecetaActiva:{
+            type: DataTypes.BOOLEAN
+        }
         
     }
     let config = {

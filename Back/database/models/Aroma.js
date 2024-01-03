@@ -27,7 +27,10 @@ module.exports =(sequelize, DataTypes) => {
         },
         FechaRegistro:{
             type: DataTypes.DATE
-        } 
+        },
+        AromaActivo:{
+            type: DataTypes.BOOLEAN
+        }
     }
     let config = {
         tableName: "aromas",

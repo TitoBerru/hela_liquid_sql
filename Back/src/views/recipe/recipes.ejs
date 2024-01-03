@@ -22,11 +22,13 @@
                     </form>
                 </a>
             </li>
-            <a class="nav-link nav-fill active btn-outline-warning w-10" aria-current="page" href="recipes/create">Crear Receta</a>
+            <li>
+                <a class="nav-link nav-fill active btn-outline-warning w-10" aria-current="page" href="recipes/create">Crear Receta</a>
+            </li>
         </ul>
         <!-- termina navbar -->
         <h3>Recetas</h3>
-        <ul>
+        <section class="sectionMainFlavor">
             <% for( let i=0; i < receta.length; i++ ) { %>
                 <li class="btn btn-outline-warning btn-sm">
                     <div class="card text-white bg-dark" >
@@ -66,7 +68,7 @@
                     </div>
                 </li>
                 <% } %>
-        </ul>
+        </section>
         <%- include('../partials/bootstrapScript.ejs') %>
 </body>
 

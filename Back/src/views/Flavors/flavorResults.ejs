@@ -38,17 +38,17 @@
 
                     </p>
                     <div class="cardsFlavorContainer">
-                     <a href="/flavors/detail/<%= flavorFound[i].id %>" class="card-link">
+                     <a href="/flavors/detail/<%= flavorFound[i].ID %>" class="card-link">
                       
                              <button type="submit" class="btn btn-outline-danger btn-sm">Detalle</button>
                    
                      </a>
-                     <a href="/flavors/delete/<%= flavorFound[i].id %>" class="card-link">
+                     <a href="/flavors/delete/<%= flavorFound[i].ID %>" class="card-link">
                          <form method="POST" action="/flavors/delete/<%= flavorFound[i].ID %>?_method=DELETE">
                              <button type="submit" class="btn btn-outline-danger btn-sm">Borrar</button>
                          </form>
                      </a>
-                     <a href="/flavors/edit/<%= flavorFound[i].id %>" class="card-link">
+                     <a href="/flavors/edit/<%= flavorFound[i].ID %>" class="card-link">
                          
 
                              <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
