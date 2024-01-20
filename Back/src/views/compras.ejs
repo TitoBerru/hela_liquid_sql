@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('partials/headBootStrap.ejs') %>
+        <title>Nuve - Compras</title>
+
+</head>
+
+<body>
+    <%- include('partials/header.ejs') %>
+        <h1>Compras</h1>
+        <main class="indexMain">
+         
+            <section class="view1">
+                <form method='POST' action="/compras/registro">
+                    <fieldset>
+                        <label for="tipoProducto"></label>
+        
+                        <select class="form-control-sm m-2" id="tipoProducto" name="tipoProducto" >
+                            <option value="aroma"> Aromas </option>
+                            <option value="Nico"> Base - Nico </option>
+                            <option value="PG"> Base - PG</option>
+                            <option value="VG"> Base - VG</option>
+                            <option value="envase10"> Envase 10</option>
+                            <option value="envase30"> Envase 30</option>
+                            <option value="envase60"> Envase 60</option>
+                            <option value="envase120"> Envase 120</option>
+                            <option value="etiqueta"> Etiquetas</option>
+                            <option value="otros"> Otros No Especificado</option>
+                        </select>
+                    </fieldset>
+                    
+                        
+                    <fieldset>
+                        <label for="cantidad"></label>
+                        <input type="number" name="cantidad" placeholder="cantidad" min="0" step="0.1" class="form-control-sm m-2" >
+                    </fieldset>
+                       
+                        <fieldset>
+                            <label for="mlOUnitario"></label>
+                            <select id="mlOUnitario" name="mlOUnitario" class="form-control-sm m-2">
+                            <option value="ML">Mililitros</option>
+                            <option value="UNITARIO" selected>Unitario</option>
+                        </select>
+                        </fieldset>
+                       
+                    <fieldset>
+                        <label for="costo"></label>
+                        <input type="number" name="costo" placeholder="Costo Total" min="1" class="form-control-sm m-2">
+                    </fieldset>
+                       
+                    <fieldset>
+                        <label for="metodoPago"></label>
+                        <input type="text" name="metodoPago" placeholder="Forma de Pago" class="form-control-sm m-2">
+                    </fieldset>
+                       
+                    <fieldset>
+                        <label for="proveedor"></label>
+                        <input type="text" name="proveedor" placeholder="Proveedor" class="form-control-sm m-2">
+                    </fieldset>
+                        
+                    <fieldset>
+                        <label for="comentarios" class="form-label"></label>
+                        <textarea class="form-control-sm" rows="2" class="form-control-sm m-2" placeholder="Comentarios Adicionales" name="comentarios"></textarea>
+                    </fieldset>
+                       
+                        
+                      
+                        <button class="btn btn-primary btnSend">Registrar Compra</button>
+                    </form>
+            </section>
+            <section class="DebeHaber col-4 view2">
+                <h2>DEBE-HABER ANUAL</h2>
+                
+                <h4>Ultimas Ventas</h4>
+                <table class="table table-dark ">
+                    <thead>
+                        <tr class="table-primary flush">
+                           
+                            <th scope="col" class="bg-primary">AÑO</th>
+                            <th scope="col"class="bg-primary">MES</th>
+                            <th scope="col"class="bg-primary">TOTAL INGRESOS</th>
+                            <th scope="col"class="bg-primary">TOTAL EGRESOS</th>
+                            <th scope="col"class="bg-primary">RESULTADO MES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for( let i=0; i < resultado.length; i++ ) { %>
+                        <tr>
+                           
+                            <th scope="row" class= "text-center"><%= resultado[i].anio %></th>
+                            <td scope="row" class= "text-center"> <%= resultado[i].mes %></td>
+                            <td scope="row" class= "text-center"><%= resultado[i].totalMontoVentas %></td>
+                            <td scope="row" class= "text-center"><%= resultado[i].totalMontoCompras %></td>
+                            <td scope="row" class= "text-center"><%= resultado[i].totalMontoVentas-resultado[i].totalMontoCompras %></td>
+                           
+                            
+                        </tr>
+                        <% } %>
+                        
+    
+    
+                    </tbody>
+                </table>
+            </section> 
+
+            <%- include('partials/bootstrapScript.ejs') %>
+        </main>
+</body>
+
+</html>

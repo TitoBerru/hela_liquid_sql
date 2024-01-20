@@ -1,7 +1,7 @@
 
 const db = require('../../database/models')
 const { Op } = require("sequelize");
-let optionsOrder = {where:{AromaActivo : 1},order: [['NombreAroma','ASC']]}
+const optionsOrder = {where:{AromaActivo : 1},order: [['NombreAroma','ASC']]}
 const flavorsController = {
 
   allFlavors: async function (req, res) {

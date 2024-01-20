@@ -17,7 +17,7 @@ const ejemploRouter = require("./src/routes/ejemplo");
 const recipesRouter = require("./src/routes/recipesRoutes");
 const flavorsRouter = require("./src/routes/flavorsRoutes");
 const salesRouter = require("./src/routes/salesRoutes");
-const stockRouter = require("./src/routes/stockRoutes");
+const comprasRouter = require("./src/routes/comprasRoutes");
 const costsRouter = require("./src/routes/costsRoutes");
 const apisRouter = require("./src/routes/apisRoutes")
 const preciosRouter = require("./src/routes/preciosRoutes")
@@ -55,7 +55,7 @@ app.use("/ejemplo", ejemploRouter);
 app.use("/recipes", recipesRouter);
 app.use("/flavors", flavorsRouter);
 app.use("/sales", salesRouter);
-app.use("/stock", stockRouter);
+app.use("/compras", comprasRouter);
 app.use("/costs", costsRouter);
 app.use("/api", apisRouter);
 app.use("/precios", preciosRouter)

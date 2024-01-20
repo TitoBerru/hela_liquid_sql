@@ -33,10 +33,9 @@ const salesController = {
         Ganancia: venta.Ganancia,
       };
     });
-    // console.log('✅  Console log linea 39 de sales controller',ventas2)
-    //  res.send({ventas2});
     res.render("sales", { ventas });
   },
+
   customer: async function (req, res) {
     const ventas = await db.Ventas.findAll({
       where: { VentaEfectiva: 1 },
@@ -54,12 +53,11 @@ const salesController = {
         [Sequelize.fn("sum", Sequelize.literal("CostoTotal")), "CostoTotal"],
       ],
       group: ["NombreCliente"],
-      order: [[Sequelize.literal("Ganancia"), "DESC"]],
+      order: [[Sequelize.literal("NombreCliente"), "ASC"]],
     });
-    // console.log(ventas[1].dataValues.cliente)
-    // res.send(ventas[0])
     res.render("./Sales/salesForCustomer", { ventas: ventas });
   },
+
   customerSalesSearch: async function (req, res) {
     const customersFound1 = await db.Ventas.findAll({
       where: {
@@ -81,9 +79,10 @@ const salesController = {
       customersFound: customersFound,
     });
   },
+
   salesForCustomerDetail: async function (req, res) {
     const customerFound = await db.Ventas.findAll({
-      where: { NombreCliente: req.params.id },
+      where: { NombreCliente: req.params.id, VentaEfectiva: 1 },
       order: [[Sequelize.literal("FechaVenta"), "DESC"]],
     });
     const datosCliente = {
@@ -94,7 +93,6 @@ const salesController = {
       totalGanancia: 0,
       fechaUltimaVenta: "",
     };
-
     customerFound.forEach(
       ({
         CantidadUnitaria,
@@ -105,50 +103,80 @@ const salesController = {
       }) => {
         // Sumar la cantidad de frascos
         datosCliente.cantidadFrascos += CantidadUnitaria;
-
         // Agregar o actualizar la cantidad de recetas compradas
         if (datosCliente.recetasMasCompradas[NombreReceta]) {
           datosCliente.recetasMasCompradas[NombreReceta] += CantidadUnitaria;
         } else {
           datosCliente.recetasMasCompradas[NombreReceta] = CantidadUnitaria;
         }
-
         // Sumar el total en pesos vendido y la ganancia
         datosCliente.totalEnPesosVendido += Number(PrecioVenta);
         datosCliente.totalGanancia += Number(Ganancia);
         datosCliente.fechaUltimaVenta = new Date(FechaVenta);
       }
     );
-
-    // console.log('console log 109 sales controller, datosCiente: ',datosCliente);
-    // console.log(datosCliente.recetasMasCompradas)
-    // console.log('linea 113 solo recetas: ', datosCliente.recetasMasCompradas.TRIBECA)
-
-    // console.log(cantidadFrascos, recetasMasCompradas, totalEnPesosVendido, totalGanancia)
-    // res.send(customerFound[0])
-    // res.send(datosCliente)
-    // console.log(customerFound)
     res.render("./Sales/salesForCustomerDetail", {
       datosCliente,
       customerFound,
     });
   },
-  month: function (req, res) {
-    res.render("./Sales/salesForMonth");
-    // res.send({ result });
+  month: async function (req, res) {
+    let month_actual = "MONTH(CURRENT_DATE())";
+    if (req.params.id) {
+      month_actual = req.params.id;
+    }
+    const ventas2 = await db.Ventas.findAll({
+      
+      where: {
+        VentaEfectiva: 1,
+        [Op.and]: [
+          Sequelize.literal(`MONTH(FechaVenta) =` + month_actual),
+          Sequelize.literal(`YEAR(FechaVenta) = YEAR(CURRENT_DATE())`),
+        ],
+      },
+      order: [[Sequelize.literal("FechaVenta"), "DESC"]],
+    });
+
+    // Formatear la fecha en formato español
+    const opcionesFormato = {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+
+    const ventas = ventas2.map((venta) => {
+      const fechaParseada = new Date(venta.FechaVenta);
+      const fechaFormateada = fechaParseada.toLocaleString(
+        "es-AR",
+        opcionesFormato
+      );
+      return {
+        NombreCliente: venta.NombreCliente,
+        FechaVenta: fechaFormateada,
+        NombreReceta: venta.NombreReceta,
+        PrecioVenta: venta.PrecioVenta,
+        Ganancia: venta.Ganancia,
+      };
+    });
+    res.render("./Sales/salesForMonth", { ventas });
   },
 
   year: function (req, res) {
     res.send("llego por year");
     // res.render('sales')
   },
+
   recipe: function (req, res) {
     res.render("./Sales/salesForRecipe");
   },
+
   flavor: function (req, res) {
     res.render("./Sales/salesForFlavor");
     // res.send('Lego por salesForFlavor');
   },
+
   createSale: async function (req, res) {
     const options = {
       order: [["FechaVenta", "DESC"]],
@@ -156,11 +184,8 @@ const salesController = {
     };
     await db.Ventas.findAll(options).then(function (ventas) {
       res.send(ventas);
-      // res.send(ingredientes);
     });
   },
-
-  // res.render('sales')
 };
 
 module.exports = salesController;

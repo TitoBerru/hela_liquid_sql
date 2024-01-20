@@ -1,9 +1,11 @@
 const { json } = require("sequelize");
 const { Op } = require("sequelize");
-let db = require("../../database/models");
+const db = require("../../database/models");
+const queryOptions = {where:{RecetaActiva : 1},order: [['NombreReceta','ASC']]}
 const recipesController = {
   list: async function (req, res) {
-    await db.Recetas.findAll({where:{RecetaActiva : 1}}).then(function (receta) {
+    await db.Recetas.findAll(queryOptions)
+    .then(function (receta) {
       // res.send(receta)
       res.render("recipe/recipes", { receta });
     });

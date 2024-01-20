@@ -36,12 +36,30 @@
                             </ul>
                         </h6>
                         <br>
+                       
                         <h6 class="card-subtitle">
                             <ul class="list-group list-group-horizontal-active">
                                 <li class="list-group-item list-group-item-success"> Total en $ Vendidos:
                                     <%= datosCliente.totalEnPesosVendido %>
                                 </li>
                             </ul>
+                        </h6>
+                        <br>
+                        <h6 class="card-subtitle">
+                            <ul class="list-group list-group-horizontal-active">
+                                <li class="list-group-item list-group-item-success"> Total Costos:
+                                    <%= datosCliente.totalEnPesosVendido - datosCliente.totalGanancia %>
+                                </li>
+                            </ul>
+                        </h6>
+                        <br>
+                        <h6 class="card-subtitle">
+                            <ul class="list-group list-group-horizontal-active">
+                                <li class="list-group-item list-group-item-success"> Total Ganancia:
+                                    <%= datosCliente.totalGanancia %>
+                                </li>
+                            </ul>
+                        </h6>
                             <h5>Recetas mas compradas</h5>
                             <% Object.entries(datosCliente.recetasMasCompradas).forEach(([receta, cantidad])=> { %>
                                 <ul class="list-group list-group-horizontal-active">

@@ -5,24 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%- include('./../partials/headBootStrap.ejs') %>
-        <title>Nuve -Ventas</title>
+    <%- include('../partials/headBootStrap.ejs') %>
+        <link rel='stylesheet' href='/stylesheets/recipes.css' />
+        <title>Nuve -Ventas Por Mes</title>
+
 </head>
 
 <body>
-
-    <%- include('./../partials/header.ejs') %>
-        <%- include('./../partials/bootstrapScript.ejs') %>
+    <%- include('../partials/header.ejs') %>
+        <%- include('../partials/bootstrapScript.ejs') %>
             <section class="mainSectionSales">
 
                 <div class="one">
                     <ul class="nav flex-column">
-                        <!-- <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Active</a>
-            </li> -->
                         <li class="nav-item">
                             <h4>
-
                                 <a class="nav-link" href="/Sales/salesForCustomer">Cliente</a>
                             </h4>
                         </li>
@@ -38,313 +35,83 @@
                         <li class="nav-item">
                             <h4><a class="nav-link" href="/Sales/salesForFlavor">Aroma</a></h4>
                         </li>
-
                     </ul>
                 </div>
                 <div class="two">
-                    <ul>
-                        <% if (result[1]) { %>
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Enero
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[1].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[1].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[1].precioVenta - result[1].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
 
-                        <% if (result[2]) { %>
-                         
-                        
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Febrero
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[2].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[2].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[2].precioVenta - result[2].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
+                    <section class="Envases view1 col-4">
+                        <h4>VENTAS POR MES</h4>
+                        <section class="table-primary flush"><a class="nav-link" href="/Sales/salesForCustomer"></a>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="1"><a
+                                    class="nav-link" href="/Sales/salesForMonth/1">ENERO</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="2"><a
+                                    class="nav-link" href="/Sales//salesForMonth/2">FEBRERO</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="3"><a
+                                    class="nav-link" href="/Sales//salesForMonth/3">MARZO</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="4"><a
+                                    class="nav-link" href="/Sales//salesForMonth/4">ABRIL</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="5"><a
+                                    class="nav-link" href="/Sales//salesForMonth/5">MAYO</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="6"><a
+                                    class="nav-link" href="/Sales//salesForMonth/6">JUNIO</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="7"><a
+                                    class="nav-link" href="/Sales//salesForMonth/7">JULIO</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="8"><a
+                                    class="nav-link" href="/Sales//salesForMonth/8">AGOSTO</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="9"><a
+                                    class="nav-link" href="/Sales//salesForMonth/9">SEPTIEMBRE</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="10"><a
+                                    class="nav-link" href="/Sales//salesForMonth/10">OCTUBRE</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="11"><a
+                                    class="nav-link" href="/Sales//salesForMonth/11">NOVIEMBRE</a></button>
+                            <button type="button" class="btn btn-outline-info btn-sm " type="submit" value="12"><a
+                                    class="nav-link" href="/Sales//salesForMonth/12">DICIEMBRE</a></button>
+                        </section>
+                        <br>
+                        <table class="table table-dark ">
+                            <thead>
+                                <tr class="table-primary flush">
+                                    <th scope="col" class="bg-primary">Nombre Cliente</th>
+                                    <th scope="col" class="bg-primary">Fecha Venta</th>
+                                    <th scope="col" class="bg-primary">Receta</th>
+                                    <th scope="col" class="bg-primary">Total en $</th>
+                                    <th scope="col" class="bg-primary">Ganancia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for( let i=0; i < ventas.length; i++ ) { %>
+                                    <tr>
 
-                        <% if (result[3]) { %>
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Marzo
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[3].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[3].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[3].precioVenta - result[3].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
+                                        <th scope="row">
+                                            <%= ventas[i].NombreCliente %>
+                                        </th>
+                                        <td>
+                                            <%= ventas[i].FechaVenta %> HS
+                                        </td>
+                                        <td>
+                                            <%= ventas[i].NombreReceta %>
+                                        </td>
+                                        <td>
+                                            <%= ventas[i].PrecioVenta %>
+                                        </td>
+                                        <td>
+                                            <%= ventas[i].Ganancia %>
+                                        </td>
 
-                        <% if (result[4]) { %>
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Abril
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[4].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[4].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[4].precioVenta - result[4].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
 
-                        <% if (result[5]) { %>
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Mayo
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[5].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[5].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[5].precioVenta - result[5].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>                                                 
-                        <% } %>
+                                    </tr>
+                                    <% } %>
 
-                        <% if (result[6]) { %>                      
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Junio
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[6].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[6].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[6].precioVenta - result[6].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
 
-                        <% if (result[7]) { %>
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Julio
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[7].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[7].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[7].precioVenta - result[7].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
 
-                        <% if (result[8]) { %>
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Agosto
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[8].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[8].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[8].precioVenta - result[8].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
-
-                        <% if (result[9]) { %>
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Septiembre
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[9].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[9].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[9].precioVenta - result[9].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
-
-                        <% if (result[10]) { %>
-                         
-                        
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Octubre
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[10].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[10].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[10].precioVenta - result[10].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
-
-                        <% if (result[11]) { %>
-                         
-                        
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Noviembre
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[11].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[11].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[11].precioVenta - result[11].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
-
-                        <% if (result[12]) { %>
-                         
-                        
-                        <li class="btn btn-outline-warning btn-sm">
-                            <div class="card text-white bg-dark">
-                                <div class="card-body recipes">
-                                    <h5 class="card-title">
-                                        Diciembre
-                                    </h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Ventas total: 
-                                        <%= result[12].precioVenta %>
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2 text-muted">
-                                        Costo:
-                                        <%= result[12].cost%>
-                                    </h6>
-                                    <h5 class="card-subtitle mb-2 text-muted">
-                                        Resultado:
-                                        <%= result[12].precioVenta - result[12].cost%>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        <% } %>
-                       
-                    </ul>
-                   
-
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
-
+                <%- include('../partials/bootstrapScript.ejs') %>
+                    <!-- <script src="sweetalert2.all.min.js"></script> -->
             </section>
+
 
 </body>
 
