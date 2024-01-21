@@ -1,6 +1,5 @@
 let db = require("../../database/models");
-const salesCostServiceSql = require("../services/salesCostServiceSql");
-
+const quoteService = require('../services/quoteService')
 const indexController = {
   index: async function (req, res) {
     try {
@@ -31,8 +30,9 @@ const indexController = {
       };
 
       const ultimaVenta = await db.Ventas.findAll(options);
-      
-      res.render("index", { recetas:recetas, ultimaVenta:ultimaVenta});
+      let valorDolarblue = (await quoteService.data()).valorDolarblue;
+      let valorDolarOf = (await quoteService.data()).valorDolarOf
+      res.render("index", { recetas:recetas, ultimaVenta:ultimaVenta, valorDolarblue, valorDolarOf});
 
       // res.send(recetas)
     } catch (error) {

@@ -25,14 +25,14 @@
             <label for="">Precio</label>
             <input type="text" name="price" value="<%= aroma.CostoUnitario %>">
             <br>
-
+            
 
             <label for="">Moneda</label>
             
-            <select class="form-control-sm" id="flavorCostType1" name="costType">
-                <option value="$ Arg">$ARS</option>
-                <option value="U$S">U$S Oficial</option>
-                <option value="U$SB">U$S Blue</option>
+            <select class="form-control-sm" id="flavorCostType1" name="costType" >
+                <option value="ARG" <%= aroma.Moneda === 'ARG' ? 'selected' : '' %>>$ARS</option>
+                <option value="USO" <%= aroma.Moneda === 'USO' ? 'selected' : '' %>>U$S Oficial</option>
+                <option value="USP" <%= aroma.Moneda === 'USP' ? 'selected' : '' %>>U$S Blue</option>
               </select>
 
             <br>

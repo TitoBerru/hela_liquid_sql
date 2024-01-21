@@ -1,6 +1,7 @@
 const { DATE } = require("sequelize");
 const db = require("../../database/models");
 const { literal } = require('sequelize');
+const quoteService = require('../services/quoteService')
 
 const salesCostServiceSql = {
   base: (cliente, idReceta, ml, nico, cantidad) => {
@@ -9,6 +10,8 @@ const salesCostServiceSql = {
 
   consulta: async (cliente, idReceta, ml, nico, cant, pcioVenta, ventaEfectiva) => {
     let cmv = {}
+    let valorDolarblue = (await quoteService.data()).valorDolarblue;
+    let valorDolarOf = (await quoteService.data()).valorDolarOf;
     try {
       const consultoReceta = await db.Recetas.findOne({
         where: { ID: idReceta },
@@ -17,7 +20,7 @@ const salesCostServiceSql = {
           {
             model: db.Aromas,
             as: "aromas",
-            attributes: ["NombreAroma", "CostoUnitario"],
+            attributes: ["NombreAroma", "CostoUnitario", "Moneda"],
             through: {
               model: db.Recetaaromas,
               as: "aroma_cantidad",
@@ -26,14 +29,28 @@ const salesCostServiceSql = {
           },
         ],
       });
-      // console.log('consoloe.log linea 27 sales cost services ',idReceta)
-      const esenciasUtilizadas = consultoReceta.aromas.map((aroma) => ({
-        nombre: aroma.NombreAroma,
+      // console.log('✅🛑✅ linea 32 sales cost services ',consultoReceta.aromas)
+      const esenciasUtilizadas = consultoReceta.aromas.map((aroma) => {
+        let costoUnitarioModificado;
+
+  if (aroma.Moneda === 'USO') {
+    costoUnitarioModificado = aroma.CostoUnitario * valorDolarOf;
+  } else if (aroma.Moneda === 'USP'){
+    costoUnitarioModificado = aroma.CostoUnitario * valorDolarblue;
+  }else{
+    costoUnitarioModificado = aroma.CostoUnitario
+  }
+  return {
+    nombre: aroma.NombreAroma,
         id: aroma.aroma_cantidad.IDAroma,
         cantidad: Number(aroma.aroma_cantidad.CantidadAroma),
-        costoUnitario: aroma.CostoUnitario,
-      }));
-      // console.log('console.log linea 36 salesCostSeviceSQL con esenciasUtilizadas: ',esenciasUtilizadas)
+        costoUnitario: costoUnitarioModificado,
+  }
+
+
+        
+      });
+      // console.log('✅🛑✅ linea 39 salesCostSeviceSQL con esenciasUtilizadas: ',esenciasUtilizadas)
       // console.log('console.log linea 36 salesCostSeviceSQL con cantidad de esencia: ',esenciasUtilizadas[0].cantidad)
       // esenciasUtilizadas[0].CantidadAroma
       const idEsenciasUtilizadas = consultoReceta.aromas.map(
@@ -115,7 +132,7 @@ const salesCostServiceSql = {
           id: element.id,
           CantidadDisponible: element.cantidad
         }));
-        console.log('console.log linea 135 sales Cost Services ',updates[0].id)
+        // console.log('console.log linea 135 sales Cost Services ',updates[0].id)
         
         for(let i=0; i<updates.length; i++){
           await db.Aromas.update({'CantidadDisponible': literal('CantidadDisponible -'+ updates[i].CantidadDisponible)},{

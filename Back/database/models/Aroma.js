@@ -30,6 +30,9 @@ module.exports =(sequelize, DataTypes) => {
         },
         AromaActivo:{
             type: DataTypes.BOOLEAN
+        },
+        Moneda:{
+            type: DataTypes.STRING(10)
         }
     }
     let config = {

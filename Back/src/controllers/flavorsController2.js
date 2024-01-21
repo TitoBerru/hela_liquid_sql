@@ -2,14 +2,41 @@
 const db = require('../../database/models')
 const { Op } = require("sequelize");
 const optionsOrder = {where:{AromaActivo : 1},order: [['NombreAroma','ASC']]}
-const quoteService = require('../services/quoteService')
 const flavorsController = {
 
   allFlavors: async function (req, res) {
-    // consulto al servicio quote para traer los valores del cambio oficial.
-  let valorDolarblue = (await quoteService.data()).valorDolarblue;
-  let valorDolarOf = (await quoteService.data()).valorDolarOf;
+  let valorDolarblue;
+  let valorDolarOf;
+  
+    // consumo api dolar
 
+  await fetch("https://dolarapi.com/v1/dolares")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('✅ console.log linea 21 flavors controller', data);
+    data.forEach(element => {
+      if(element.casa == 'blue'){
+        valorDolarblue = element.venta;
+      }else if(element.casa == 'oficial'){
+        valorDolarOf = element.venta
+      }
+    });
+    console.log('✅ console.log linea 29 flavors controller, dolar of:', valorDolarOf);
+    console.log('✅ console.log linea 30 flavors controller, dolar of:', valorDolarblue);
+    
+
+    // Cach al error por si falla la api
+  })
+  .catch(error => {
+    console.error('Error al obtener los datos:', error.message);
+  });
+
+ 
    await db.Aromas.findAll(optionsOrder)
     .then(function(aroma){
 
@@ -47,8 +74,8 @@ const flavorsController = {
       //     console.log('✅Linea 18 flavorsController: ',element.dataValues.CostoUnitario)
       //   }
       // });
-      // res.send(aromas2)
-      res.render("Flavors/flavors", {aroma:aromas2});
+      res.send(aromas2)
+      // res.render("Flavors/flavors", {aroma});
     })
   },
 
@@ -69,8 +96,8 @@ const flavorsController = {
     })
 
 
-    res.send(req.body)
-    // res.redirect("/flavors");
+    // res.send(req.body)
+    res.redirect("/flavors");
   },
 
   search: async function (req, res) {
@@ -96,13 +123,6 @@ const flavorsController = {
     
   },
   updateFlavor: async function (req, res) {
-    let valorDolarblue = (await quoteService.data()).valorDolarblue;
-    let valorDolarOf = (await quoteService.data()).valorDolarOf;
-    // let costoUnitarioActualizado;
-    // costoUnitarioActualizado = (req.body.costType === 'USP') ? req.body.price * valorDolarblue : costoUnitarioActualizado;
-    // costoUnitarioActualizado = (req.body.costType === 'USO') ? req.body.price * valorDolarOf : costoUnitarioActualizado;
-    // costoUnitarioActualizado = (req.body.costType === 'ARG') ? req.body.price : costoUnitarioActualizado;
-    // console.log('✅linea 105 flavors controller', costoUnitarioActualizado)
    await db.Aromas.update({
       NombreAroma: req.body.name,
       CantidadDisponible: req.body.stock,
@@ -110,14 +130,13 @@ const flavorsController = {
       CostoUnitario:req.body.price,
       Marca: req.body.brand,
       FechaRegistro: new Date(),
-      AromaActivo: 1,
-      Moneda : req.body.costType
+      AromaActivo: 1
     }, {
       where:{
         id: req.params.id
       }
     })
-    // res.send(req.body)
+    
     res.redirect("/flavors");
   },
 
@@ -135,7 +154,6 @@ const flavorsController = {
 
     await db.Aromas.findByPk(req.params.id)
     .then(function(aroma){
-      
       res.render("flavors/flavorDetail", {aroma});
       // res.send(aroma)
     })

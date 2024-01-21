@@ -24,11 +24,17 @@
     <%- include('partials/costoVenta.ejs') %>
     
    </div>
-   <div class="view3">Cantidad de Stock Bajo
+   <div class="view3"><h5>
+    Dolar OFICIAL:  <%= valorDolarOf %>
+   </h5>
     
    </div>
-   <div class="view4">Ranking de ventas por Receta
+   <div class="view4">
+    <h5>Dolar BLUE: <%= valorDolarblue %></h5> 
    </div>
+  </p ><h5 class="text-start">Actualizado el <%= new Date().toLocaleString() %> hs</h5>
+  
+</p>
   </main>
       <%- include('partials/bootstrapScript.ejs') %>
 </body>

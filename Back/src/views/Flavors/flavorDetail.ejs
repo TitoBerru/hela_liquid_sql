@@ -44,6 +44,16 @@
 								<p class="product-detail-price small">
 									<span>Precio por Mililitro$ <%= aroma.CostoUnitario %></span>
 								</p>
+							</li><li>
+								<p class="product-detail-price small">
+									<span>Moneda:  
+										
+										<%= aroma.Moneda === 'USO' ? 'U$S Oficial' : ""; %>
+										<%= aroma.Moneda === 'USP' ? 'U$S Blue' : ""; %>
+										<%= aroma.Moneda === 'ARG' ? '$ARS' : ""; %>
+									
+									</span>
+								</p>
 							</li>
 							<li>
 								<i class="fas fa-store"></i>
