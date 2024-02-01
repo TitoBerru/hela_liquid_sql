@@ -58,7 +58,7 @@
                         <tr>
 
                             <th scope="row">
-                                <%= ventas[i].dataValues.cliente %>
+                              <a href="./salesForCustomerDetail/<%= ventas[i].dataValues.cliente %>">  <%= ventas[i].dataValues.cliente %></a>
                             </th>
                             <td>
                                 <%= Math.trunc(ventas[i].dataValues.TotalFacturado) %>

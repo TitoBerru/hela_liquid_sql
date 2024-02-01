@@ -11,7 +11,7 @@
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
-        <ul class="nav">
+        <!-- <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <form action="/Sales/search" method="get">
@@ -20,65 +20,93 @@
                     </form>
                 </a>
             </li>
-        </ul>
-        <ul>
-            <li class="btn btn-outline-warning btn-sm">
-                <div class="card text-white bg-dark">
-                    <div class="card-body salesCustomerDetail">
-                        <h5 class="card-title-center">
-                            Cliente: <%= datosCliente.nombreCliente %>
-                        </h5>
-                        <h6 class="card-subtitle">
-                            <ul class="list-group list-group-horizontal-active">
-                                <li class="list-group-item list-group-item-success"> Cantidad de Compras:
-                                    <%= datosCliente.cantidadFrascos %>
-                                </li>
-                            </ul>
-                        </h6>
-                        <br>
-                       
-                        <h6 class="card-subtitle">
-                            <ul class="list-group list-group-horizontal-active">
-                                <li class="list-group-item list-group-item-success"> Total en $ Vendidos:
-                                    <%= datosCliente.totalEnPesosVendido %>
-                                </li>
-                            </ul>
-                        </h6>
-                        <br>
-                        <h6 class="card-subtitle">
-                            <ul class="list-group list-group-horizontal-active">
-                                <li class="list-group-item list-group-item-success"> Total Costos:
-                                    <%= datosCliente.totalEnPesosVendido - datosCliente.totalGanancia %>
-                                </li>
-                            </ul>
-                        </h6>
-                        <br>
-                        <h6 class="card-subtitle">
-                            <ul class="list-group list-group-horizontal-active">
-                                <li class="list-group-item list-group-item-success"> Total Ganancia:
-                                    <%= datosCliente.totalGanancia %>
-                                </li>
-                            </ul>
-                        </h6>
-                            <h5>Recetas mas compradas</h5>
-                            <% Object.entries(datosCliente.recetasMasCompradas).forEach(([receta, cantidad])=> { %>
+        </ul> -->
+       <main class="mainSectionSales">
+        <div class="one">
+            <ul class="nav flex-column">
+    
+                <li class="nav-item"><h4>
+                
+                  <a class="nav-link" href="/Sales/salesForCustomer">Cliente</a>
+                </h4>
+                </li>
+                <li class="nav-item">
+                  <h4><a class="nav-link" href="/Sales/salesForMonth">Mes</a></h4>
+                </li>
+                <li class="nav-item">
+                    <h4><a class="nav-link" href="/Sales/salesForYear">Año</a></h4>
+                </li>
+                <li class="nav-item">
+                    <h4><a class="nav-link" href="/Sales/salesForRecipe">Receta</a></h4>
+                </li>
+                <li class="nav-item">
+                    <h4><a class="nav-link" href="/Sales/salesForFlavor">Aroma</a></h4>
+                </li>
+               
+              </ul>
+          </div>
+          
+        <div class="view2 ">
+            <ul>
+                <li class="btn btn-outline-warning btn-sm">
+                    <div class="card text-white bg-dark">
+                        <div class="card-body salesCustomerDetail">
+                            <h5 class="card-title-center">
+                                Cliente: <%= datosCliente.nombreCliente %>
+                            </h5>
+                            <h6 class="card-subtitle">
                                 <ul class="list-group list-group-horizontal-active">
-                                    <li class="list-group-item list-group-item-success"> <b>
-                                            <%= receta %>
-                                        </b>, Cantidad: <b>
-                                            <%= cantidad %>
-                                        </b>
+                                    <li class="list-group-item list-group-item-success"> Cantidad de Compras:
+                                        <%= datosCliente.cantidadFrascos %>
                                     </li>
-                                    <br>
                                 </ul>
-
-                                <% }); %>
+                            </h6>
+                            <br>
+                           
+                            <h6 class="card-subtitle">
+                                <ul class="list-group list-group-horizontal-active">
+                                    <li class="list-group-item list-group-item-success"> Total en $ Vendidos:
+                                        <%= datosCliente.totalEnPesosVendido %>
+                                    </li>
+                                </ul>
+                            </h6>
+                            <br>
+                            <h6 class="card-subtitle">
+                                <ul class="list-group list-group-horizontal-active">
+                                    <li class="list-group-item list-group-item-success"> Total Costos:
+                                        <%= datosCliente.totalEnPesosVendido - datosCliente.totalGanancia %>
+                                    </li>
+                                </ul>
+                            </h6>
+                            <br>
+                            <h6 class="card-subtitle">
+                                <ul class="list-group list-group-horizontal-active">
+                                    <li class="list-group-item list-group-item-success"> Total Ganancia:
+                                        <%= datosCliente.totalGanancia %>
+                                    </li>
+                                </ul>
+                            </h6>
+                                <h5>Recetas mas compradas</h5>
+                                <% Object.entries(datosCliente.recetasMasCompradas).forEach(([receta, cantidad])=> { %>
+                                    <ul class="list-group list-group-horizontal-active">
+                                        <li class="list-group-item list-group-item-success"> <b>
+                                                <%= receta %>
+                                            </b>, Cantidad: <b>
+                                                <%= cantidad %>
+                                            </b>
+                                        </li>
+                                        <br>
+                                    </ul>
+    
+                                    <% }); %>
+                        </div>
                     </div>
-                </div>
-            </li>
-
-
-        </ul>
+                </li>
+    
+    
+            </ul>
+        </div>
+       </main>
 
         <%- include('../partials/bootstrapScript.ejs') %>
 </body>

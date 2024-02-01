@@ -11,7 +11,7 @@ module.exports =(sequelize, DataTypes) => {
             type: DataTypes.STRING(100)
         } ,
         CantidadDisponible:{
-            type: DataTypes.DECIMAL(10)
+            type: DataTypes.DECIMAL(10,2)
         } ,
         Proveedor: {
             type: DataTypes.STRING(100)

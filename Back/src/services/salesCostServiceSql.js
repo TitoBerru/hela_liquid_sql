@@ -1,7 +1,8 @@
 const { DATE } = require("sequelize");
 const db = require("../../database/models");
 const { literal } = require('sequelize');
-const quoteService = require('../services/quoteService')
+const quoteService = require('../services/quoteService');
+const Sequelize = require("sequelize");
 
 const salesCostServiceSql = {
   base: (cliente, idReceta, ml, nico, cantidad) => {
@@ -33,22 +34,19 @@ const salesCostServiceSql = {
       const esenciasUtilizadas = consultoReceta.aromas.map((aroma) => {
         let costoUnitarioModificado;
 
-  if (aroma.Moneda === 'USO') {
-    costoUnitarioModificado = aroma.CostoUnitario * valorDolarOf;
-  } else if (aroma.Moneda === 'USP'){
-    costoUnitarioModificado = aroma.CostoUnitario * valorDolarblue;
-  }else{
-    costoUnitarioModificado = aroma.CostoUnitario
-  }
-  return {
-    nombre: aroma.NombreAroma,
-        id: aroma.aroma_cantidad.IDAroma,
-        cantidad: Number(aroma.aroma_cantidad.CantidadAroma),
-        costoUnitario: costoUnitarioModificado,
-  }
-
-
-        
+        if (aroma.Moneda === "USO") {
+          costoUnitarioModificado = aroma.CostoUnitario * valorDolarOf;
+        } else if (aroma.Moneda === "USP") {
+          costoUnitarioModificado = aroma.CostoUnitario * valorDolarblue;
+        } else {
+          costoUnitarioModificado = aroma.CostoUnitario;
+        }
+        return {
+          nombre: aroma.NombreAroma,
+          id: aroma.aroma_cantidad.IDAroma,
+          cantidad: Number(aroma.aroma_cantidad.CantidadAroma),
+          costoUnitario: costoUnitarioModificado,
+        };
       });
       // console.log('✅🛑✅ linea 39 salesCostSeviceSQL con esenciasUtilizadas: ',esenciasUtilizadas)
       // console.log('console.log linea 36 salesCostSeviceSQL con cantidad de esencia: ',esenciasUtilizadas[0].cantidad)
@@ -56,7 +54,7 @@ const salesCostServiceSql = {
       const idEsenciasUtilizadas = consultoReceta.aromas.map(
         (aroma) => aroma.aroma_cantidad.IDAroma
       );
-        // Traigo los 
+      // Traigo los
       const consultoBaseIngredientes = await db.Ingredientes.findAll({
         attributes: ["NombreIngrediente", "Costo"],
       });
@@ -67,97 +65,110 @@ const salesCostServiceSql = {
           costo: ingrediente.Costo,
         })
       );
-        //Costo Total de esencias por Receta
+      //Costo Total de esencias por Receta
       const valorTotalEsencias = esenciasUtilizadas.reduce(
         (total, aroma) =>
-          total +
-          (aroma.costoUnitario * aroma.cantidad * ml) / 100,
+          total + (aroma.costoUnitario * aroma.cantidad * ml) / 100,
         0
       );
-        // Total de PG usada en recetas, por aromas
-      const porcentajeTotalEsencias = esenciasUtilizadas.reduce((cont, porcentaje)=>{
-        return cont + porcentaje.cantidad
-      },0)
-    
+      // Total de PG usada en recetas, por aromas
+      const porcentajeTotalEsencias = esenciasUtilizadas.reduce(
+        (cont, porcentaje) => {
+          return cont + porcentaje.cantidad;
+        },
+        0
+      );
+
       //Costo Frasco
       const valorFrasco =
         valoresUnitariosIngredientes.find(
           (ingrediente) => ingrediente.nombreIngrediente == ml
         )?.costo || 0;
-          // Costo nico
+      // Costo nico
       const valorEnRecetaNico =
         ((nico *
           (valoresUnitariosIngredientes.find(
             (ingrediente) => ingrediente.nombreIngrediente === "Nico"
           )?.costo || 0)) /
-          100) * ml;
+          100) *
+        ml;
 
-            //Costo PG
-      const costoTotalPg =  
+      //Costo PG
+      const costoTotalPg =
         (valoresUnitariosIngredientes.find(
           (ingrediente) => ingrediente.nombreIngrediente === "PG"
-        )?.costo * (20-porcentajeTotalEsencias)*ml/100|| 0 );
+        )?.costo *
+          (20 - porcentajeTotalEsencias) *
+          ml) /
+          100 || 0;
 
-        // Costo VG
-        const costoTotalVg =  
+      // Costo VG
+      const costoTotalVg =
         (valoresUnitariosIngredientes.find(
           (ingrediente) => ingrediente.nombreIngrediente === "VG"
-        )?.costo * 80*ml/100|| 0 )
-       
-      
-      const valorTotalReceta = (costoTotalPg+costoTotalVg+Number(valorFrasco) + Number(valorTotalEsencias) + Number(valorEnRecetaNico) )*cant;
+        )?.costo *
+          80 *
+          ml) /
+          100 || 0;
 
+      const valorTotalReceta =
+        (costoTotalPg +
+          costoTotalVg +
+          Number(valorFrasco) +
+          Number(valorTotalEsencias) +
+          Number(valorEnRecetaNico)) *
+        cant;
 
-         
+      await db.Ventas.create({
+        CantidadKg: ml,
+        CantidadUnitaria: cant,
+        FechaVenta: new Date(),
+        IDReceta: idReceta,
+        NombreCliente: cliente,
+        NombreReceta: consultoReceta.NombreReceta,
+        CostoTotalEsencia: valorTotalEsencias,
+        CostoTotalBase: costoTotalPg + costoTotalVg,
+        CostoTotalNico: valorEnRecetaNico,
+        CostoFrasco: Number(valorFrasco),
+        CostoTotal: valorTotalReceta,
+        PrecioVenta: pcioVenta,
+        Ganancia: pcioVenta - valorTotalReceta,
+        VentaEfectiva: ventaEfectiva,
+      });
 
-        await db.Ventas.create({
-          CantidadUnitaria: cant,
-          FechaVenta: new Date(),
-          IDReceta: idReceta,
-          NombreCliente: cliente,
-          NombreReceta: consultoReceta.NombreReceta,
-          CostoTotalEsencia: valorTotalEsencias,
-          CostoTotalBase : (costoTotalPg + costoTotalVg),
-          CostoTotalNico: valorEnRecetaNico, 
-          CostoFrasco : Number(valorFrasco),
-          CostoTotal : valorTotalReceta,
-          PrecioVenta: pcioVenta,
-          Ganancia : pcioVenta-valorTotalReceta,
-          VentaEfectiva: ventaEfectiva
-        })
-
-        // Intento metodo para bulk, con varios ids y porcentajes.
-        const updates = esenciasUtilizadas.map((element) => ({
-        
-          id: element.id,
-          CantidadDisponible: element.cantidad
-        }));
-        // console.log('console.log linea 135 sales Cost Services ',updates[0].id)
-        
-        for(let i=0; i<updates.length; i++){
-          await db.Aromas.update({'CantidadDisponible': literal('CantidadDisponible -'+ updates[i].CantidadDisponible)},{
-            where:{
-                ID : updates[i].id
-                }
-          }
-
-          )
+      // Metodo Bulk para descontar escencias utilizadas
+     
+      const updates = esenciasUtilizadas.map((element) => ({
+        id: element.id,
+        CantidadUtilizada: ((element.cantidad * ml) / 100) * cant,
+      }));
+      console.log("✅⛔✅ console.log linea 135 sales Cost Services ", updates);
+      if (ventaEfectiva == 1) {
+        for (let i = 0; i < updates.length; i++) {
+          await db.Aromas.update(
+            {
+              CantidadDisponible: literal(
+                "CantidadDisponible -" + updates[i].CantidadUtilizada
+              ),
+            },
+            {
+              where: {
+                ID: updates[i].id,
+              },
+            }
+          );
         }
-
-      // console.log('id de la receta',idReceta)
-      // console.log('PG', costoTotalPg)
-      // console.log('PorcentajeTotalEsencias:  ' ,porcentajeTotalEsencias)
-      // console.log("Valor del Frasco (valorFrasco): ", Number(valorFrasco));
-      // console.log("valor total esencias(valorTotalEsencias): ", valorTotalEsencias);
-      // console.log("valor de la nico (valorEnRecetaNico): ", valorEnRecetaNico);
-      // console.log('valor total receta(valorTotalReceta)', valorTotalReceta)
-      // return cmv;
+      };
       
     } catch (error) {
       console.error("Error en la consulta:", error);
-    }
+    };
     
+    
+
   },
+
+  
 };
 // (cliente, idReceta, ml, nico, cant, pcioVenta)
 // salesCostServiceSql.consulta("Tito", 56, 100, 9,2,5000);

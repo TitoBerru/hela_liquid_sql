@@ -1,40 +1,35 @@
 
 const db = require('../../database/models')
+const Sequelize = require("sequelize");
 const { Op } = require("sequelize");
 const optionsOrder = {where:{AromaActivo : 1},order: [['NombreAroma','ASC']]}
 const quoteService = require('../services/quoteService')
 const flavorsController = {
-
   allFlavors: async function (req, res) {
     // consulto al servicio quote para traer los valores del cambio oficial.
-  let valorDolarblue = (await quoteService.data()).valorDolarblue;
-  let valorDolarOf = (await quoteService.data()).valorDolarOf;
+    let valorDolarblue = (await quoteService.data()).valorDolarblue;
+    let valorDolarOf = (await quoteService.data()).valorDolarOf;
 
-   await db.Aromas.findAll(optionsOrder)
-    .then(function(aroma){
-
-      const aromas2 = aroma.map(aroma =>{
-        if (aroma.dataValues.Moneda == 'USP'){
+    await db.Aromas.findAll(optionsOrder).then(function (aroma) {
+      const aromas2 = aroma.map((aroma) => {
+        if (aroma.dataValues.Moneda == "USP") {
           // console.log('✅linea 14, flavors controller: ', aroma.dataValues)
           return {
             ...aroma.dataValues,
-            CostoUnitario: aroma.dataValues.CostoUnitario * valorDolarblue
-          }
-          
-        }else if(aroma.dataValues.Moneda == 'USO'){
+            CostoUnitario: aroma.dataValues.CostoUnitario * valorDolarblue,
+          };
+        } else if (aroma.dataValues.Moneda == "USO") {
           // console.log('✅linea 22, flavors controller: ', aroma.dataValues)
           return {
             ...aroma.dataValues,
-            CostoUnitario: aroma.dataValues.CostoUnitario * valorDolarOf
-          }
+            CostoUnitario: aroma.dataValues.CostoUnitario * valorDolarOf,
+          };
+        } else {
+          return {
+            ...aroma.dataValues,
+          };
         }
-        else {
-          return{
-            ...aroma.dataValues
-          }
-        }
-        
-      })
+      });
       // console.log('✅linea 23, flavors controller: ', aromas2)
 
       // aroma.forEach(element => {
@@ -48,8 +43,8 @@ const flavorsController = {
       //   }
       // });
       // res.send(aromas2)
-      res.render("Flavors/flavors", {aroma:aromas2});
-    })
+      res.render("Flavors/flavors", { aroma: aromas2 });
+    });
   },
 
   createFlavors: function (req, res) {
@@ -60,40 +55,44 @@ const flavorsController = {
     await db.Aromas.create({
       NombreAroma: req.body.name,
       CantidadDisponible: req.body.stock,
-      Proveedor:req.body.provider,
-      CostoUnitario:req.body.price,
+      Proveedor: req.body.provider,
+      CostoUnitario: req.body.price,
       Marca: req.body.brand,
-      FechaRegistro : new Date(),
+      FechaRegistro: new Date(),
       AromaActivo: 1,
-      Moneda: req.body.costType
-    })
+      Moneda: req.body.costType,
+    });
 
-
-    res.send(req.body)
-    // res.redirect("/flavors");
+    // res.send(req.body);
+    res.redirect("/flavors");
   },
 
   search: async function (req, res) {
     const flavorFound = await db.Aromas.findAll({
-      where:{
-
-        NombreAroma:{
-          [Op.like]: `%${req.query.searchFlavor}%`,
-        },
-        'AromaActivo': 1
-
-      }
-    })
-    res.render("flavors/flavorResults", {flavorFound : flavorFound });
-},
+      where: {
+        [Op.or]: [
+          {
+            NombreAroma: {
+              [Op.like]: `%${req.query.searchFlavor}%`,
+            },
+          },
+          {
+            Marca: {
+              [Op.like]: `%${req.query.searchFlavor}%`,
+            },
+          },
+        ],
+        AromaActivo: 1,
+      },
+    });
+    res.render("flavors/flavorResults", { flavorFound: flavorFound });
+  },
 
   edit: async function (req, res) {
-   await db.Aromas.findByPk(req.params.id)
-    .then(function(aroma){
-    // res.send(aroma)
+    await db.Aromas.findByPk(req.params.id).then(function (aroma) {
+      // res.send(aroma)
       res.render("flavors/flavorEdit", { aroma });
-    })
-    
+    });
   },
   updateFlavor: async function (req, res) {
     let valorDolarblue = (await quoteService.data()).valorDolarblue;
@@ -103,45 +102,45 @@ const flavorsController = {
     // costoUnitarioActualizado = (req.body.costType === 'USO') ? req.body.price * valorDolarOf : costoUnitarioActualizado;
     // costoUnitarioActualizado = (req.body.costType === 'ARG') ? req.body.price : costoUnitarioActualizado;
     // console.log('✅linea 105 flavors controller', costoUnitarioActualizado)
-   await db.Aromas.update({
-      NombreAroma: req.body.name,
-      CantidadDisponible: req.body.stock,
-      Proveedor:req.body.provider,
-      CostoUnitario:req.body.price,
-      Marca: req.body.brand,
-      FechaRegistro: new Date(),
-      AromaActivo: 1,
-      Moneda : req.body.costType
-    }, {
-      where:{
-        id: req.params.id
+    await db.Aromas.update(
+      {
+        NombreAroma: req.body.name,
+        CantidadDisponible: req.body.stock,
+        Proveedor: req.body.provider,
+        CostoUnitario: req.body.price,
+        Marca: req.body.brand,
+        FechaRegistro: new Date(),
+        AromaActivo: 1,
+        Moneda: req.body.costType,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
       }
-    })
+    );
     // res.send(req.body)
     res.redirect("/flavors");
   },
 
   deleteFlavor: async function (req, res) {
-   
-    await db.Aromas.update({'AromaActivo': 0},{
-      where:{
-        id:req.params.id
+    await db.Aromas.update(
+      { AromaActivo: 0 },
+      {
+        where: {
+          id: req.params.id,
+        },
       }
-    })
+    );
     res.redirect("/flavors");
-    },
+  },
 
   detail: async function (req, res) {
-
-    await db.Aromas.findByPk(req.params.id)
-    .then(function(aroma){
-      
-      res.render("flavors/flavorDetail", {aroma});
+    await db.Aromas.findByPk(req.params.id).then(function (aroma) {
+      res.render("flavors/flavorDetail", { aroma });
       // res.send(aroma)
-    })
-  }
- 
- 
+    });
+  },
 };
 
 module.exports = flavorsController;

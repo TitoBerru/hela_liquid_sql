@@ -50,6 +50,7 @@ const comprasController = {
     // console.log('✅ Console Log linea 50 Compras Controller: ', resultado);
 
     // res.send(resultado);
+    // console.log('✅linea 53 compras controller',resultado)
     res.render('compras', { resultado });
   },
   registroCompra: async function (req, res) {
@@ -63,7 +64,8 @@ const comprasController = {
       Proveedor: req.body.proveedor.toUpperCase(),
       Comentarios: req.body.comentarios.toUpperCase(),
     });
-    res.send(req.body);
+    // res.send(req.body);
+    res.redirect('/compras')
   },
 };
 

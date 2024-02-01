@@ -24,6 +24,9 @@ module.exports =(sequelize, DataTypes) => {
         } ,
         FechaRegistro:{
             type: DataTypes.DATE
+        },
+        FechaFin:{
+            type: DataTypes.DATE
         } 
     }
     let config = {

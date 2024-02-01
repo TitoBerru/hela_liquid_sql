@@ -55,6 +55,7 @@ const salesController = {
       group: ["NombreCliente"],
       order: [[Sequelize.literal("NombreCliente"), "ASC"]],
     });
+    // res.send(ventas)
     res.render("./Sales/salesForCustomer", { ventas: ventas });
   },
 
@@ -115,6 +116,7 @@ const salesController = {
         datosCliente.fechaUltimaVenta = new Date(FechaVenta);
       }
     );
+    
     res.render("./Sales/salesForCustomerDetail", {
       datosCliente,
       customerFound,
@@ -160,8 +162,31 @@ const salesController = {
         Ganancia: venta.Ganancia,
       };
     });
-    res.render("./Sales/salesForMonth", { ventas });
+
+    // Esta expresion funciona para una sola columna
+    // Intento otro metodo para traer 2 columnas.
+    // const ventasTotalMes = await db.Ventas.sum('PrecioVenta',
+    //   {
+    //     where: {
+    //       VentaEfectiva : 1, 
+    //       [Op.and]: [Sequelize.literal(`MONTH(FechaVenta) =` + month_actual)]
+    //     }
+    // });
+    const ventasTotalMes = await db.Ventas.findAll({
+      attributes: [
+        [Sequelize.fn('SUM', Sequelize.col('PrecioVenta')), 'TotalVentas'],
+        [Sequelize.fn('SUM', Sequelize.col('Ganancia')), 'TotalGanancias']
+      ],
+      raw: true,
+      where:{
+             VentaEfectiva : 1, 
+           [Op.and]: [Sequelize.literal(`MONTH(FechaVenta) =` + month_actual)]
+           }
+    })
+    console.log('✅linea 167 Sales Controller: ', ventasTotalMes)
+    res.render("./Sales/salesForMonth", { ventas, ventasTotalMes });
   },
+   
 
   year: function (req, res) {
     res.send("llego por year");

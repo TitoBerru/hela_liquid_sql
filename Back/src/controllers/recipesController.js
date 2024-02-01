@@ -28,9 +28,20 @@ const recipesController = {
   search: async function (req, res) {
     const recipeFound = await db.Recetas.findAll({
       where: {
-        NombreReceta: {
-          [Op.like]: `%${req.query.searchRecipe}%`,
-        },
+        [Op.or]:[
+          {
+            NombreReceta: {
+              [Op.like]: `%${req.query.searchRecipe}%`,
+            }
+          },
+          {
+            TipoReceta: {
+              [Op.like]: `%${req.query.searchRecipe}%`,
+            },
+          }
+        ],
+        RecetaActiva: 1,
+        
       },
     });
     // res.send(recipeFound)
@@ -85,7 +96,7 @@ const recipesController = {
           {
             model: db.Aromas,
             as: "aromas",
-            attributes: ["NombreAroma"],
+            attributes: ["NombreAroma", "CantidadDisponible"],
             through: {
               model: db.Recetaaromas,
               as: "aroma_cantidad", // Alias diferente
@@ -96,7 +107,7 @@ const recipesController = {
         raw: true,
         nest: true,
       });
-
+      // console.log('✅⛔🛑✅ Linea 110 RecipesController',receta)
       // Verificar si se encontró la receta
       if (receta) {
         // Enviar la receta al cliente en formato JSON

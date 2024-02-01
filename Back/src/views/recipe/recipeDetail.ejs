@@ -45,11 +45,13 @@
 
                                 <p>
                                     <%= receta[i].aromas.NombreAroma %> :
-                                        <%= receta[i].aromas.aroma_cantidad.CantidadAroma %> %
+                                        <%= receta[i].aromas.aroma_cantidad.CantidadAroma %> % - 
+                                        <br>Stock Actual: <%= receta[i].aromas.CantidadDisponible %> ML
                                 </p>
+                                
                                 <% } %>
 
-                                    <div class="actions-list">
+                                    <!-- <div class="actions-list">
                                         <br>
                                         <p class="product-detail-price big">
                                             Ventas Ultimo Mes
@@ -64,7 +66,7 @@
                                         <p>Usuario que mas compra: </p>
 
                                     </div>
-                                    <hr>
+                                    <hr> -->
                         </article>
                         <a href="/recipes" class="card-link">
                             <button type="submit" class="btn btn-outline-danger btn-sm">Volver</button>
