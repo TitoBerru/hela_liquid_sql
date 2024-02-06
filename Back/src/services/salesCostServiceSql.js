@@ -56,15 +56,18 @@ const salesCostServiceSql = {
       );
       // Traigo los
       const consultoBaseIngredientes = await db.Ingredientes.findAll({
-        attributes: ["NombreIngrediente", "Costo"],
+        attributes: [ "id","NombreIngrediente", "Costo"],
       });
-
+      // console.log('🟢linea 61 sale cost service', consultoBaseIngredientes)
       const valoresUnitariosIngredientes = consultoBaseIngredientes.map(
         (ingrediente) => ({
+          
+          id: ingrediente.id,
           nombreIngrediente: ingrediente.NombreIngrediente,
           costo: ingrediente.Costo,
         })
       );
+      // console.log('🟢 Linea 69 sale Cost Service: ',valoresUnitariosIngredientes)
       //Costo Total de esencias por Receta
       const valorTotalEsencias = esenciasUtilizadas.reduce(
         (total, aroma) =>
@@ -80,10 +83,14 @@ const salesCostServiceSql = {
       );
 
       //Costo Frasco
+      let idFrasco =    valoresUnitariosIngredientes.find(
+        (ingrediente) => ingrediente.nombreIngrediente == ml
+      )?.id;
       const valorFrasco =
         valoresUnitariosIngredientes.find(
           (ingrediente) => ingrediente.nombreIngrediente == ml
         )?.costo || 0;
+        
       // Costo nico
       const valorEnRecetaNico =
         ((nico *
@@ -142,7 +149,7 @@ const salesCostServiceSql = {
         id: element.id,
         CantidadUtilizada: ((element.cantidad * ml) / 100) * cant,
       }));
-      console.log("✅⛔✅ console.log linea 135 sales Cost Services ", updates);
+      // console.log("✅⛔✅ console.log linea 135 sales Cost Services ", updates);
       if (ventaEfectiva == 1) {
         for (let i = 0; i < updates.length; i++) {
           await db.Aromas.update(
@@ -157,6 +164,22 @@ const salesCostServiceSql = {
               },
             }
           );
+          // AQUI DEBERIA INCLUIR PARA RESTAR STOCK FRASCOS EN UNA VENTA
+          if (idFrasco){
+            await db.Ingredientes.update(
+              {
+                CantidadDisponible: literal(
+                  "CantidadDisponible -" + cant
+                ),
+              },
+              {
+                where: {
+                  ID: idFrasco,
+                },
+              }
+            );
+          }
+
         }
       };
       

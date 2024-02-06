@@ -29,10 +29,10 @@ const indexController = {
         limit: 1
       };
 
+      const { valorDolarblue, valorDolarOf, fechaActual } = await quoteService.data();
       const ultimaVenta = await db.Ventas.findAll(options);
-      let valorDolarblue = (await quoteService.data()).valorDolarblue;
-      let valorDolarOf = (await quoteService.data()).valorDolarOf
-      res.render("index", { recetas:recetas, ultimaVenta:ultimaVenta, valorDolarblue, valorDolarOf});
+      
+      res.render("index", { recetas:recetas, ultimaVenta:ultimaVenta, valorDolarblue, valorDolarOf, fechaActual});
 
       // res.send(recetas)
     } catch (error) {

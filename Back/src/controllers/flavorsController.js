@@ -7,13 +7,15 @@ const quoteService = require('../services/quoteService')
 const flavorsController = {
   allFlavors: async function (req, res) {
     // consulto al servicio quote para traer los valores del cambio oficial.
-    let valorDolarblue = (await quoteService.data()).valorDolarblue;
-    let valorDolarOf = (await quoteService.data()).valorDolarOf;
+    const { valorDolarblue, valorDolarOf } = await quoteService.data();
+    console.log('✅⛔✅ linea 11 flavors controller: valor dolar blue', valorDolarblue)
+   
 
     await db.Aromas.findAll(optionsOrder).then(function (aroma) {
       const aromas2 = aroma.map((aroma) => {
+        
         if (aroma.dataValues.Moneda == "USP") {
-          // console.log('✅linea 14, flavors controller: ', aroma.dataValues)
+          // console.log('✅linea 14, flavors controller: ', valorDolarblue)
           return {
             ...aroma.dataValues,
             CostoUnitario: aroma.dataValues.CostoUnitario * valorDolarblue,
