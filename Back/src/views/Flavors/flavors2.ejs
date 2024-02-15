@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %> 
+    <link rel='stylesheet' href='/stylesheets/recipes.css' />
+    
+    <title>Nuve - Aromas</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %> 
+    
+   <!-- NAVBAR  -->
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <form action="/Flavors/search" method="get">
+                <input type="text" name="searchFlavor" placeholder="Buscar Aroma">
+                <input type="submit" value="Buscar">
+            </form>
+        </a>
+    </li>
+    <li>
+        <a class="nav-link nav-fill active btn-outline-warning ml-4" aria-current="page" href="Flavors/create">Crear Nuevo Aroma</a>
+
+    </li>
+   
+       
+    
+
+</ul>
+  <!-- termina navbar -->
+
+ <h3>Aromas</h3> 
+    <section class="sectionMainFlavor">
+        <% for( let i = 1; i < aroma.length; i++ ) { %>   
+    
+            <li class="btn btn-outline-warning btn-sm">
+                <div class="card text-white bg-dark" style="width: 18rem;">
+                    <div class="card-body flavors">
+                        <h5 class="card-title m-15">
+                            <%= aroma[i].NombreAroma %>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <%= aroma[i].Marca %>
+                        </h6>
+                        <p class="card-text">
+                            Stock:
+                            <%= aroma[i].CantidadDisponible %> ML
+                        </p>
+                        <p class="card-text">
+                           Costo:
+                            <%= Math.trunc(aroma[i].CostoUnitario) %> /ML
+                        </p>
+                        <p class="card-text">
+                            Actualizado:
+                             <%= aroma[i].FechaRegistro %>
+                         </p>
+                         
+                        <div class="cardsFlavorContainer card-footer">
+                            <a href="/flavors/detail/<%= aroma[i].ID %>" class="card-link">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Detalle
+                                </button>
+                            </a>
+                            <a href="/flavors/delete/<%= aroma[i].ID %>" class="card-link">
+                                <form method="POST"
+                                    action="/flavors/delete/<%= aroma[i].ID %>?_method=DELETE">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </a>
+                            <a href="/flavors/edit/<%= aroma[i].ID %>" class="card-link">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            
+        </li>
+        <% } %>
+    </section>
+   
+
+    <%- include('../partials/bootstrapScript.ejs')  %> 
+    <script src="sweetalert2.all.min.js"></script>
+
+</body>
+</html>

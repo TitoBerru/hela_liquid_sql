@@ -6,86 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include('../partials/headBootStrap.ejs') %> 
     <link rel='stylesheet' href='/stylesheets/recipes.css' />
+    <title>Nuve -Ventas</title>
     
-    <title>Nuve - Aromas</title>
 </head>
 <body>
     <%- include('../partials/header.ejs') %> 
-    
-   <!-- NAVBAR  -->
-<ul class="nav">
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <form action="/Flavors/search" method="get">
-                <input type="text" name="searchFlavor" placeholder="Buscar Aroma">
-                <input type="submit" value="Buscar">
-            </form>
-        </a>
-    </li>
-    <li>
-        <a class="nav-link nav-fill active btn-outline-warning ml-4" aria-current="page" href="Flavors/create">Crear Nuevo Aroma</a>
-
-    </li>
-   
-       
-    
-
-</ul>
-  <!-- termina navbar -->
-
- <h3>Aromas</h3> 
-    <section class="sectionMainFlavor">
-        <% for( let i = 1; i < aroma.length; i++ ) { %>   
-    
-            <li class="btn btn-outline-warning btn-sm">
-                <div class="card text-white bg-dark" style="width: 18rem;">
-                    <div class="card-body flavors">
-                        <h5 class="card-title m-15">
-                            <%= aroma[i].NombreAroma %>
-                        </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            <%= aroma[i].Marca %>
-                        </h6>
-                        <p class="card-text">
-                            Stock:
-                            <%= aroma[i].CantidadDisponible %> ML
-                        </p>
-                        <p class="card-text">
-                           Costo:
-                            <%= Math.trunc(aroma[i].CostoUnitario) %> /ML
-                        </p>
-                        <p class="card-text">
-                            Actualizado:
-                             <%= aroma[i].FechaRegistro %>
-                         </p>
-
-                        <div class="cardsFlavorContainer card-footer">
-                            <a href="/flavors/detail/<%= aroma[i].ID %>" class="card-link">
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Detalle
-                                </button>
-                            </a>
-                            <a href="/flavors/delete/<%= aroma[i].ID %>" class="card-link">
-                                <form method="POST"
-                                    action="/flavors/delete/<%= aroma[i].ID %>?_method=DELETE">
-                                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                                        Eliminar
-                                    </button>
-                                </form>
-                            </a>
-                            <a href="/flavors/edit/<%= aroma[i].ID %>" class="card-link">
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Editar</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <%- include('../partials/bootstrapScript.ejs')  %> 
+    <section class="mainSectionSales">
+  
+      <div class="one">
+        <ul class="nav flex-column">
+            <!-- <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Active</a>
+            </li> -->
+            <li class="nav-item"><h4>
             
-        </li>
-        <% } %>
-    </section>
-   
+              <a class="nav-link" href="/Sales/salesForCustomer">Cliente</a>
+            </h4>
+            </li>
+            <li class="nav-item">
+              <h4><a class="nav-link" href="/Sales/salesForMonth">Mes</a></h4>
+            </li>
+            <li class="nav-item">
+                <h4><a class="nav-link" href="/Sales/salesForYear">Año</a></h4>
+            </li>
+            <li class="nav-item">
+                <h4><a class="nav-link" href="/Sales/salesForRecipe">Receta</a></h4>
+            </li>
+            <li class="nav-item">
+                <h4><a class="nav-link" href="/Sales/salesForFlavor">Aroma</a></h4>
+            </li>
+           
+          </ul>
+      </div>
+      <div class="two">
+       
+        <!-- <section class="Envases view1 col-4"> -->
+            <!-- <h4>Aromas</h4> -->
+            <table class="table table-dark ">
+                <thead>
+                    <tr class="table-primary flush">
+                       
+                        <th scope="col" class="bg-primary">AROMA</th>
+                        <th scope="col"class="bg-primary">FABRICANTE</th>
+                        <th scope="col"class="bg-primary">ML DISPONIBLE</th>
+                        <th scope="col"class="bg-primary">COSTO ML</th>
+                        <th scope="col"class="bg-primary">FECHA ACTUALIZACION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for( let i=1; i < aroma.length; i++ ) { %>
+                    <tr>
+                       
+                        <th scope="row">
 
+                            <a href="/flavors/detail/<%= aroma[i].ID %>" class="card-link">
+                               <%= aroma[i].NombreAroma %></th>
+                              
+                            </a>
+
+                        
+                        <td > <%= aroma[i].Marca %> HS</td>
+                        <td><%= aroma[i].CantidadDisponible %></td>
+                        <td><%= Math.trunc(aroma[i].CostoUnitario)  %></td>
+                        <td><%= aroma[i].FechaRegistro %></td>
+                       
+                        
+                    </tr>
+                    <% } %>
+                    
+
+
+                </tbody>
+            </table>
+        </section> 
+    </div>
     <%- include('../partials/bootstrapScript.ejs')  %> 
     <script src="sweetalert2.all.min.js"></script>
-
+    </section>
+    
+      
 </body>
 </html>

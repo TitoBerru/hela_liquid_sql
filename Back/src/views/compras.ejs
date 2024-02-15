@@ -74,9 +74,9 @@
                     </form>
             </section>
             <section class="DebeHaber col-4 view2">
-                <h2>DEBE-HABER ANUAL</h2>
+                <h2>COMPRAS DEL MES</h2>
                 
-                <h4>Ultimas Ventas</h4>
+                <!-- <h4> COMPRAS DEL MES</h4> -->
                 <table class="table table-dark ">
                     <thead>
                         <tr class="table-primary flush">
@@ -94,7 +94,7 @@
                            
                             <th scope="row" class= "text-center"><%= resultado[i].anio %></th>
                             <td scope="row" class= "text-center"> <%= resultado[i].mes %></td>
-                            <td scope="row" class= "text-center"><%= resultado[i].totalMontoVentas %></td>
+                            <td scope="row" class= "text-center"><%= Math.trunc(resultado[i].totalMontoVentas) %></td>
                             <td scope="row" class= "text-center"><%= resultado[i].totalMontoCompras %></td>
                             <td scope="row" class= "text-center"><%= resultado[i].totalMontoVentas-resultado[i].totalMontoCompras %></td>
                            

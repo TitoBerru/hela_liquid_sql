@@ -6,19 +6,23 @@ const url = "https://dolarapi.com/v1/dolares";
 const DOLAR_BLUE = "DolarBlue";
 const DOLAR_OFICIAL = "DolarOficial";
 
+
 // Definir una función para obtener la fecha de fin según la hora actual
 const getEndDate = (fechaActual) => {
-  // Definir las horas límite para el rango de cotización
-  const {horaAntesRango, horaFin} = 7
-  const horaInicio = 12;
- 
 
+  const horaActual = fechaActual.getHours();
+  console.log('🟢 linea 14 quoteServices', horaActual)
+  // const horaActual = 16;
+  // Definir las horas límite para el rango de cotización
+  const horaAntesRango= 9;
+  const horaInicio = 10;
+  const horaFin = 15;
   // Definir las fechas de fin para antes, durante y después del rango
   let endDateAntesRango = new Date(
     fechaActual.getFullYear(),
     fechaActual.getMonth(),
     fechaActual.getDate(),
-    horaAntesRango,
+    horaAntesRango-2,
     0,
     0
   );
@@ -26,7 +30,7 @@ const getEndDate = (fechaActual) => {
     fechaActual.getFullYear(),
     fechaActual.getMonth(),
     fechaActual.getDate(),
-    horaFin,
+    horaFin-3,
     0,
     0
   );
@@ -34,15 +38,17 @@ const getEndDate = (fechaActual) => {
     fechaActual.getFullYear(),
     fechaActual.getMonth(),
     fechaActual.getDate() + 1, // Añadir un día
-    horaInicio,
+    horaAntesRango-2,
     0,
     0
   );
-
   // Devolver la fecha de fin según la hora actual
-  if (fechaActual.getHours() >= horaInicio && fechaActual.getHours() <= horaFin) {
+  if (
+    horaActual >= horaInicio &&
+    horaActual <= horaFin
+  ) {
     return endDateEnRango;
-  } else if (fechaActual.getHours() < horaInicio) {
+  } else if (horaActual < horaInicio) {
     return endDateAntesRango;
   } else {
     return endDateDespuesRango;
@@ -69,7 +75,10 @@ const updateCotizacion = async (tipoMoneda, cotizacion, fechaActual) => {
       }
     );
   } catch (error) {
-    console.log(`⛔ Error al grabar cotización de ${tipoMoneda} en base: ⛔`, error.message);
+    console.log(
+      `⛔ Error al grabar cotización de ${tipoMoneda} en base: ⛔`,
+      error.message
+    );
   }
 };
 

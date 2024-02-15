@@ -1,6 +1,18 @@
 const db = require("../../database/models");
 const Sequelize = require("sequelize");
 const { Op } = require("sequelize");
+const mesEnCurso = new Date().getMonth()+1;
+ // Establece el día al primero del mes
+ const fechaInicioMes = new Date().getDate();
+// fechaInicioMes.setDate(1)
+const queryComprasMes ={
+ 
+  where: {
+    FechaPago: {
+      [Op.gte]: fechaInicioMes,
+    },
+  },
+}
 const queryComprasOptions = {
   attributes: [
     [Sequelize.fn("YEAR", Sequelize.col("FechaPago")), "anio"],
@@ -8,6 +20,7 @@ const queryComprasOptions = {
     [Sequelize.fn("SUM", Sequelize.col("Monto")), "totalMontoCompras"],
   ],
   group: [Sequelize.fn("MONTH", Sequelize.col("FechaPago"))],
+  order:[['FechaPago','DESC' ]],
   raw: true,
 };
 const queryVentasOptions = {
@@ -20,6 +33,7 @@ const queryVentasOptions = {
   group: [Sequelize.fn("MONTH", Sequelize.col("FechaVenta"))],
   raw: true,
 };
+
 const comprasController = {
   list: async function (req, res) {
     const compras = await db.Compras.findAll(queryComprasOptions);
@@ -53,6 +67,12 @@ const comprasController = {
     // console.log('✅linea 53 compras controller',resultado)
     res.render('compras', { resultado });
   },
+  comprasMes: async function(req,res){
+    console.log('🟢 linea 68 compras Controller',fechaInicioMes)
+    const compras = await db.Compras.findAll({queryComprasMes});
+    res.send(compras)
+  },
+
   registroCompra: async function (req, res) {
     await db.Compras.create({
       Monto: req.body.costo,
