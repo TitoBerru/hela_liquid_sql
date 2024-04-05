@@ -19,8 +19,9 @@ const flavorsRouter = require("./src/routes/flavorsRoutes");
 const salesRouter = require("./src/routes/salesRoutes");
 const comprasRouter = require("./src/routes/comprasRoutes");
 const costsRouter = require("./src/routes/costsRoutes");
-const apisRouter = require("./src/routes/apisRoutes")
-const preciosRouter = require("./src/routes/preciosRoutes")
+const apisRouter = require("./src/routes/apisRoutes");
+const preciosRouter = require("./src/routes/preciosRoutes");
+const customerRouter = require("./src/routes/customerRoutes")
 
 
 // end of Consts
@@ -58,7 +59,8 @@ app.use("/sales", salesRouter);
 app.use("/compras", comprasRouter);
 app.use("/costs", costsRouter);
 app.use("/api", apisRouter);
-app.use("/precios", preciosRouter)
+app.use("/precios", preciosRouter);
+app.use("/customer", customerRouter);
 
 //Not found
 app.use((req, res, next) =>{

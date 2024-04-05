@@ -96,7 +96,54 @@ input{
   text-align: center;
   
 }
-
+summary{
+  list-style: none;
+}
+summary::before{
+  content:"🔻";
+  float: inline-end;
+}
+details[open] summary::before{
+  content: "🔺";
+  transform: rotate(270deg);
+  padding: 20px;
+}
+/* summary::marker {
+  display: none;
+  content: ">";
+} */
+/* summary::after{
+ 
+  border-radius: 5px;
+  content: "<";
+  color: black;
+  float: right;
+  font-size: 3.5em;
+  font-weight: bold;
+  margin: 15px 10px 0 0;
+  text-align: center;
+  width: 25px;
+} */
+/* summary::after {
+  list-style: none;
+  transform: rotate(90deg);
+  content: "🔻";
+  float: inline-end;
+  
+  
+} */
+/* summary::before{
+ 
+  transform: rotate(90deg);
+  content: "🔻";
+  float: inline-end;
+} */
+/* details[open] summary::marker{
+  content: "🔻";
+} */
+/* summary {
+  cursor: pointer;
+} */
 
 /* End Sales */
 @media (max-width: 992px){ 

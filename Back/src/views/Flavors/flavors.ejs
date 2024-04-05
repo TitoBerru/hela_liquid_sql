@@ -12,33 +12,29 @@
 <body>
     <%- include('../partials/header.ejs') %> 
     <%- include('../partials/bootstrapScript.ejs')  %> 
-    <section class="mainSectionSales">
-  
-      <div class="one">
-        <ul class="nav flex-column">
-            <!-- <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Active</a>
-            </li> -->
-            <li class="nav-item"><h4>
-            
-              <a class="nav-link" href="/Sales/salesForCustomer">Cliente</a>
-            </h4>
-            </li>
+    <section>
+        <ul class="nav">
             <li class="nav-item">
-              <h4><a class="nav-link" href="/Sales/salesForMonth">Mes</a></h4>
+                <a class="nav-link" href="#">
+                    <form action="/Flavors/search" method="get">
+                        <input type="text" name="searchFlavor" placeholder="Buscar Aroma">
+                        <input type="submit" value="Buscar">
+                    </form>
+                </a>
             </li>
-            <li class="nav-item">
-                <h4><a class="nav-link" href="/Sales/salesForYear">Año</a></h4>
-            </li>
-            <li class="nav-item">
-                <h4><a class="nav-link" href="/Sales/salesForRecipe">Receta</a></h4>
-            </li>
-            <li class="nav-item">
-                <h4><a class="nav-link" href="/Sales/salesForFlavor">Aroma</a></h4>
+            <li>
+                <a class="nav-link nav-fill active btn-outline-primary ml-4" aria-current="page" href="Flavors/create">Crear Aroma</a>
+        
             </li>
            
-          </ul>
-      </div>
+               
+            
+        
+        </ul>
+    </section>
+    <section class="mainSectionSales">
+        
+      
       <div class="two">
        
         <!-- <section class="Envases view1 col-4"> -->
@@ -48,9 +44,10 @@
                     <tr class="table-primary flush">
                        
                         <th scope="col" class="bg-primary">AROMA</th>
-                        <th scope="col"class="bg-primary">FABRICANTE</th>
+                        
                         <th scope="col"class="bg-primary">ML DISPONIBLE</th>
                         <th scope="col"class="bg-primary">COSTO ML</th>
+                        <th scope="col"class="bg-primary">FABRICANTE</th>
                         <th scope="col"class="bg-primary">FECHA ACTUALIZACION</th>
                     </tr>
                 </thead>
@@ -66,9 +63,10 @@
                             </a>
 
                         
-                        <td > <%= aroma[i].Marca %> HS</td>
+                        
                         <td><%= aroma[i].CantidadDisponible %></td>
                         <td><%= Math.trunc(aroma[i].CostoUnitario)  %></td>
+                        <td > <%= aroma[i].Marca %></td>
                         <td><%= aroma[i].FechaRegistro %></td>
                        
                         

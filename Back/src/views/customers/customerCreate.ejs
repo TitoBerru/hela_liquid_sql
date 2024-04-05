@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %> 
+    <title>Nuve - Agregar Aroma</title>
+    
+</head>
+<body>
+    <%- include('../partials/header.ejs') %> 
+    <h1>Nuevo Cliente</h1>
+    <form method = 'POST' action="/customer/create">
+        <label for="">Nombre Cliente</label>
+        <input type="text" name="name">
+        <br>
+        <label for="">Apellido Cliente</label>
+        <input type="text" name="lastName">
+        <br>
+        <label for="">telefono</label>
+        <input type="tel" name="tel"min="0" pattern="^[0-9]+">
+        <br>
+        <label for="">Email</label>
+        <input type="email" name="email">
+        <br>
+        <label for="">Direccion</label>
+        <input type="text" name="direccion">
+        <br>
+        
+        <label for="">Localidad</label>
+        <input type="text" name="localidad">
+        <br>
+        <label for="">Provincia</label>
+        <input type="text" name="provincia">
+        <br>
+        <label for="">Edad</label>
+        <input type="number" name="edad">
+        <br>
+        
+           <input type="submit" value="Guardar nuevo Cliente">
+            
+       
+    </form>
+
+
+    <%- include('../partials/bootstrapScript.ejs')  %> 
+</body>
+</html>

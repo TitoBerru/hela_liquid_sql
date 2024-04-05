@@ -11,7 +11,7 @@ const DOLAR_OFICIAL = "DolarOficial";
 const getEndDate = (fechaActual) => {
 
   const horaActual = fechaActual.getHours();
-  console.log('🟢 linea 14 quoteServices', horaActual)
+  // console.log('🟢 linea 14 quoteServices', horaActual)
   // const horaActual = 16;
   // Definir las horas límite para el rango de cotización
   const horaAntesRango= 9;

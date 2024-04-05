@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/headBootStrap.ejs') %> 
+    <link rel='stylesheet' href='/stylesheets/recipes.css' />
+    <title>Nuve - Clientes</title>
+    
+</head>
+<body>
+    <%- include('../partials/header.ejs') %> 
+    <%- include('../partials/bootstrapScript.ejs')  %> 
+      <!-- NAVBAR  -->
+      <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <form action="/customers/search" method="get">
+                    <input type="text" name="searchCustomer" placeholder="Buscar Cliente">
+                    <input type="submit" value="Buscar">
+                </form>
+            </a>
+        </li>
+        <li>
+            <a class="nav-link nav-fill active btn-outline-primary ml-4" aria-current="page" href="customer/create">Crear Cliente </a>
+        </li>
+    </ul>
+    <!-- termina navbar -->
+    <section class="mainSectionSales">
+  
+   
+      <div class="two">
+       
+        <section class="Envases view1 col-4">
+            <h4>DATOS CLIENTES</h4>
+            <table class="table table-dark ">
+                <thead>
+                    <tr class="table-primary flush">
+                       
+                        <th scope="col" class="bg-primary">Nombre Cliente</th>
+                        <th scope="col"class="bg-primary">Direccion</th>
+                        <th scope="col"class="bg-primary">Telefono</th>
+                 
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for( let i=0; i < clientes.length; i++ ) { %>
+                    <tr>
+                       
+                        <th scope="row"><%= clientes[i].Nombre  %> <%= clientes[i].Apellido  %></th>
+                        <td > <%= clientes[i].Direccion %> </td>
+                        <td > <%= clientes[i].Telefono %> </td>
+                        
+                       
+                        
+                    </tr>
+                    <% } %>
+                    
+
+
+                </tbody>
+            </table>
+        </section> 
+    </div>
+    <%- include('../partials/bootstrapScript.ejs')  %> 
+    <script src="sweetalert2.all.min.js"></script>
+    </section>
+    
+      
+</body>
+</html>

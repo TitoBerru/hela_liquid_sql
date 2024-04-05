@@ -31,8 +31,10 @@ const indexController = {
 
       const { valorDolarblue, valorDolarOf, fechaActual } = await quoteService.data();
       const ultimaVenta = await db.Ventas.findAll(options);
-      
-      res.render("index", { recetas:recetas, ultimaVenta:ultimaVenta, valorDolarblue, valorDolarOf, fechaActual});
+      const optionsClientsOrder = {order: [['Nombre','ASC']]}
+      const customers = await db.Clientes.findAll(optionsClientsOrder);
+      // res.send (customers)
+      res.render("index", { recetas, ultimaVenta, valorDolarblue, valorDolarOf, fechaActual, customers});
 
       // res.send(recetas)
     } catch (error) {

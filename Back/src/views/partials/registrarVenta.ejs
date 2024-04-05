@@ -3,7 +3,15 @@
 <form method='POST' action="/costs/calculate">
   
     <label for="cliente"></label>
-    <input type="text" name="cliente" placeholder="Cliente">
+
+    <select class="form-control-sm m-1" id="cliente" name="cliente">
+      <% for( let i=0; i < customers.length; i++ ) { %>
+          <option value="<%=customers[i].Nombre%>  <%= customers[i].Apellido %>">
+
+              <%=customers[i].Nombre%> <%= customers[i].Apellido %>
+          </option>
+          <% } %>
+  </select>
     <br>
     <select class="form-control-sm m-1" id="receta" name="receta">
         <% for( let i=0; i < recetas.length; i++ ) { %>
