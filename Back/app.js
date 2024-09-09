@@ -22,6 +22,7 @@ const costsRouter = require("./src/routes/costsRoutes");
 const apisRouter = require("./src/routes/apisRoutes");
 const preciosRouter = require("./src/routes/preciosRoutes");
 const customerRouter = require("./src/routes/customerRoutes")
+const stockPorRecetaRouter = require("./src/routes/stockPorRecetaRoutes")
 
 
 // end of Consts
@@ -61,6 +62,8 @@ app.use("/costs", costsRouter);
 app.use("/api", apisRouter);
 app.use("/precios", preciosRouter);
 app.use("/customer", customerRouter);
+app.use("/stockPorReceta", stockPorRecetaRouter);
+
 
 //Not found
 app.use((req, res, next) =>{
