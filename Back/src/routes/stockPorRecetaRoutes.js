@@ -4,6 +4,7 @@ const salesController = require ('../controllers/stockPorRecetaController');
 const stockPorRecetaController = require('../controllers/stockPorRecetaController');
 
 /* GET recipes */
-router.get('/', stockPorRecetaController.query);
+router.get('/', stockPorRecetaController.index);
+router.post('/check-availability', stockPorRecetaController.check);
 
 module.exports = router;
