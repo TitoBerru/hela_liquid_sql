@@ -131,42 +131,7 @@ const apisController = {
     }
   },
   edit: async function (req, res) {
-    // FUNCIONALIDAD QUE FUNCIONA EN BACK END.
-    // try {
-    //   const recetaId = req.params.id; // Obtener el ID de la receta desde los parámetros de la URL
-    //   const recipeToEdit = await db.Recetas.findOne({
-    //     where: { ID: recetaId },
-    //     attributes: [ "NombreReceta", "TipoReceta", "Descripcion"],
-    //     include: [
-    //       {
-    //         model: db.Aromas,
-    //         as: "aromas",
-    //         attributes: ["NombreAroma"],
-    //         through: {
-    //           model: db.Recetaaromas,
-    //           as: "aroma_cantidad", // Alias diferente
-    //           attributes: ["CantidadAroma"],
-    //         },
-    //       },
-    //     ],
-    //   });
 
-    //   // Verificar si se encontró la receta
-    //   if (recipeToEdit) {
-    //     // Enviar la receta al cliente en formato JSON
-    //     // res.json(receta);
-    //     // for (let i=0; i<= recipeToEdit.length; i++){
-    //     //   console.log("console desde linea 44 de recipes controler: " + recipeToEdit[i])}
-
-    //     res.render("recipe/edit", { recipeToEdit, recetaId });
-    //     //  res.send(recetaId);
-    //   } else {
-    //     res.status(404).json({ error: "Receta no encontrada" });
-    //   }
-    // } catch (error) {
-    //   console.error("Error al obtener la receta:", error);
-    //   res.status(500).json({ error: "Ocurrió un error al obtener la receta" });
-    // }
     res.json("Funcionalidad API Edit aun no desarrollada");
   },
 

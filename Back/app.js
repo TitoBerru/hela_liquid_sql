@@ -25,20 +25,6 @@ const preciosRouter = require("./src/routes/preciosRoutes");
 const customerRouter = require("./src/routes/customerRoutes")
 const stockPorRecetaRouter = require("./src/routes/stockPorRecetaRoutes")
 
-
-// end of Consts
-
-//server start
-// app.listen(3000, () => {
-//   // console.log(colours.fg.yellow, 'Servidor corriendo terminal 3000 ❤ 😂', colours.reset)
-//   console.log(
-//     colours.bg.white,
-//     colours.fg.red,
-//     "Server run on port 3000",
-//     colours.reset
-//   );
-// });
-
 // view engine setup
 app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "ejs");
