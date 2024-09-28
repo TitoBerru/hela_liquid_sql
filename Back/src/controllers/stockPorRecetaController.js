@@ -5,14 +5,14 @@ const queryOptions = {where:{RecetaActiva : 1},order: [['NombreReceta','ASC']]}
 
 const stockPorRecetaController = {
   
-  index2: async function (req, res) {
+  index: async function (req, res) {
     await db.Recetas.findAll(queryOptions)
     .then(function(receta){
       // res.send(receta)
       res.render("stockPorReceta", {recetas: receta});
     })
   },
-  index: async function (req, res) {
+  index2: async function (req, res) {
    
       const recetas = await db.Recetas.findAll({
         where: { RecetaActiva: 1 },
@@ -37,7 +37,7 @@ const stockPorRecetaController = {
   },
 
   check: async function (req, res) {
-    res.send (req.body)
+    res.send (JSON.stringify(req.body))
   },
 }
 

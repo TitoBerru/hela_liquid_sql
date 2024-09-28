@@ -4,6 +4,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const methodOverride = require("method-override");
+const cors = require('cors');
 
 const app = express();
 const path = require("path");
@@ -43,6 +44,7 @@ app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "ejs");
 
 // uses
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

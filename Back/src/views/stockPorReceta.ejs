@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label for="recipeName0" class="form-label">Nombre de la Receta</label>
-                            <select class="form-select" id="recipeName0" name="recipeName0" required>
+                            <select class="form-select" id="recipeName0" name="recipeId0" required>
                                 <option value="">Seleccione una receta</option>
                                 <% recetas.forEach(function(receta) { %>
                                     <option value="<%= receta.ID %>"><%= receta.NombreReceta %></option>
@@ -131,7 +131,7 @@
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="recipeName${recipeCount}" class="form-label">Nombre de la Receta</label>
-                        <select class="form-select" id="recipeName${recipeCount}" name="recipeName${recipeCount}" required>
+                        <select class="form-select" id="recipeName${recipeCount}" name="recipeId${recipeCount}" required>
                             <option value="">Seleccione una receta</option>
                             ${recetas.map(receta => `<option value="${receta.ID}">${receta.NombreReceta}</option>`).join('')}
                         </select>

@@ -17,6 +17,7 @@ router.get('/edit/:id', apisController.edit);
 
 
 router.get('/sales', apisController.sales)
-
+router.get('/salesLast', apisController.salesLast)
+router.get('/customer', apisController.customer)
 
 module.exports = router;
