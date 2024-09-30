@@ -17,6 +17,7 @@ router.get('/v1/recipes/deleteRecipe/:id', apisRecipesController.deleteRecipe) /
 //  VENTAS
 router.get('/v1/sales', apisSalesController.sales) // Todas
 router.get('/v1/salesLast', apisSalesController.salesLast) // ultima Venta
+router.post('/v1/newSale', apisSalesController.newSale)
 
 //  CLIENTES
 router.get('/v1/customer', apisCustomerController.customer)
