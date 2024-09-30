@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-// const apisController = require('../controllers/apisController');
+
+// APIS CONTROLLERS
+const apisRecipesController = require('../controllers/apisV1/apisRecipesController')
 const apisSalesController = require('../controllers/apisV1/apisSalesController')
 const apisCustomerController = require('../controllers/apisV1/apisCustomerController')
-const apisRecipesController = require('../controllers/apisV1/apisRecipesController')
 
-//    RECETAS V1
+// ******************************* API V1 *******************************//
+
+//    RECETAS
 router.get('/v1/recipes', apisRecipesController.recipes) // TOdas las recetas
 router.get('/v1/recipes/detail/:id', apisRecipesController.recipeDetail) //Detalle Recetas
 router.post('/v1/recipes/create', apisRecipesController.storeRecipe) // Crear Receta sin aromas
