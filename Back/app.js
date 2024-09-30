@@ -25,6 +25,8 @@ const preciosRouter = require("./src/routes/preciosRoutes");
 const customerRouter = require("./src/routes/customerRoutes")
 const stockPorRecetaRouter = require("./src/routes/stockPorRecetaRoutes")
 
+
+
 // view engine setup
 app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "ejs");
@@ -51,6 +53,8 @@ app.use("/api", apisRouter);
 app.use("/precios", preciosRouter);
 app.use("/customer", customerRouter);
 app.use("/stockPorReceta", stockPorRecetaRouter);
+
+
 
 
 //Not found

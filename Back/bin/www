@@ -91,7 +91,7 @@ function onListening() {
   console.log(
     colours.bg.white,
     colours.fg.red,
-    "Server run on port " + port + " ✅ ",
+    "🚀🚀 Server run on port " + port + " 🚀🚀 ",
     colours.reset
  );
 }

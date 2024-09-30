@@ -1,6 +1,7 @@
 const { json } = require("sequelize");
-let db = require("../../database/models");
-const apisController = {
+let db = require("../../../database/models");
+
+const apisRecipesController = {
   recipes: async function (req, res) {
     try {
       await db.Recetas.findAll({ where: { RecetaActiva: 1 } }).then(function (
@@ -35,17 +36,16 @@ const apisController = {
         nest: true,
       });
 
-      
       // Verificar si se encontró la receta
-      console.log('✅✅ Console log linea 40 apis controller: ',receta)
-      if (receta !='') {
+
+      if (receta != "") {
         const datosReceta = {
           nombreReceta: receta[0].NombreReceta,
           TipoReceta: receta[0].NombreReceta,
           Descripcion: receta[0].Descripcion,
           aromas: {},
         };
-  
+
         datosReceta.aromas = receta.map((aroma) => ({
           NombreAroma: aroma.aromas.NombreAroma,
           CantidadAroma: aroma.aromas.aroma_cantidad.CantidadAroma,
@@ -53,7 +53,7 @@ const apisController = {
         }));
         res.status(200).json(datosReceta);
       } else {
-        res.status(204).json({ error: "Receta no encontrada"});
+        res.status(204).json({ error: "Receta no encontrada" });
       }
     } catch (error) {
       console.error("Error al obtener la receta:", error);
@@ -131,11 +131,8 @@ const apisController = {
     }
   },
   edit: async function (req, res) {
-
     res.json("Funcionalidad API Edit aun no desarrollada");
   },
-
-  
 
   // Método para actualizar una receta existente
   updateRecipe: async function (req, res) {
@@ -237,46 +234,5 @@ const apisController = {
 
     // res.redirect("/recipes" );
   },
-  sales: async function (req, res) {
-    try {
-      const ventas = await db.Ventas.findAll({
-        where: {
-          VentaEfectiva: 1,
-        },
-      });
-      res.json(ventas);
-    } catch (error) {
-      res.status(500).json("Error al consultar ventas Totales- Error: ", error);
-    }
-  },
-  salesLast: async function (req, res) {
-    try {
-      const ventas = await db.Ventas.findAll({
-        where: {
-          VentaEfectiva: 1,
-        },
-        limit: 1,
-        order: [['id','DESC']]
-        
-      });
-      res.json(ventas);
-    } catch (error) {
-      res.status(500).json("Error al consultar Ultima venta - Error: ", error);
-    }
-  },
-  
-  customer: async function (req, res) {
-    try {
-      const customers = await db.Clientes.findAll({
-      
-        order: [['Nombre','ASC']]
-        
-      });
-      res.json(customers);
-    } catch (error) {
-      res.status(500).json("Error al consultar clientes - Error: ", error);
-    }
-  }
 };
-
-module.exports = apisController;
+module.exports = apisRecipesController;

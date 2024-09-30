@@ -1,28 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const recipesController = require ('../controllers/recipesController');
-const apisController = require('../controllers/apisController');
+// const apisController = require('../controllers/apisController');
+const apisSalesController = require('../controllers/apisV1/apisSalesController')
+const apisCustomerController = require('../controllers/apisV1/apisCustomerController')
+const apisRecipesController = require('../controllers/apisV1/apisRecipesController')
 
-
-//    RECETAS
-router.get('/recipes', apisController.recipes); // TOdas las recetas
-router.get('/recipes/detail/:id', apisController.recipeDetail) //Detalle Recetas
-router.post('/recipes/create', apisController.storeRecipe); // Crear Receta sin aromas
-router.get('/recipes/deleteRecipe/:id', apisController.deleteRecipe) // Borrar Receta
-
-// Sin usar
-router.get('/create', apisController.create); // 
-router.get('/search', apisController.search);
-router.get('/edit/:id', apisController.edit);
+//    RECETAS V1
+router.get('/v1/recipes', apisRecipesController.recipes) // TOdas las recetas
+router.get('/v1/recipes/detail/:id', apisRecipesController.recipeDetail) //Detalle Recetas
+router.post('/v1/recipes/create', apisRecipesController.storeRecipe) // Crear Receta sin aromas
+router.get('/v1/recipes/deleteRecipe/:id', apisRecipesController.deleteRecipe) // Borrar Receta
 
 //  VENTAS
-router.get('/sales', apisController.sales) // Todas
-router.get('/salesLast', apisController.salesLast) // ultima Venta
+router.get('/v1/sales', apisSalesController.sales) // Todas
+router.get('/v1/salesLast', apisSalesController.salesLast) // ultima Venta
 
 //  CLIENTES
-router.get('/customer', apisController.customer)
+router.get('/v1/customer', apisCustomerController.customer)
+// router.get('/customer', apisController.customer)
 
 // TESTEO POST DESDE apisPost
-router.get('/customer', apisController.customer)
+// router.get('/v1/customer', apisController.customer)
+
+
+// Sin usar
+// router.get('/create', apisController.create); // 
+// router.get('/search', apisController.search);
+// router.get('/edit/:id', apisController.edit);
 
 module.exports = router;
