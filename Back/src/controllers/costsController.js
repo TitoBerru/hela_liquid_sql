@@ -58,11 +58,14 @@ const costController = {
       ],
     });
     ;
+    const customerFind = await db.Clientes.findByPk(req.body.cliente)
+    
     const obj = JSON.parse(JSON.stringify(req.body));
     // console.log('❎console log linea 62 costController', obj);
     // console.log('console log linea 63 costController', req.body);
 
-    let cliente = req.body.cliente.toUpperCase(); 
+    let idCliente = customerFind.id
+    let cliente = customerFind.Nombre.toUpperCase(); 
     let idReceta=req.body.receta;
     let ml=req.body.ml;
     let nico=req.body.nico;
@@ -70,8 +73,9 @@ const costController = {
     let pcioVenta=req.body.pcioVenta;
     let VentaEfectiva = req.body.ventaEfectiva;
 
-   
-    await salesCostService.consulta(cliente,idReceta,ml,nico, cant, pcioVenta, VentaEfectiva);
+
+    
+    await salesCostService.consulta(idCliente,cliente,idReceta,ml,nico, cant, pcioVenta, VentaEfectiva);
     
     // console.log('linea 61 de cost controller',cmv)
    

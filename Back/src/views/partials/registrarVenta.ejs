@@ -6,12 +6,17 @@
 
     <select class="form-control-sm m-1" id="cliente" name="cliente">
       <% for( let i=0; i < customers.length; i++ ) { %>
-          <option value="<%=customers[i].Nombre%>  <%= customers[i].Apellido %>">
+          <option value="<%=customers[i].id%>"">
 
               <%=customers[i].Nombre%> <%= customers[i].Apellido %>
           </option>
+          
           <% } %>
+         
   </select>
+<!-- Campo hidden para enviar el ID del cliente -->
+
+   
     <br>
     <select class="form-control-sm m-1" id="receta" name="receta">
         <% for( let i=0; i < recetas.length; i++ ) { %>

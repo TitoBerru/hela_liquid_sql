@@ -9,7 +9,7 @@ const salesCostServiceSql = {
     // Implementar la lógica base aquí...
   },
 
-  consulta: async (cliente, idReceta, ml, nico, cant, pcioVenta, ventaEfectiva) => {
+  consulta: async (idCliente, cliente, idReceta, ml, nico, cant, pcioVenta, ventaEfectiva) => {
     let cmv = {}
     let valorDolarblue = (await quoteService.data()).valorDolarblue;
     let valorDolarOf = (await quoteService.data()).valorDolarOf;
@@ -123,13 +123,35 @@ const salesCostServiceSql = {
           costoTotalVg +
           Number(valorFrasco) +
           Number(valorTotalEsencias) +
-          Number(valorEnRecetaNico)) *
-        cant;
+          Number(valorEnRecetaNico)) * cant;
+
+
+      // SETEO RANGO HORARIO - ARGENTINA
+
+      let fechaActual = new Date();
+
+// Convertir la fecha a la zona horaria de Argentina (UTC -3)
+fechaActual.setHours(fechaActual.getHours() - 3);
+
+// Formatear la fecha a 'YYYY-MM-DD HH:mm:ss'
+const pad = (n) => (n < 10 ? "0" + n : n);
+
+let year = fechaActual.getFullYear();
+let month = pad(fechaActual.getMonth() + 1); // Los meses empiezan desde 0
+let day = pad(fechaActual.getDate());
+let hours = pad(fechaActual.getHours());
+let minutes = pad(fechaActual.getMinutes());
+let seconds = pad(fechaActual.getSeconds());
+
+let fechaFormateada = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  
+   // SETEO RANGO HORARIO - ARGENTINA
 
       await db.Ventas.create({
         CantidadKg: ml,
         CantidadUnitaria: cant,
-        FechaVenta: new Date(),
+        FechaVenta: fechaFormateada,
+        IDCliente : idCliente,
         IDReceta: idReceta,
         NombreCliente: cliente,
         NombreReceta: consultoReceta.NombreReceta,

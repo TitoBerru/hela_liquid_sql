@@ -4,9 +4,11 @@ let db = require("../../../database/models");
 const apisRecipesController = {
   recipes: async function (req, res) {
     try {
-      await db.Recetas.findAll({ where: { RecetaActiva: 1 } }).then(function (
-        receta
-      ) {
+      await db.Recetas.findAll({
+        where: { RecetaActiva: 1 },
+        order: [["NombreReceta", "ASC"]],
+        loggin: console.log,
+      }).then(function (receta) {
         res.json(receta);
       });
     } catch (error) {

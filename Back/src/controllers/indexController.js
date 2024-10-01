@@ -33,7 +33,9 @@ const indexController = {
       const ultimaVenta = await db.Ventas.findAll(options);
       const optionsClientsOrder = {order: [['Nombre','ASC']]}
       const customers = await db.Clientes.findAll(optionsClientsOrder);
-      // res.send (customers)
+      
+      // console.log('linea 37 indexcController: Customers ', customers)
+
       res.render("index", { recetas, ultimaVenta, valorDolarblue, valorDolarOf, fechaActual, customers});
 
       // res.send(recetas)
