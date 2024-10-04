@@ -154,6 +154,7 @@ const salesController = {
         "es-AR",
         opcionesFormato
       );
+      
       return {
         NombreCliente: venta.NombreCliente,
         FechaVenta: fechaFormateada,
@@ -183,7 +184,7 @@ const salesController = {
            [Op.and]: [Sequelize.literal(`MONTH(FechaVenta) =` + month_actual)]
            }
     })
-    console.log('✅linea 167 Sales Controller: ', ventasTotalMes)
+    console.log('✅linea 167 Sales Controller: ', ventas)
     res.render("./Sales/salesForMonth", { ventas, ventasTotalMes });
   },
    
