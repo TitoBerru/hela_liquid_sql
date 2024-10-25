@@ -94,6 +94,27 @@ res.status(200).json('OK');
       res.status(500).json({ status: "error", message: "Ocurrió un error en el servidor" });
     }
     
+  }, 
+  topRecipes: async function (req, res) {
+    try {
+      const rankingRecipes = await db.Ventas.findAll({
+        attributes: [
+          [literal('(SUM(CantidadKg) * SUM(CantidadUnitaria))'), 'resultado'],
+          'NombreReceta'
+        ],
+        where: {
+          VentaEfectiva: 1
+        },
+        group: ['NombreReceta'],
+        order: [[literal('resultado'), 'DESC']],
+        limit: 10
+      });
+      res.status(200).json(rankingRecipes);
+ 
+    } catch (error) {
+      console.error("Error en el endpoint:", error);
+      res.status(500).json({ status: "error", message: "Ocurrió un error en el servidor" });
+    }
   }
 
 }

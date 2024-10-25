@@ -19,6 +19,7 @@ router.get('/v1/sales', apisSalesController.sales) // Todas
 router.get('/v1/salesLast', apisSalesController.salesLast) // ultima Venta
 router.get('/v1/salesProspect', apisSalesController.salesProspect) // ultimo Presupuesto
 router.get('/v1/year', apisSalesController.year) // totales por mes/año
+router.get('/v1/topRecipes', apisSalesController.topRecipes) // Top de Recetas en total
 
 router.post('/v1/newSale', apisSalesController.newSale)
 
